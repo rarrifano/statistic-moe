@@ -4,13 +4,18 @@ function trataInput(){
     sheetParamters.push(valor.split(';'))
     let realSheetParameters = sheetParamters 
     realSheetParameters[0].sort((a,b) => a-b)
-    let comulativeValues = []
+    console.log('vetor: ' + realSheetParameters[0])
+    var countElements = {}
+    realSheetParameters[0].forEach(function(i){ countElements[i] = (countElements[i]||0)+1})
+    console.log(countElements)
+    console.log("Elementos: " + elements)
     let maiorNumero = realSheetParameters[0][realSheetParameters[0].length - 1]
+    console.log("Maior: " + maiorNumero)
     let menorNumero = realSheetParameters[0][0]
+    console.log("Menor: "+ menorNumero)
     let totaldeIndicesVetor = realSheetParameters[0].length
-    let elements = realSheetParameters.filter((i,j) => i != j)
-    console.log(`Elementos ${elements}`)
-    return { realSheetParameters, maiorNumero, menorNumero, totaldeIndicesVetor}
+    console.log("Total: " + totaldeIndicesVetor)
+    return { realSheetParameters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements}
 }
 
 //Function what returns a number of lines and the number of colomns of a tabulation 
