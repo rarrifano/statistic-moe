@@ -1,6 +1,6 @@
 var ctx = document.getElementById('exemplo');
 var exemplo = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
