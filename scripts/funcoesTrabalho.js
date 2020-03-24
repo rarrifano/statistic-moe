@@ -8,16 +8,24 @@ function trataInput(){
     var countElements = {}
     realSheetParameters[0].forEach(function(i){ countElements[i] = (countElements[i]||0)+1})
     console.log(countElements)
-    console.log("Elementos: " + elements)
     let maiorNumero = realSheetParameters[0][realSheetParameters[0].length - 1]
     console.log("Maior: " + maiorNumero)
     let menorNumero = realSheetParameters[0][0]
     console.log("Menor: "+ menorNumero)
     let totaldeIndicesVetor = realSheetParameters[0].length
     console.log("Total: " + totaldeIndicesVetor)
-    return { realSheetParameters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements}
+    return {realSheetParameters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements}
+
 }
 
+function importArchive() {
+    let arquivo = document.createElement("INPUT")
+    arquivo.setAttribute("type", "file")
+    arquivo.setAttribute("accept", ".csv")
+    document.body.appendChild(arquivo)
+    
+  }
+  
 //Function what returns a number of lines and the number of colomns of a tabulation 
 const quantitativaContinua = function(max, min, totalElem){
     let amplitude = max - min //calcula a amplitude da serie
