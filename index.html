@@ -7,6 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
+    <div style='width: 35%;'>
+        <canvas id="exemplo" width="400" height="400"></canvas>
+    </div>
     <div>
         <input class="input" id="input" placeholder="Insira os dados aqui"/>
         <br/>
@@ -14,7 +17,6 @@
         <button type="button" class="button" onclick ="trataInput()">Gravar dados</button>
         <button onclick="importArchive()">Importar arquivo</button>
     </div>
-    <canvas id="exemplo" width="400" height="400"></canvas>
     <script src='scripts/graficos.js'></script>
     <script src="scripts/funcoesTrabalho.js"></script>  
 </body>
