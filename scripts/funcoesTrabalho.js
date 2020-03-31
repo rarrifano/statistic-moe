@@ -18,14 +18,6 @@ function trataInput(){
 
 }
 
-function importArchive() {
-    let arquivo = document.createElement("INPUT")
-    arquivo.setAttribute("type", "file")
-    arquivo.setAttribute("accept", ".csv")
-    document.body.appendChild(arquivo)
-    
-  }
-  
 //Function what returns a number of lines and the number of colomns of a tabulation 
 const quantitativaContinua = function(max, min, totalElem){
     let amplitude = max - min //calcula a amplitude da serie
@@ -53,3 +45,4 @@ const quantitativaContinua = function(max, min, totalElem){
         return formatoTabela
 }
 console.log(quantitativaContinua(56, 18, 37))
+

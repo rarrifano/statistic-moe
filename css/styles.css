@@ -62,3 +62,32 @@ span{
     background-color: #7f6ac7;
     /* color: #ffffff; */
 }
+
+.importArchive {
+    color: black;
+  }
+  .importArchive::-webkit-file-upload-button {
+    display: inline-block;
+    background-color: #7159c1;
+    color: #ffffff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-size: 10pt;
+
+  }
+  .importArchive:hover::before {
+    border-color: black;
+  }
+  .importArchive:active {
+    outline: 0;
+  }
+  .importArchive:active::before {
+    background-color:  black; 
+  }
+  
+  

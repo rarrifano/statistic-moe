@@ -17,7 +17,7 @@
         <input class="input" id="input" placeholder="Nome da variável"/>
         <br/>
         <br/>
-        <input class="input" id="input" placeholder="Insira os dados separando-os por ';'"/>
+        <input class="input" id="input2" placeholder="Insira os dados separando-os por ';'"/>
         <br/>
         <br/>
         <span>Medidas Separatrizes: </span>
@@ -33,12 +33,12 @@
           <input type="radio" name="tipo" value="populacao">População
           <input type="radio" name="tipo" value="amostra">Amostra<br>
         <br/>
-        <button onclick="importArchive()">Importar arquivo</button>
+        <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
         <br/>
         <br/>
         <button type="button" class="button" onclick="trataInput()">Calcular</button>
       </div>
     </div>
-    <script src="funcoesTrabalho.js"></script>     
+    <script src="scripts/funcoesTrabalho.js"></script>     
   </body>
 </html>
