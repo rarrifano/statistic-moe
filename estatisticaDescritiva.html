@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <title>Estatística Descritiva - Statistic.moe</title>
     <!-- Required meta tags -->
@@ -14,7 +14,7 @@
       <img src="./img/document.png">
       <div class="content">
         <h2 class="box-title">Estatística Descritiva</h2>
-        <input class="input" id="input" placeholder="Nome da variável"/>
+        <input class="input" id="input" placeholder="Titulo do Grafico"/>
         <br/>
         <br/>
         <input class="input" id="input2" placeholder="Insira os dados separando-os por ';'"/>
@@ -28,7 +28,7 @@
           <option value="3">Decil</option>
           <option value="3">Porcentil</option>
         </select>
-        <br/><br/>
+        <br/><br/>  
         <form>
           <input type="radio" name="tipo" value="populacao">População
           <input type="radio" name="tipo" value="amostra">Amostra<br>
@@ -36,9 +36,15 @@
         <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
         <br/>
         <br/>
-        <button type="button" class="button" onclick="trataInput()">Calcular</button>
+        <button type="button" class="button" onclick="criaGrafico()">Calcular</button>
+      </div>
+      <br>
+      <br>
+      <div>
+        <canvas id="grafico"></canvas>
       </div>
     </div>
-    <script src="scripts/funcoesTrabalho.js"></script>     
+    <script src="scripts/funcoes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>     
   </body>
 </html>
