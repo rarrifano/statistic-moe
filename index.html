@@ -1,1 +1,23 @@
-<img src=https://media1.tenor.com/images/873de19cd181508f153b814d434e42b2/tenor.gif?itemid=11887259>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    <div style='width: 35%;'>
+        <canvas id="exemplo" width="400" height="400"></canvas>
+    </div>
+    <div>
+        <input class="input" id="input" placeholder="Insira os dados aqui"/>
+        <br/>
+        <br/>
+        <button type="button" class="button" onclick ="trataInput()">Gravar dados</button>
+        <button onclick="importArchive()">Importar arquivo</button>
+    </div>
+    <script src='scripts/graficos.js'></script>
+    <script src="scripts/funcoesTrabalho.js"></script>  
+</body>
+</html>

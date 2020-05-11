@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Estatística Descritiva - Statistic.moe</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <!-- Bootstrap CSS -->
+  </head>
+  <body>
+    <div class="box">
+      <img src="./img/document.png">
+      <div class="content">
+        <h2 class="box-title">Estatística Descritiva</h2>
+        <input class="input" id="input" placeholder="Titulo do Grafico"/>
+        <br/>
+        <br/>
+        <input class="input" id="input2" placeholder="Insira os dados separando-os por ';'"/>
+        <br/>
+        <br/>
+        <span>Medidas Separatrizes: </span>
+        <select id="cars">
+          <option value="" selected disabled >Selecione</option>
+          <option value="1">Quartil</option>
+          <option value="2">Quintil</option>
+          <option value="3">Decil</option>
+          <option value="3">Porcentil</option>
+        </select>
+        <br/><br/>  
+        <form>
+          <input type="radio" name="tipo" value="populacao">População
+          <input type="radio" name="tipo" value="amostra">Amostra<br>
+        <br/>
+        <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
+        <br/>
+        <br/>
+        <button type="button" class="button" onclick="criaGrafico()">Calcular</button>
+      </div>
+      <br>
+      <br>
+      <div>
+        <canvas id="grafico"></canvas>
+      </div>
+    </div>
+    <script src="scripts/funcoes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>     
+  </body>
+</html>
