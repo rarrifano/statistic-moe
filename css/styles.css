@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css");
+
 *{
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
@@ -89,5 +91,5 @@ span{
   .importArchive:active::before {
     background-color:  black; 
   }
-  
+
   
