@@ -1,6 +1,7 @@
 var elButton = document.querySelector(".box .content .execButton");
+var elChart = document.querySelector(".box .content #grafico");
 
-const trataInput = function(){
+function trataInput(){
     let valor = document.getElementById("inputValores").value
     
     if(valor == ''){
@@ -22,8 +23,7 @@ const trataInput = function(){
     }
 }
 
-//Function what returns a number of lines and the number of colomns of a tabulation 
-const quantitativaContinua = function(max, min, totalElem){
+function quantitativaContinua(max, min, totalElem){
     
     let amplitude = max - min //calcula a amplitude da serie
     let classeLinha = Number(Math.sqrt(totalElem).toFixed(0)) ;
@@ -50,7 +50,6 @@ const quantitativaContinua = function(max, min, totalElem){
         }
         return formatoTabela;
 }
-
 
 function extraiObj(obj){
     this.frequencia = []
@@ -89,4 +88,9 @@ function criaGrafico(){
     document.getElementById('inputTitulo').value = '';
 };
 
-elButton.onclick = criaGrafico;
+function execRender(){
+    trataInput();
+    criaGrafico();
+}
+
+elButton.onclick = execRender;
