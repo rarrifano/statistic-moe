@@ -5,7 +5,7 @@ function trataInput(){
     let valor = document.getElementById("inputValores").value
     
     if(valor == ''){
-        alert("Erro, insira dados válidos");
+        alert("Erro: insira dados válidos");
     }else{
         let sheetParamters = valor.split(';');
         let countElements = {};
