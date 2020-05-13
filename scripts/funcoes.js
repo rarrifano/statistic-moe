@@ -2,7 +2,7 @@ const trataInput = function(){
     let valor = document.getElementById("inputValores").value
     
     if(valor == ''){
-        alert("[ERRO] Favor Informar os dados");
+        alert("Erro, insira dados válidos")
     }else{
         let sheetParamters = valor.split(';');
         let countElements = {};
