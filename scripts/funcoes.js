@@ -1,3 +1,5 @@
+var elButton = document.querySelector(".box .content .execButton");
+
 const trataInput = function(){
     let valor = document.getElementById("inputValores").value
     
@@ -59,8 +61,6 @@ function extraiObj(obj){
     return frequencia;
 }
 
-
-
 function criaGrafico(){
     let ctx = document.getElementById('grafico').getContext('2d');
     Chart.defaults.global.elements.rectangle.backgroundColor = 'rgba(113,89,193, 0.8)';
@@ -88,3 +88,5 @@ function criaGrafico(){
     document.getElementById('inputValores').value = '';
     document.getElementById('inputTitulo').value = '';
 };
+
+elButton.onclick = criaGrafico;
