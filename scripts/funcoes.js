@@ -90,7 +90,6 @@ function criaGrafico(){
 };
 
 function execRender(){
-    trataInput();
     criaGrafico();
 }
 
