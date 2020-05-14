@@ -18,7 +18,7 @@ function trataInput(){
         let maiorNumero = sheetParamters.length - 1;
         let menorNumero = sheetParamters[0];
         let totaldeIndicesVetor = sheetParamters.length;
-        let media = sheetParamters.map(Number).reduce(a,b)
+        let media = sheetParamters.map(Number).reduce((a,b) => a + b)
         return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
     }
 }
