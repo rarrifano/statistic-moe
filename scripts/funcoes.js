@@ -18,7 +18,7 @@ function trataInput(){
         let maiorNumero = sheetParamters.length - 1;
         let menorNumero = sheetParamters[0];
         let totaldeIndicesVetor = sheetParamters.length;
-
+        let media = sheetParamters.map(Number).reduce(a,b)
         return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
     }
 }
@@ -84,6 +84,7 @@ function criaGrafico(){
         }
     }
 });
+    geraTabela(mountains)
     document.getElementById('inputValores').value = '';
     document.getElementById('inputTitulo').value = '';
 };
@@ -94,3 +95,25 @@ function execRender(){
 }
 
 elButton.onclick = execRender;
+
+function geraTabela(dados){
+    let tabela = document.getElementById('tabela');
+    let titulos = tabela.createTHead();    
+    let linhas = titulos.insertRow();
+
+    for(let chaves of Object.keys(dados[0])){
+        let th = document.createElement('th');
+        let texto = document.createTextNode(chaves);
+        th.appendChild(texto);
+        linhas.appendChild(th);
+    }
+
+    for(let elemento of dados){
+        let linhaTabela = tabela.insertRow();
+        for(chave in elemento){
+            let celula = linhaTabela.insertCell();
+            let textoLinhas = document.createTextNode(elemento[chave]);
+            celula.appendChild(textoLinhas);
+        }
+    }
+}
