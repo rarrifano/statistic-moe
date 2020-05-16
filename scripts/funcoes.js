@@ -19,7 +19,7 @@ function trataInput(){
         let menorNumero = sheetParamters[0];
         let totaldeIndicesVetor = sheetParamters.length;
         let media = sheetParamters.map(Number).reduce((a,b) => a + b)
-        return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
+        return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements, media};
     }
 }
 
@@ -60,10 +60,17 @@ function extraiObj(obj){
     return frequencia;
 }
 
+function tituloTabela(funcao){
+    let obj = {}
+    return obj
+}
+
 function criaGrafico(){
     let ctx = document.getElementById('grafico').getContext('2d');
     Chart.defaults.global.elements.rectangle.backgroundColor = 'rgba(113,89,193, 0.8)';
     Chart.defaults.global.elements.rectangle.borderColor = 'rgba(113,89,193, 1)';
+    Chart.defaults.global.legend.display = false
+    Chart.defaults.global.title = true
     var grafico = new Chart(ctx,{
         type: 'bar',
         data: {
@@ -78,22 +85,25 @@ function criaGrafico(){
             scales: {
                 yAxes: [{
                     ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    stacked: false
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    offsetGridLines: true,
+                    stacked: false
                 }
             }]
         }
     }
 });
-    geraTabela(mountains)
+    /*Aqui vai a função pra chamar a tabela*/ 
     document.getElementById('inputValores').value = '';
     document.getElementById('inputTitulo').value = '';
 };
 
-function execRender(){
-    criaGrafico();
-}
-
-elButton.onclick = execRender;
+elButton.onclick = () => criaGrafico();
 
 function geraTabela(dados){
     let tabela = document.getElementById('tabela');
