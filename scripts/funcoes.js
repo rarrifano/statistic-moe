@@ -103,7 +103,57 @@ function criaGrafico(){
     document.getElementById('inputTitulo').value = '';
 };
 
-elButton.onclick = () => criaGrafico();
+function criaGraficodePizza(){
+    console.log("pizza")
+    let ctx = document.getElementById('grafico').getContext('2d');
+    Chart.defaults.global.legend.display = false
+    Chart.defaults.global.title = true
+    var grafico = new Chart(ctx,{
+        type: 'pie',
+        data: {
+            labels: Object.keys(trataInput().countElements),
+            datasets: [{
+                label: document.getElementById('inputTitulo').value,
+                data: extraiObj(trataInput().countElements),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+});
+    /*Aqui vai a função pra chamar a tabela*/ 
+    document.getElementById('inputValores').value = '';
+    document.getElementById('inputTitulo').value = '';
+};
+
+
+function execRender(){
+    var tipoVariavel = document.getElementById('variaveis').value
+    if(tipoVariavel === ''){
+        alert('Erro: Selecione o tipo de variavel')
+    }else if(tipoVariavel !== 'qualitativa'){
+        criaGrafico();
+    }else{
+        criaGraficodePizza()
+    }
+        
+}
+
+elButton.onclick = execRender;
 
 function geraTabela(dados){
     let tabela = document.getElementById('tabela');
