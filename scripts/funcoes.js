@@ -1,5 +1,14 @@
 var elButton = document.querySelector(".box .content .execButton");
 var elChart = document.querySelector(".box .content #grafico");
+//Adcionar função para calculo de moda
+//Estratégia para criação da tabela e plotagem de alguns dados:
+//1- pegar todos os dados das colunas e formar uma matris com eles
+//2- feito isso será usado dois fors
+//3- 1º for ele escreverá o titulo
+//4- 2º for ele depois escreverá os dados das linhas 
+//5- com isso será feito a tabela
+//6- Depois será criada uma função para ser colocado os dados de: moda, media, mediana, desvio padrão 
+//7- Pensar em como será feito as medidas separatrizes
 
 function trataInput(){
     let valor = document.getElementById("inputValores").value
@@ -9,7 +18,7 @@ function trataInput(){
     }else{
         let sheetParamters = valor.split(';');
         let countElements = {};
-
+        
         sheetParamters.sort((a,b) => a-b); //←QuickSort→
         sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
@@ -59,10 +68,15 @@ function extraiObj(obj){
     }
     return frequencia;
 }
-
-function tituloTabela(funcao){
-    let obj = {}
-    return obj
+//Verificar a lógica da função
+function mediana(vetor){
+    if(vetor.length % 2 == 0){
+        let posicao1 = (vetor.length -1) / 2
+        let posicao2 = posicao1 + 1
+        return vetor[Math.ceil((posicao1 + posicao2)/2)]
+    }else{
+        return vetor[Math.ceil((vetor.length - 1) % 2)] / 2
+    }
 }
 
 function criaGrafico(){
@@ -76,7 +90,6 @@ function criaGrafico(){
         data: {
             labels: Object.keys(trataInput().countElements),
             datasets: [{
-                label: document.getElementById('inputTitulo').value,
                 data: extraiObj(trataInput().countElements),
                 borderWidth: 1
             }]
@@ -98,13 +111,11 @@ function criaGrafico(){
         }
     }
 });
-    /*Aqui vai a função pra chamar a tabela*/ 
-    document.getElementById('inputValores').value = '';
-    document.getElementById('inputTitulo').value = '';
+
+
 };
 
 function criaGraficodePizza(){
-    console.log("pizza")
     let ctx = document.getElementById('grafico').getContext('2d');
     Chart.defaults.global.legend.display = false
     Chart.defaults.global.title = true
@@ -113,7 +124,6 @@ function criaGraficodePizza(){
         data: {
             labels: Object.keys(trataInput().countElements),
             datasets: [{
-                label: document.getElementById('inputTitulo').value,
                 data: extraiObj(trataInput().countElements),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.8)',
@@ -135,19 +145,22 @@ function criaGraficodePizza(){
             }]
         },
 });
-    /*Aqui vai a função pra chamar a tabela*/ 
-    document.getElementById('inputValores').value = '';
-    document.getElementById('inputTitulo').value = '';
+
+    
 };
 
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value
     if(tipoVariavel === ''){
+           
         alert('Erro: Selecione o tipo de variavel')
     }else if(tipoVariavel !== 'qualitativa'){
+        geraTabela();
         criaGrafico();
+        console.log(desviopadrao())
     }else{
+        geraTabela()
         criaGraficodePizza()
     }
         
@@ -155,24 +168,49 @@ function execRender(){
 
 elButton.onclick = execRender;
 
-function geraTabela(dados){
+function geraTabela(){
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
+    let colunaTitulo = document.getElementById('inputTitulo').value || document.getElementById('variaveis').value
+    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%']
+    let coluna1 = Object.keys(trataInput().countElements)
+    let coluna2 = extraiObj(trataInput().countElements)
 
-    for(let chaves of Object.keys(dados[0])){
+    this.dados = {
+        elemento1: coluna1,
+        elemento2: coluna2
+    }
+    //console.log(dados.elemento1[0])
+    for(let i of cabecalho){
         let th = document.createElement('th');
-        let texto = document.createTextNode(chaves);
+        let texto = document.createTextNode(i);
         th.appendChild(texto);
         linhas.appendChild(th);
     }
 
-    for(let elemento of dados){
+    for(let elemento in dados.elemento){
         let linhaTabela = tabela.insertRow();
-        for(chave in elemento){
-            let celula = linhaTabela.insertCell();
-            let textoLinhas = document.createTextNode(elemento[chave]);
+        let celula = linhaTabela.insertCell();
+       for(chave in dados.elemento){
+            console.log("Elemento = " + elemento)
+            console.log('Chave = ' + chave)
+            
+            let textoLinhas = document.createTextNode(dados.elemento[chave]);
             celula.appendChild(textoLinhas);
         }
     }
 }
+// Precisa acertar o calculo da função
+function desviopadrao(){
+var media = trataInput().media;
+var lista = trataInput().sheetParamters;
+var varianca = 0;
+for (var i = 0;i < lista.length; i++) {
+    varianca += (media - lista[i]) * (media - lista[i]);
+}
+varianca = varianca/lista.length;
+return Math.sqrt(varianca);
+
+}
+
