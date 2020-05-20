@@ -1,14 +1,15 @@
 var elButton = document.querySelector(".box .content .execButton");
 var elChart = document.querySelector(".box .content #grafico");
-//Adcionar função para calculo de moda
-//Estratégia para criação da tabela e plotagem de alguns dados:
-//1- pegar todos os dados das colunas e formar uma matris com eles
-//2- feito isso será usado dois fors
-//3- 1º for ele escreverá o titulo
-//4- 2º for ele depois escreverá os dados das linhas 
-//5- com isso será feito a tabela
-//6- Depois será criada uma função para ser colocado os dados de: moda, media, mediana, desvio padrão 
-//7- Pensar em como será feito as medidas separatrizes
+
+/* Adicionar função para calculo de moda
+Estratégia para criação da tabela e plotagem de alguns dados:
+1-Pegar todos os dados das colunas e formar uma mátris com eles
+2-Feito isso será usado dois fors
+3-1º for ele escreverá o titulo
+4-2º for ele depois escreverá os dados das linhas 
+5-Com isso será feito a tabela
+6-Será criada uma função para ser colocado os dados de: moda, media, mediana, desvio padrão 
+7-Pensar em como será feito as medidas separatrizes */
 
 function trataInput(){
     let valor = document.getElementById("inputValores").value
@@ -19,7 +20,7 @@ function trataInput(){
         let sheetParamters = valor.split(';');
         let countElements = {};
         
-        sheetParamters.sort((a,b) => a-b); //←QuickSort→
+        sheetParamters.sort((a,b) => a-b); //QuickSort
         sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
@@ -68,6 +69,7 @@ function extraiObj(obj){
     }
     return frequencia;
 }
+
 //Verificar a lógica da função
 function mediana(vetor){
     if(vetor.length % 2 == 0){
@@ -111,8 +113,6 @@ function criaGrafico(){
         }
     }
 });
-
-
 };
 
 function criaGraficodePizza(){
@@ -145,15 +145,13 @@ function criaGraficodePizza(){
             }]
         },
 });
-
-    
 };
 
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value
-    if(tipoVariavel === ''){
-           
+    
+    if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel')
     }else if(tipoVariavel !== 'qualitativa'){
         geraTabela();
@@ -162,13 +160,13 @@ function execRender(){
     }else{
         geraTabela()
         criaGraficodePizza()
-    }
-        
+    }        
 }
 
 elButton.onclick = execRender;
 
 function geraTabela(){
+
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
@@ -181,6 +179,7 @@ function geraTabela(){
         elemento1: coluna1,
         elemento2: coluna2
     }
+
     //console.log(dados.elemento1[0])
     for(let i of cabecalho){
         let th = document.createElement('th');
@@ -190,9 +189,12 @@ function geraTabela(){
     }
 
     for(let elemento in dados.elemento){
+
         let linhaTabela = tabela.insertRow();
         let celula = linhaTabela.insertCell();
-       for(chave in dados.elemento){
+
+        for(chave in dados.elemento){
+
             console.log("Elemento = " + elemento)
             console.log('Chave = ' + chave)
             
@@ -201,16 +203,18 @@ function geraTabela(){
         }
     }
 }
+
 // Precisa acertar o calculo da função
 function desviopadrao(){
-var media = trataInput().media;
-var lista = trataInput().sheetParamters;
-var varianca = 0;
-for (var i = 0;i < lista.length; i++) {
-    varianca += (media - lista[i]) * (media - lista[i]);
-}
-varianca = varianca/lista.length;
-return Math.sqrt(varianca);
 
-}
+    var media = trataInput().media;
+    var lista = trataInput().sheetParamters;
+    var varianca = 0;
 
+    for (var i = 0;i < lista.length; i++) {
+        varianca += (media - lista[i]) * (media - lista[i]);
+    }
+    
+    varianca = varianca/lista.length;
+    return Math.sqrt(varianca);
+}
