@@ -73,7 +73,9 @@ function geraTabela(){
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value
-    
+    console.log('Média:' + trataInput().media)
+    console.log('Mediana: ' + mediana(trataInput().sheetParamters))
+    console.log('Moda: ' + moda())
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel')
     }else if(tipoVariavel !== 'qualitativa'){

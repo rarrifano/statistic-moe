@@ -45,7 +45,7 @@ function mediana(vetor){
     return (vetor[meio - 1] + vetor[meio]) / 2;
   }
 
-function mode() {
+function moda() {
     let moda = []
     let indiceMax = Object.keys(trataInput().countElements)
     let contador = extraiObj(trataInput().countElements)
