@@ -36,13 +36,30 @@ Estratégia para criação da tabela e plotagem de alguns dados:
 7-Pensar em como será feito as medidas separatrizes */
 
 //Verificar a lógica da função
+
 function mediana(vetor){
-    if(vetor.length % 2 == 0){
-        let posicao1 = (vetor.length -1) / 2
-        let posicao2 = posicao1 + 1
-        return vetor[Math.ceil((posicao1 + posicao2)/2)]
+    var meio = Math.floor(vetor.length / 2);
+    if (vetor.length % 2){
+        return vetor[meio];
+    }
+    return (vetor[meio - 1] + vetor[meio]) / 2;
+  }
+
+function mode() {
+    let moda = []
+    let indiceMax = Object.keys(trataInput().countElements)
+    let contador = extraiObj(trataInput().countElements)
+    
+    if(Math.max.apply(null,contador) == 1){
+        return "serie amodal"
     }else{
-        return vetor[Math.ceil((vetor.length - 1) % 2)] / 2
+    for(let i =0; i< contador.length; i++){
+        if(contador[i] == Math.max.apply(null,contador)){
+            
+            moda.push(indiceMax[i]);
+            }
+        }
+        return moda;
     }
 }
 
@@ -60,3 +77,4 @@ function desviopadrao(){
     varianca = varianca/lista.length;
     return Math.sqrt(varianca);
 }
+

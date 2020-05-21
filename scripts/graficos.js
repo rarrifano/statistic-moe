@@ -1,4 +1,5 @@
 function criaGrafico(){
+    Chart.defaults.global.legend.display = false
     let ctx = document.getElementById('grafico').getContext('2d');
     var grafico = new Chart(ctx,{
         type: 'bar',

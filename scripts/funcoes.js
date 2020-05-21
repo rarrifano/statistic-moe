@@ -7,9 +7,9 @@ function trataInput(){
     if(valor == ''){
         alert("Erro: insira dados válidos");
     }else{
-        let sheetParamters = valor.split(';');
+        var sheetParamters = valor.split(';');
         let countElements = {};
-        
+        var sheetParamters = sheetParamters.map(Number)
         sheetParamters.sort((a,b) => a-b); //QuickSort
         sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
@@ -18,7 +18,7 @@ function trataInput(){
         let maiorNumero = sheetParamters.length - 1;
         let menorNumero = sheetParamters[0];
         let totaldeIndicesVetor = sheetParamters.length;
-        let media = sheetParamters.map(Number).reduce((a,b) => a + b)
+        let media = sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor
         return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements, media};
     }
 }
@@ -79,7 +79,6 @@ function execRender(){
     }else if(tipoVariavel !== 'qualitativa'){
         geraTabela();
         criaGrafico();
-        console.log(desviopadrao())
     }else{
         geraTabela()
         criaGraficoPizza()
