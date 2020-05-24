@@ -79,8 +79,6 @@ function geraTabela(){
         }
     }
 }   
-    
-
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value
