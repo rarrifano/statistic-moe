@@ -40,42 +40,55 @@ function geraTabela(){
     let colunaTitulo = document.getElementById('inputTitulo').value || document.getElementById('variaveis').value
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%']
     let coluna1 = Object.keys(trataInput().countElements)
-    let coluna2 = extraiObj(trataInput().countElements)
+    let frequenciaSimples = extraiObj(trataInput().countElements)
+    let frequenciaAcumulada = []
+    let linha = []
+    let acumulador = 0
     
-    this.dados = {
-        elemento1: coluna1,
-        elemento2: coluna2
+    for(i in frequenciaSimples){
+
+        if(i == 0){
+            acumulador = acumulador + frequenciaSimples[i]
+            frequenciaAcumulada.push(acumulador)
+        }else{
+            acumulador = acumulador + frequenciaSimples[i]
+            frequenciaAcumulada.push(acumulador)
+        }
+        
     }
     
-    //console.log(dados.elemento1[0])
+    for(let i = 0; i < 4 ; i++){
+        linha.push({elementos:coluna1[i], 
+        frequenciaSimples: frequenciaSimples[i],
+        frequenciaAcumulada:frequenciaAcumulada[i],
+        })
+    }
+    
     for(let i of cabecalho){
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
         th.appendChild(texto);
         linhas.appendChild(th);
     }
-    
-    for(let elemento in dados.elemento){
-        
-        let linhaTabela = tabela.insertRow();
-        let celula = linhaTabela.insertCell();
-        
-        for(chave in dados.elemento){
-            
-            console.log("Elemento = " + elemento)
-            console.log('Chave = ' + chave)
-            
-            let textoLinhas = document.createTextNode(dados.elemento[chave]);
+    for (let i of linha) {
+        let row = tabela.insertRow();
+        for (j in i) {         
+            let celula = row.insertCell();
+            let textoLinhas = document.createTextNode(i[j]);
             celula.appendChild(textoLinhas);
         }
     }
-}
+}   
+    
+
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value
     console.log('Média:' + trataInput().media)
     console.log('Mediana: ' + mediana(trataInput().sheetParamters))
     console.log('Moda: ' + moda())
+    console.log('Desvio: ' + desviopadrao())
+    console.log(trataInput().totaldeIndicesVetor)
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel')
     }else if(tipoVariavel !== 'qualitativa'){

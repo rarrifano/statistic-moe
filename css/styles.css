@@ -92,4 +92,30 @@ span{
     background-color:  black; 
   }
 
-  
+table{
+    border: 1px solid #606060;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+td {
+    border: 1px solid #606060;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    vertical-align: top;
+    font-weight: bold;
+}
+th{
+    border: 1px solid #606060;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto; 
+}
+tr{
+    border: 1px solid #606060;
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}

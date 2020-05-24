@@ -25,7 +25,7 @@ function quantitativaContinua(max, min, totalElem){
         }
     return formatoTabela;
 }
-/* Adicionar função para calculo de moda
+/* Adicionar função para calculo de moda ok
 Estratégia para criação da tabela e plotagem de alguns dados:
 1-Pegar todos os dados das colunas e formar uma mátris com eles
 2-Feito isso será usado dois fors
