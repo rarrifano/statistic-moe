@@ -2,7 +2,7 @@ var elButton = document.querySelector(".box .content .execButton");
 var elChart = document.querySelector(".box .content #grafico");
 
 function trataInput(){
-    let valor = document.getElementById("inputValores").value
+    let valor = document.getElementById("inputValores").value;
     
     if(valor == ''){
         alert("Erro: insira dados válidos");
