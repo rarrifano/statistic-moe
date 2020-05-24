@@ -1,5 +1,4 @@
 function criaGrafico(){
-    Chart.defaults.global.legend.display = false
     let ctx = document.getElementById('grafico').getContext('2d');
     var grafico = new Chart(ctx,{
         type: 'bar',
@@ -37,8 +36,6 @@ function criaGrafico(){
 
 function criaGraficoPizza(){
     let ctx = document.getElementById('grafico').getContext('2d');
-    Chart.defaults.global.legend.display = false
-    Chart.defaults.global.title = true
     var grafico = new Chart(ctx,{
         type: 'pie',
         data: {
