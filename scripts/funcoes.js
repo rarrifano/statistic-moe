@@ -84,18 +84,19 @@ function geraTabela(){
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value
+    geraTabela();
+    
     console.log('Média:' + trataInput().media)
     console.log('Mediana: ' + mediana(trataInput().sheetParamters))
     console.log('Moda: ' + moda())
     console.log('Desvio: ' + desviopadrao())
     console.log(trataInput().totaldeIndicesVetor)
+    
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel')
     }else if(tipoVariavel !== 'qualitativa'){
-        geraTabela();
         criaGrafico();
     }else{
-        geraTabela()
         criaGraficoPizza()
     }        
 }
