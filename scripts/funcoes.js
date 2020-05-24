@@ -54,10 +54,10 @@ function geraTabela(){
             acumulador = acumulador + frequenciaSimples[i]
             frequenciaAcumulada.push(acumulador)
         }
-        
     }
     
     for(let i = 0; i < 4 ; i++){
+        
         linha.push({elementos:coluna1[i], 
         frequenciaSimples: frequenciaSimples[i],
         frequenciaAcumulada:frequenciaAcumulada[i],
@@ -65,37 +65,41 @@ function geraTabela(){
     }
     
     for(let i of cabecalho){
+        
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
+        
         th.appendChild(texto);
         linhas.appendChild(th);
     }
     for (let i of linha) {
         let row = tabela.insertRow();
+        
         for (j in i) {         
             let celula = row.insertCell();
             let textoLinhas = document.createTextNode(i[j]);
+            
             celula.appendChild(textoLinhas);
         }
     }
 }   
 
 function execRender(){
-    var tipoVariavel = document.getElementById('variaveis').value
+    var tipoVariavel = document.getElementById('variaveis').value;
     geraTabela();
     
-    console.log('Média:' + trataInput().media)
-    console.log('Mediana: ' + mediana(trataInput().sheetParamters))
-    console.log('Moda: ' + moda())
-    console.log('Desvio: ' + desviopadrao())
-    console.log(trataInput().totaldeIndicesVetor)
+    console.log('Média:' + trataInput().media);
+    console.log('Mediana: ' + mediana(trataInput().sheetParamters));
+    console.log('Moda: ' + moda());
+    console.log('Desvio: ' + desviopadrao());
+    console.log(trataInput().totaldeIndicesVetor);
     
     if(tipoVariavel === ''){       
-        alert('Erro: Selecione o tipo de variavel')
+        alert('Erro: Selecione o tipo de variavel');
     }else if(tipoVariavel !== 'qualitativa'){
         criaGrafico();
     }else{
-        criaGraficoPizza()
+        criaGraficoPizza();
     }        
 }
 
