@@ -44,15 +44,20 @@ function geraTabela(){
     let frequenciaAcumulada = []
     let linha = []
     let acumulador = 0
+    let frequenciaPercent = []
+    let frequenciaPerAcu = []
     
     for(i in frequenciaSimples){
-
+        frequenciaPercent.push(((frequenciaSimples[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
         if(i == 0){
             acumulador = acumulador + frequenciaSimples[i]
             frequenciaAcumulada.push(acumulador)
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            
         }else{
             acumulador = acumulador + frequenciaSimples[i]
             frequenciaAcumulada.push(acumulador)
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
         }
     }
     
@@ -60,7 +65,9 @@ function geraTabela(){
         
         linha.push({elementos:coluna1[i], 
         frequenciaSimples: frequenciaSimples[i],
+        frequenciaPercent: frequenciaPercent[i],
         frequenciaAcumulada:frequenciaAcumulada[i],
+        frequenciaPerAcu: frequenciaPerAcu[i]
         })
     }
     
@@ -104,3 +111,42 @@ function execRender(){
 }
 
 elButton.onclick = execRender;
+
+function mudaBarra(){
+    var barra = document.getElementById("barraMedidas")
+    var barraValor = document.getElementById("cars").value
+
+    if (barraValor == "Percentil") {
+        barra.min = 1
+        barra.max = 100
+        barra.step = 1
+        barra.value = 1
+    } else if (barraValor == "Decil") {
+        barra.min = 10
+        barra.max = 100
+        barra.step = 10
+        barra.value = 10
+    } else if (barraValor == "Quintil") {
+        barra.min = 20
+        barra.max = 100
+        barra.step = 20
+        barra.value = 20
+    } else if (barraValor == "Quartil") {
+        barra.min = 25
+        barra.max = 100
+        barra.step = 25
+        barra.value = 25
+    }
+}
+
+function barraBMS() {
+    //Funcionamento da barra da medida separatriz
+    var slider = document.getElementById("barraMedidas")
+    var vbms = document.getElementById("valorBMS")
+    vbms.innerHTML = `${slider.value}%`; // Mostra o valor inicial
+
+    // Atualiza o valor conforme o usuário usa
+    slider.oninput = function () {
+        vbms.innerHTML = `${slider.value}%`
+    }
+}
