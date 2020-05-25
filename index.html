@@ -41,9 +41,10 @@
       </select>
       <input type="range" min="0" max="0" value="0" step="1" class="bms" id="barraMedidas">
       <p id="valorBMS">-</p>
-      
+      <div>
       <input type="radio" name="tipo" class="amostragem" value="populacao">População
       <input type="radio" name="tipo" class="amostragem"value="amostra">Amostra<br>
+      </div>
       <br/>
       <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
       <br/>
@@ -52,6 +53,9 @@
     </form>
       <table id="tabela" class="tabela"></table>
     <div>
+      <div>
+        <table id="tabela2"></table>
+      </div>
       <canvas id="grafico"></canvas>
     </div>
   </div>

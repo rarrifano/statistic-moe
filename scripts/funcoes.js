@@ -37,15 +37,16 @@ function geraTabela(){
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
-    let colunaTitulo = document.getElementById('inputTitulo').value || document.getElementById('variaveis').value
-    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%']
-    let coluna1 = Object.keys(trataInput().countElements)
-    let frequenciaSimples = extraiObj(trataInput().countElements)
-    let frequenciaAcumulada = []
-    let linha = []
-    let acumulador = 0
-    let frequenciaPercent = []
-    let frequenciaPerAcu = []
+    tabela.style.border = '1px solid #606060';
+    let colunaTitulo = document.getElementById('inputTitulo').value || document.getElementById('variaveis').value;
+    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
+    let coluna1 = Object.keys(trataInput().countElements);
+    let frequenciaSimples = extraiObj(trataInput().countElements);
+    let frequenciaAcumulada = [];
+    let linha = [];
+    let acumulador = 0;
+    let frequenciaPercent = [];
+    let frequenciaPerAcu = [];
     
     for(i in frequenciaSimples){
         frequenciaPercent.push(((frequenciaSimples[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
@@ -61,8 +62,7 @@ function geraTabela(){
         }
     }
     
-    for(let i = 0; i < 4 ; i++){
-        
+    for(let i = 0; i < 4 ; i++){    
         linha.push({elementos:coluna1[i], 
         frequenciaSimples: frequenciaSimples[i],
         frequenciaPercent: frequenciaPercent[i],
@@ -71,21 +71,44 @@ function geraTabela(){
         })
     }
     
-    for(let i of cabecalho){
-        
+    for(let i of cabecalho){   
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
-        
         th.appendChild(texto);
         linhas.appendChild(th);
     }
     for (let i of linha) {
         let row = tabela.insertRow();
-        
         for (j in i) {         
             let celula = row.insertCell();
             let textoLinhas = document.createTextNode(i[j]);
-            
+            celula.appendChild(textoLinhas);
+        }
+    }
+
+}
+function geraTabela2(){
+    let tabela2 = document.getElementById('tabela2');
+    tabela2.style.border = '1px solid #606060';
+    let tituloTabela2 = tabela2.createTHead();
+    let linhaTabela2 = tituloTabela2.insertRow();
+    let medidasCentrais = [{
+        Média: trataInput().media,
+        Moda: moda(),
+        Mediana: mediana(trataInput().sheetParamters)
+    }]
+
+    for(let i of Object.keys(medidasCentrais[0])){
+        let th = document.createElement('th');
+        let texto = document.createTextNode(i);
+        th.appendChild(texto);
+        linhaTabela2.appendChild(th);
+    }
+    for(let i of medidasCentrais){
+        let row = tabela2.insertRow();
+        for(j in i){
+            let celula = row.insertCell();
+            let textoLinhas = document.createTextNode(i[j]);
             celula.appendChild(textoLinhas);
         }
     }
@@ -93,28 +116,24 @@ function geraTabela(){
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
-    geraTabela();
-    
-    console.log('Média:' + trataInput().media);
-    console.log('Mediana: ' + mediana(trataInput().sheetParamters));
-    console.log('Moda: ' + moda());
-    console.log('Desvio: ' + desviopadrao());
-    console.log(trataInput().totaldeIndicesVetor);
-    
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
     }else if(tipoVariavel !== 'qualitativa'){
         criaGrafico();
+        geraTabela();
+        geraTabela2();
     }else{
         criaGraficoPizza();
+        geraTabela();
+        geraTabela2();
     }        
 }
 
 elButton.onclick = execRender;
 
 function mudaBarra(){
-    var barra = document.getElementById("barraMedidas")
-    var barraValor = document.getElementById("cars").value
+    let barra = document.getElementById("barraMedidas")
+    let barraValor = document.getElementById("cars").value
 
     if (barraValor == "Percentil") {
         barra.min = 1

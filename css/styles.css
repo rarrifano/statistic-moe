@@ -93,11 +93,11 @@ span{
   }
 
 table{
-    border: 1px solid #606060;
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+    margin-top: 50px;
 }
 td {
     border: 1px solid #606060;
@@ -140,7 +140,4 @@ p{
 }
 #cars{
     margin-top: 10px;
-}
-table{
-    margin-top: 50px;
 }
