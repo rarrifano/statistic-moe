@@ -3,23 +3,48 @@ var elChart = document.querySelector(".box .content #grafico");
 
 function trataInput(){
     let valor = document.getElementById("inputValores").value;
-    
+    let variavel = document.getElementById('variaveis').value 
     if(valor == ''){
         alert("Erro: insira dados válidos");
     }else{
         var sheetParamters = valor.split(';');
         let countElements = {};
-        var sheetParamters = sheetParamters.map(Number)
-        sheetParamters.sort((a,b) => a-b); //QuickSort
-        sheetParamters.forEach(function(i){
+
+        if(variavel == 'qualitativaOrdinal'){
+            
+            sheetParamters.sort(); //QuickSort
+            sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
+            let maiorNumero = sheetParamters.length - 1;
+            let menorNumero = sheetParamters[0];
+            let totaldeIndicesVetor = sheetParamters.length;
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
 
-        let maiorNumero = sheetParamters.length - 1;
-        let menorNumero = sheetParamters[0];
-        let totaldeIndicesVetor = sheetParamters.length;
-        let media = sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor
-        return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements, media};
+        }else if(variavel == 'qualitativaNominal'){
+            
+            
+            sheetParamters.forEach(function(i){
+            countElements[i] = (countElements[i]||0)+1;
+        });
+            let maiorNumero = sheetParamters.length - 1;
+            let menorNumero = sheetParamters[0];
+            let totaldeIndicesVetor = sheetParamters.length;
+            
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
+        }else{
+            var sheetParamters = sheetParamters.map(Number);
+            sheetParamters.sort((a,b) => a-b); //QuickSort
+            sheetParamters.forEach(function(i){
+            countElements[i] = (countElements[i]||0)+1;
+        });
+            let maiorNumero = sheetParamters.length - 1;
+            let menorNumero = sheetParamters[0];
+            let totaldeIndicesVetor = sheetParamters.length;
+            let media = (sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor).toFixed(2)
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements,media};
+        }
+        
     }
 }
 
@@ -38,7 +63,7 @@ function geraTabela(){
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
     tabela.style.border = '1px solid #606060';
-    let colunaTitulo = document.getElementById('inputTitulo').value || document.getElementById('variaveis').value;
+    let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
     let coluna1 = Object.keys(trataInput().countElements);
     let frequenciaSimples = extraiObj(trataInput().countElements);
@@ -62,7 +87,7 @@ function geraTabela(){
         }
     }
     
-    for(let i = 0; i < 4 ; i++){    
+    for(let i = 0; i < coluna1.length ; i++){    
         linha.push({elementos:coluna1[i], 
         frequenciaSimples: frequenciaSimples[i],
         frequenciaPercent: frequenciaPercent[i],
@@ -70,7 +95,7 @@ function geraTabela(){
         frequenciaPerAcu: frequenciaPerAcu[i]
         })
     }
-    
+    console.log(linha)
     for(let i of cabecalho){   
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
@@ -93,7 +118,7 @@ function geraTabela2(){
     let tituloTabela2 = tabela2.createTHead();
     let linhaTabela2 = tituloTabela2.insertRow();
     let medidasCentrais = [{
-        Média: trataInput().media,
+        Média: trataInput().media || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
         Variança: desviopadrao().varianca,
@@ -120,7 +145,7 @@ function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
-    }else if(tipoVariavel !== 'qualitativa'){
+    }else if(tipoVariavel !== 'qualitativaOrdinal' && tipoVariavel !== 'qualitativaNominal'){
         criaGrafico();
         geraTabela();
         geraTabela2();

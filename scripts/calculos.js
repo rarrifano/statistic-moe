@@ -71,7 +71,11 @@ function desviopadrao(){
     let varianca = 0;
     let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;
     let desvio 
-
+    if(media == undefined){
+        varianca = "-"
+        desvio = "-"
+        return{desvio, varianca}
+    }
     for (var i = 0;i < lista.length; i++) {
         varianca += (media - lista[i]) * (media - lista[i]);
     }
