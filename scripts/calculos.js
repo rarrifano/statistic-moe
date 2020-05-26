@@ -71,7 +71,11 @@ function desviopadrao(){
     let varianca = 0;
     let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;
     let desvio 
-
+    if(media == undefined){
+        varianca = "-"
+        desvio = "-"
+        return{desvio, varianca}
+    }
     for (var i = 0;i < lista.length; i++) {
         varianca += (media - lista[i]) * (media - lista[i]);
     }
@@ -88,3 +92,15 @@ function desviopadrao(){
     return {desvio, varianca};
 }   
 
+function medidasSeparatrizes(){
+    let separatriz = document.getElementById("barraMedidas").value;
+    let separador 
+    console.log("Separatiz: "+separatriz)
+    if(separatriz !== 100 && separatriz !== 0){
+        separador = Math.round(separatriz/ trataInput().sheetParamters.length)
+        return trataInput().sheetParamters[separador]
+    }else if(separatriz == 100){
+        return trataInput().maiorNumero
+    }
+
+}
