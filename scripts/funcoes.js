@@ -2,15 +2,15 @@ var elButton = document.querySelector(".box .content .execButton");
 var elChart = document.querySelector(".box .content #grafico");
 
 function trataInput(){
-    let valor = document.getElementById("inputValores").value
+    let valor = document.getElementById("inputValores").value;
     
     if(valor == ''){
         alert("Erro: insira dados válidos");
     }else{
-        let sheetParamters = valor.split(';');
+        var sheetParamters = valor.split(';');
         let countElements = {};
-
-        sheetParamters.sort((a,b) => a-b); //←QuickSort→
+        var sheetParamters = sheetParamters.map(Number)
+        sheetParamters.sort((a,b) => a-b); //QuickSort
         sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
@@ -18,37 +18,9 @@ function trataInput(){
         let maiorNumero = sheetParamters.length - 1;
         let menorNumero = sheetParamters[0];
         let totaldeIndicesVetor = sheetParamters.length;
-        let media = sheetParamters.map(Number).reduce((a,b) => a + b)
+        let media = sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor
         return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements, media};
     }
-}
-
-function quantitativaContinua(max, min, totalElem){
-    
-    let amplitude = max - min //calcula a amplitude da serie
-    let classeLinha = Number(Math.sqrt(totalElem).toFixed(0)) ;
-    let classeLinhaMaisUm = classeLinha + 1;
-    let classeLinhaMenosUm = classeLinha - 1;
-    let resto = 1
-    
-        while(resto == 1){
-            if(amplitude % classeLinhaMenosUm != 0 && amplitude % classeLinhaMaisUm != 0 && amplitude % classeLinhaMenosUm != 0){
-                amplitude ++;
-            }else if(amplitude % classeLinhaMaisUm == 0){
-                let resultado = amplitude / classeLinhaMaisUm;
-                resto = 0;
-                this.formatoTabela = [classeLinhaMaisUm, resultado];
-            }else if(amplitude % classeLinhaMenosUm == 0){
-                let resultado = amplitude / classeLinhaMenosUm;
-                resto = 0;
-                this.formatoTabela = [classeLinhaMenosUm, resultado];
-            }else if(amplitude % classeLinha == 0){
-                let resultado = amplitude/classeLinha;
-                resto = 0;
-                this.formatoTabela = [classeLinha, resultado];
-            } 
-        }
-        return formatoTabela;
 }
 
 function extraiObj(obj){
@@ -60,119 +32,144 @@ function extraiObj(obj){
     return frequencia;
 }
 
-function tituloTabela(funcao){
-    let obj = {}
-    return obj
-}
-
-function criaGrafico(){
-    let ctx = document.getElementById('grafico').getContext('2d');
-    Chart.defaults.global.elements.rectangle.backgroundColor = 'rgba(113,89,193, 0.8)';
-    Chart.defaults.global.elements.rectangle.borderColor = 'rgba(113,89,193, 1)';
-    Chart.defaults.global.legend.display = false
-    Chart.defaults.global.title = true
-    var grafico = new Chart(ctx,{
-        type: 'bar',
-        data: {
-            labels: Object.keys(trataInput().countElements),
-            datasets: [{
-                label: document.getElementById('inputTitulo').value,
-                data: extraiObj(trataInput().countElements),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                    beginAtZero: true,
-                    stacked: false
-                }
-            }],
-            xAxes: [{
-                gridLines: {
-                    offsetGridLines: true,
-                    stacked: false
-                }
-            }]
+function geraTabela(){
+    
+    let tabela = document.getElementById('tabela');
+    let titulos = tabela.createTHead();    
+    let linhas = titulos.insertRow();
+    tabela.style.border = '1px solid #606060';
+    let colunaTitulo = document.getElementById('inputTitulo').value || document.getElementById('variaveis').value;
+    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
+    let coluna1 = Object.keys(trataInput().countElements);
+    let frequenciaSimples = extraiObj(trataInput().countElements);
+    let frequenciaAcumulada = [];
+    let linha = [];
+    let acumulador = 0;
+    let frequenciaPercent = [];
+    let frequenciaPerAcu = [];
+    
+    for(i in frequenciaSimples){
+        frequenciaPercent.push(((frequenciaSimples[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
+        if(i == 0){
+            acumulador = acumulador + frequenciaSimples[i]
+            frequenciaAcumulada.push(acumulador)
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            
+        }else{
+            acumulador = acumulador + frequenciaSimples[i]
+            frequenciaAcumulada.push(acumulador)
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
         }
     }
-});
-    /*Aqui vai a função pra chamar a tabela*/ 
-    document.getElementById('inputValores').value = '';
-    document.getElementById('inputTitulo').value = '';
-};
+    
+    for(let i = 0; i < 4 ; i++){    
+        linha.push({elementos:coluna1[i], 
+        frequenciaSimples: frequenciaSimples[i],
+        frequenciaPercent: frequenciaPercent[i],
+        frequenciaAcumulada:frequenciaAcumulada[i],
+        frequenciaPerAcu: frequenciaPerAcu[i]
+        })
+    }
+    
+    for(let i of cabecalho){   
+        let th = document.createElement('th');
+        let texto = document.createTextNode(i);
+        th.appendChild(texto);
+        linhas.appendChild(th);
+    }
+    for (let i of linha) {
+        let row = tabela.insertRow();
+        for (j in i) {         
+            let celula = row.insertCell();
+            let textoLinhas = document.createTextNode(i[j]);
+            celula.appendChild(textoLinhas);
+        }
+    }
 
-function criaGraficodePizza(){
-    console.log("pizza")
-    let ctx = document.getElementById('grafico').getContext('2d');
-    Chart.defaults.global.legend.display = false
-    Chart.defaults.global.title = true
-    var grafico = new Chart(ctx,{
-        type: 'pie',
-        data: {
-            labels: Object.keys(trataInput().countElements),
-            datasets: [{
-                label: document.getElementById('inputTitulo').value,
-                data: extraiObj(trataInput().countElements),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
-                    'rgba(75, 192, 192, 0.8)',
-                    'rgba(153, 102, 255, 0.8)',
-                    'rgba(255, 159, 64, 0.8)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-});
-    /*Aqui vai a função pra chamar a tabela*/ 
-    document.getElementById('inputValores').value = '';
-    document.getElementById('inputTitulo').value = '';
-};
+}
+function geraTabela2(){
+    let tabela2 = document.getElementById('tabela2');
+    tabela2.style.border = '1px solid #606060';
+    let tituloTabela2 = tabela2.createTHead();
+    let linhaTabela2 = tituloTabela2.insertRow();
+    let medidasCentrais = [{
+        Média: trataInput().media,
+        Moda: moda(),
+        Mediana: mediana(trataInput().sheetParamters),
+        Variança: desviopadrao().varianca,
+        "Desvio Padrão": desviopadrao().desvio
+    }];
 
+    for(let i of Object.keys(medidasCentrais[0])){
+        let th = document.createElement('th');
+        let texto = document.createTextNode(i);
+        th.appendChild(texto);
+        linhaTabela2.appendChild(th);
+    }
+    for(let i of medidasCentrais){
+        let row = tabela2.insertRow();
+        for(j in i){
+            let celula = row.insertCell();
+            let textoLinhas = document.createTextNode(i[j]);
+            celula.appendChild(textoLinhas);
+        }
+    }
+}   
 
 function execRender(){
-    var tipoVariavel = document.getElementById('variaveis').value
-    if(tipoVariavel === ''){
-        alert('Erro: Selecione o tipo de variavel')
+    var tipoVariavel = document.getElementById('variaveis').value;
+    if(tipoVariavel === ''){       
+        alert('Erro: Selecione o tipo de variavel');
     }else if(tipoVariavel !== 'qualitativa'){
         criaGrafico();
+        geraTabela();
+        geraTabela2();
+        desviopadrao();
     }else{
-        criaGraficodePizza()
-    }
-        
+        criaGraficoPizza();
+        geraTabela();
+        geraTabela2();
+        desviopadrao();
+    }        
 }
 
 elButton.onclick = execRender;
 
-function geraTabela(dados){
-    let tabela = document.getElementById('tabela');
-    let titulos = tabela.createTHead();    
-    let linhas = titulos.insertRow();
+function mudaBarra(){
+    let barra = document.getElementById("barraMedidas")
+    let barraValor = document.getElementById("cars").value
 
-    for(let chaves of Object.keys(dados[0])){
-        let th = document.createElement('th');
-        let texto = document.createTextNode(chaves);
-        th.appendChild(texto);
-        linhas.appendChild(th);
+    if (barraValor == "Percentil") {
+        barra.min = 1
+        barra.max = 100
+        barra.step = 1
+        barra.value = 1
+    } else if (barraValor == "Decil") {
+        barra.min = 10
+        barra.max = 100
+        barra.step = 10
+        barra.value = 10
+    } else if (barraValor == "Quintil") {
+        barra.min = 20
+        barra.max = 100
+        barra.step = 20
+        barra.value = 20
+    } else if (barraValor == "Quartil") {
+        barra.min = 25
+        barra.max = 100
+        barra.step = 25
+        barra.value = 25
     }
+}
 
-    for(let elemento of dados){
-        let linhaTabela = tabela.insertRow();
-        for(chave in elemento){
-            let celula = linhaTabela.insertCell();
-            let textoLinhas = document.createTextNode(elemento[chave]);
-            celula.appendChild(textoLinhas);
-        }
+function barraBMS() {
+    //Funcionamento da barra da medida separatriz
+    var slider = document.getElementById("barraMedidas")
+    var vbms = document.getElementById("valorBMS")
+    vbms.innerHTML = `${slider.value}%`; // Mostra o valor inicial
+
+    // Atualiza o valor conforme o usuário seleciona o valor da barra
+    slider.oninput = function () {
+        vbms.innerHTML = `${slider.value}%`
     }
 }

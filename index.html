@@ -9,56 +9,59 @@
     <link rel="stylesheet" href="./css/styles.css">
     <!-- Bootstrap CSS -->
   </head>
-  <body>
-    <div class="box">
-      <img src="./img/document.png">
-      <div class="content">
-        <h2 class="box-title">Estatística Descritiva</h2>
-        <input class="input" id="inputTitulo" placeholder="Titulo do Grafico"/>
-        <br/>
-        <br/>
-        <input class="input" id="inputValores" placeholder="Insira os dados separando-os por ';'"/>
-        <br/>
-        <br/>
-        <div>
-        <span>Tipo de Variavel: </span>
-        <select id="variaveis">
-          <option value="" selected disabled>Selecione</option>
-          <option value="qualitativa">Qualitativa</option>
-          <option value="quantitativaDiscreta">Quantitativa Discreta</option>
-          <option value="quatitativaContinua">Quantitativa Continua</option>
-        </select>
-      </div>
+<body onload="barraBMS()">
+  <form>
+  <div class="box">
+    <img src="./img/document.png">
+    <div class="content">
+      <h2 class="box-title">Estatística Descritiva</h2>
+      <input class="input" id="inputTitulo" placeholder="Nome da variavel"/>
+      <br/>
+      <br/>
+      <input class="input" id="inputValores" placeholder="Insira os dados separando-os por ';'"/>
+      <br/>
+      <br/>
       <div>
-        <span>Medidas Separatrizes: </span>
-        <select id="cars">
-          <option value="" selected disabled >Selecione</option>
-          <option value="1">Quartil</option>
-          <option value="2">Quintil</option>
-          <option value="3">Decil</option>
-          <option value="3">Porcentil</option>
-        </select>
-      </div>
-        <br/><br/>  
-        <form>
-          <input type="radio" name="tipo" value="populacao">População
-          <input type="radio" name="tipo" value="amostra">Amostra<br>
-        <br/>
-        <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
-        <br/>
-        <br/>
-        <button type="button" class="execButton">Calcular</button>
-      </div>
-      <br>
-      <br>
-      <div>
-        <table id="tabela" class="tabela"></table>
-      </div>
-      <div>
-        <canvas id="grafico"></canvas>
-      </div>
+      <span>Tipo de Variavel: </span>
+      <select id="variaveis">
+        <option value="" selected disabled>Selecione</option>
+        <option value="qualitativa">Qualitativa</option>
+        <option value="quantitativaDiscreta">Quantitativa Discreta</option>
+        <option value="quatitativaContinua">Quantitativa Continua</option>
+      </select>
     </div>
-    <script src="scripts/funcoes.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-  </body>
+    <div>
+      <span>Medidas Separatrizes: </span>
+      <select id="cars" onchange="mudaBarra()">
+        <option value="" selected disabled >Selecione</option>
+        <option value="Quartil">Quartil</option>
+        <option value="Quintil">Quintil</option>
+        <option value="Decil">Decil</option>
+        <option value="Porcentil">Porcentil</option>
+      </select>
+      <input type="range" min="0" max="0" value="0" step="1" class="bms" id="barraMedidas">
+      <p id="valorBMS">-</p>
+      <div>
+      <input type="radio" name="tipo" class="amostragem" value="populacao" checked>População
+      <input type="radio" name="tipo" class="amostragem"value="amostra">Amostra<br>
+      </div>
+      <br/>
+      <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
+      <br/>
+      <br/>
+      <button type="button" class="execButton">Calcular</button>
+    </form>
+      <table id="tabela" class="tabela"></table>
+    <div>
+      <div>
+        <table id="tabela2"></table>
+      </div>
+      <canvas id="grafico"></canvas>
+    </div>
+  </div>
+  <script src="scripts/funcoes.js"></script>
+  <script src="scripts/calculos.js"></script>
+  <script src="scripts/graficos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+</body>
 </html>
