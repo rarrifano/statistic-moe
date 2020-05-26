@@ -95,8 +95,10 @@ function geraTabela2(){
     let medidasCentrais = [{
         Média: trataInput().media,
         Moda: moda(),
-        Mediana: mediana(trataInput().sheetParamters)
-    }]
+        Mediana: mediana(trataInput().sheetParamters),
+        Variança: desviopadrao().varianca,
+        "Desvio Padrão": desviopadrao().desvio
+    }];
 
     for(let i of Object.keys(medidasCentrais[0])){
         let th = document.createElement('th');
@@ -122,10 +124,12 @@ function execRender(){
         criaGrafico();
         geraTabela();
         geraTabela2();
+        desviopadrao();
     }else{
         criaGraficoPizza();
         geraTabela();
         geraTabela2();
+        desviopadrao();
     }        
 }
 
@@ -164,7 +168,7 @@ function barraBMS() {
     var vbms = document.getElementById("valorBMS")
     vbms.innerHTML = `${slider.value}%`; // Mostra o valor inicial
 
-    // Atualiza o valor conforme o usuário usa
+    // Atualiza o valor conforme o usuário seleciona o valor da barra
     slider.oninput = function () {
         vbms.innerHTML = `${slider.value}%`
     }

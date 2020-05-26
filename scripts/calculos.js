@@ -66,15 +66,25 @@ function moda() {
 // Precisa acertar o calculo da função
 function desviopadrao(){
 
-    var media = trataInput().media;
-    var lista = trataInput().sheetParamters;
-    var varianca = 0;
+    let media = trataInput().media;
+    let lista = trataInput().sheetParamters;
+    let varianca = 0;
+    let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;
+    let desvio 
 
     for (var i = 0;i < lista.length; i++) {
         varianca += (media - lista[i]) * (media - lista[i]);
     }
     
-    varianca = varianca/lista.length;
-    return Math.sqrt(varianca);
-}
+    if(getAmostraPopulação == 'populacao'){
+        varianca = (varianca/lista.length).toFixed(2);
+        desvio = Math.sqrt(varianca).toFixed(2);
+    }
+    else{
+        varianca = (varianca/lista.length -1).toFixed(2);
+        desvio = Math.sqrt(varianca).toFixed(2);
+    }
+    
+    return {desvio, varianca};
+}   
 
