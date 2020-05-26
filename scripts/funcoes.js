@@ -3,14 +3,13 @@ var elChart = document.querySelector(".box .content #grafico");
 
 function trataInput(){
     let valor = document.getElementById("inputValores").value;
-    let variavel = document.getElementById('variaveis').value 
+    let variavel = document.getElementById("variaveis").value;
     if(valor == ''){
         alert("Erro: insira dados válidos");
     }else{
         var sheetParamters = valor.split(';');
         let countElements = {};
-
-        if(variavel == 'qualitativaOrdinal'){
+        if(variavel == 'qualitativaOrdinal' || variavel == 'qualitativaNominal'){
             
             sheetParamters.sort(); //QuickSort
             sheetParamters.forEach(function(i){
@@ -21,17 +20,6 @@ function trataInput(){
             let totaldeIndicesVetor = sheetParamters.length;
             return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
 
-        }else if(variavel == 'qualitativaNominal'){
-            
-            
-            sheetParamters.forEach(function(i){
-            countElements[i] = (countElements[i]||0)+1;
-        });
-            let maiorNumero = sheetParamters.length - 1;
-            let menorNumero = sheetParamters[0];
-            let totaldeIndicesVetor = sheetParamters.length;
-            
-            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
         }else{
             var sheetParamters = sheetParamters.map(Number);
             sheetParamters.sort((a,b) => a-b); //QuickSort
@@ -117,6 +105,7 @@ function geraTabela2(){
     tabela2.style.border = '1px solid #606060';
     let tituloTabela2 = tabela2.createTHead();
     let linhaTabela2 = tituloTabela2.insertRow();
+    let separatriz = document.getElementById("barraMedidas").value
     let medidasCentrais = [{
         Média: trataInput().media || "-",
         Moda: moda(),
@@ -124,7 +113,7 @@ function geraTabela2(){
         Variança: desviopadrao().varianca,
         "Desvio Padrão": desviopadrao().desvio
     }];
-
+    
     for(let i of Object.keys(medidasCentrais[0])){
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
@@ -138,6 +127,16 @@ function geraTabela2(){
             let textoLinhas = document.createTextNode(i[j]);
             celula.appendChild(textoLinhas);
         }
+    }
+    if(separatriz!=0){
+        let th = document.createElement('th');
+        let texto = document.createTextNode(document.getElementById("cars").value +" : "+ separatriz);
+        th.appendChild(texto);
+        linhaTabela2.appendChild(th);
+        let row = tabela2.insertRow();
+        let celula = row.insertCell();
+        let textoLinhas = document.createTextNode(medidasSeparatrizes());
+        celula.appendChild(textoLinhas);
     }
 }   
 
@@ -155,7 +154,8 @@ function execRender(){
         geraTabela();
         geraTabela2();
         desviopadrao();
-    }        
+    }
+    console.log(medidasSeparatrizes())        
 }
 
 elButton.onclick = execRender;

@@ -92,3 +92,15 @@ function desviopadrao(){
     return {desvio, varianca};
 }   
 
+function medidasSeparatrizes(){
+    let separatriz = document.getElementById("barraMedidas").value;
+    let separador 
+    console.log("Separatiz: "+separatriz)
+    if(separatriz !== 100 && separatriz !== 0){
+        separador = Math.round(separatriz/ trataInput().sheetParamters.length)
+        return trataInput().sheetParamters[separador]
+    }else if(separatriz == 100){
+        return trataInput().maiorNumero
+    }
+
+}
