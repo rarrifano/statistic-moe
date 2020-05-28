@@ -83,7 +83,6 @@ function geraTabela(){
         frequenciaPerAcu: frequenciaPerAcu[i]
         })
     }
-    console.log(linha)
     for(let i of cabecalho){   
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
@@ -106,40 +105,49 @@ function geraTabela2(){
     let tituloTabela2 = tabela2.createTHead();
     let linhaTabela2 = tituloTabela2.insertRow();
     let separatriz = document.getElementById("barraMedidas").value
+    let chaveSepratriz = document.getElementById("cars").value +": "+ separatriz
     let medidasCentrais = [{
         Média: trataInput().media || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
         Variança: desviopadrao().varianca,
-        "Desvio Padrão": desviopadrao().desvio
+        "Desvio Padrão": desviopadrao().desvio,
+        
     }];
-    
+    if(separatriz!=0){
+        medidasCentrais[0][chaveSepratriz] = medidasSeparatrizes()
+    }
+    console.log(medidasCentrais)
     for(let i of Object.keys(medidasCentrais[0])){
         let th = document.createElement('th');
+        th.setAttribute('class', 'cabecalho');
         let texto = document.createTextNode(i);
         th.appendChild(texto);
         linhaTabela2.appendChild(th);
     }
     for(let i of medidasCentrais){
+        
+        console.log("Medidas Dentro: " + medidasCentrais[0].chaveSepratriz)
         let row = tabela2.insertRow();
         for(j in i){
+            console.log("j: " + j)
             let celula = row.insertCell();
             let textoLinhas = document.createTextNode(i[j]);
             celula.appendChild(textoLinhas);
+            
         }
-    }
-    if(separatriz!=0){
-        let th = document.createElement('th');
-        let texto = document.createTextNode(document.getElementById("cars").value +" : "+ separatriz);
-        th.appendChild(texto);
-        linhaTabela2.appendChild(th);
-        let row = tabela2.insertRow();
-        let celula = row.insertCell();
-        let textoLinhas = document.createTextNode(medidasSeparatrizes());
-        celula.appendChild(textoLinhas);
     }
 }   
 
+function geraTabelaQntContinua(){
+    let limiteInferior = []
+    let limiteSuperior = []
+    let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesVetor )
+    let 
+    for(let i = 0; i > parametros[0]; i++){
+        
+    }
+}   
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
     if(tipoVariavel === ''){       
