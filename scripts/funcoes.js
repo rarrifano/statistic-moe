@@ -83,7 +83,6 @@ function geraTabela(){
         frequenciaPerAcu: frequenciaPerAcu[i]
         })
     }
-    console.log(linha)
     for(let i of cabecalho){   
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
@@ -106,16 +105,22 @@ function geraTabela2(){
     let tituloTabela2 = tabela2.createTHead();
     let linhaTabela2 = tituloTabela2.insertRow();
     let separatriz = document.getElementById("barraMedidas").value
+    let chaveSepratriz = document.getElementById("cars").value +": "+ separatriz
     let medidasCentrais = [{
         Média: trataInput().media || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
         Variança: desviopadrao().varianca,
-        "Desvio Padrão": desviopadrao().desvio
+        "Desvio Padrão": desviopadrao().desvio,
+        
     }];
-    
+    if(separatriz!=0){
+        medidasCentrais[0][chaveSepratriz] = medidasSeparatrizes()
+    }
+
     for(let i of Object.keys(medidasCentrais[0])){
         let th = document.createElement('th');
+        th.setAttribute('class', 'cabecalho');
         let texto = document.createTextNode(i);
         th.appendChild(texto);
         linhaTabela2.appendChild(th);
@@ -126,25 +131,39 @@ function geraTabela2(){
             let celula = row.insertCell();
             let textoLinhas = document.createTextNode(i[j]);
             celula.appendChild(textoLinhas);
+            
         }
-    }
-    if(separatriz!=0){
-        let th = document.createElement('th');
-        let texto = document.createTextNode(document.getElementById("cars").value +" : "+ separatriz);
-        th.appendChild(texto);
-        linhaTabela2.appendChild(th);
-        let row = tabela2.insertRow();
-        let celula = row.insertCell();
-        let textoLinhas = document.createTextNode(medidasSeparatrizes());
-        celula.appendChild(textoLinhas);
     }
 }   
 
+function geraTabelaQntContinua(){
+    let limiteInferior = [trataInput().menorNumero]
+    let limiteSuperior = []
+    let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesVetor );
+    let aux = 0
+    for(let i = 0; i > parametrosTabela[0]; i++){
+        console.log(i)
+        if(i == 0){
+            limiteSuperior.push(parametrosTabela[1]+limiteInferior[0])
+        }
+        limiteInferior.push(limiteSuperior[i])
+        limiteSuperior.push(parametrosTabela[1]+limiteInferior[i])
+    }
+    console.log('Limite inferior: ' + limiteInferior)
+    console.log('Limite superior: ' + limiteSuperior)
+}   
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
+    geraTabelaQntContinua()
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
-    }else if(tipoVariavel !== 'qualitativaOrdinal' && tipoVariavel !== 'qualitativaNominal'){
+    }else if(tipoVariavel == 'quantitativaContinua'){
+        criaGraficoHisto();
+        geraTabela();
+        geraTabela2();
+        desviopadrao();
+    }
+    else if(tipoVariavel !== 'qualitativaOrdinal' && tipoVariavel !== 'qualitativaNominal'){
         criaGrafico();
         geraTabela();
         geraTabela2();
@@ -154,8 +173,7 @@ function execRender(){
         geraTabela();
         geraTabela2();
         desviopadrao();
-    }
-    console.log(medidasSeparatrizes())        
+    }       
 }
 
 elButton.onclick = execRender;

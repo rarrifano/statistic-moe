@@ -66,7 +66,7 @@ function moda() {
 // Precisa acertar o calculo da função
 function desviopadrao(){
 
-    let media = trataInput().media;
+    let media = trataInput().media
     let lista = trataInput().sheetParamters;
     let varianca = 0;
     let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;
@@ -77,7 +77,7 @@ function desviopadrao(){
         return{desvio, varianca}
     }
     for (var i = 0;i < lista.length; i++) {
-        varianca += (media - lista[i]) * (media - lista[i]);
+        varianca += (lista[i] - media) * (lista[i] - media);
     }
     
     if(getAmostraPopulação == 'populacao'){
@@ -88,7 +88,7 @@ function desviopadrao(){
         varianca = (varianca/lista.length -1).toFixed(2);
         desvio = Math.sqrt(varianca).toFixed(2);
     }
-    
+    console.log(desvio)
     return {desvio, varianca};
 }   
 

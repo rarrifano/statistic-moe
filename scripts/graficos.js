@@ -65,3 +65,33 @@ function criaGraficoPizza(){
         },
 });
 };
+
+function criaGraficoHisto(){
+    let ctx = document.getElementById('grafico').getContext('2d');
+    Chart.defaults.global.legend.display = false;
+    var grafico = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: Object.keys(trataInput().countElements),
+        datasets: [{
+        data:extraiObj(trataInput().countElements) ,
+        backgroundColor: 'rgba(113,89,193, 1)',
+        }]
+    },
+    options: {
+     scales: {
+      xAxes: [{
+        display: false,
+        barPercentage: 1.30,
+      }, {
+        display: true,
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
+  }
+});
+}
