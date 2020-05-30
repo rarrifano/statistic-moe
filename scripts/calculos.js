@@ -2,36 +2,17 @@ function quantitativaContinua(max, min, totalElem){
     
     let amplitude = max - min //calcula a amplitude da serie
     let classeLinha = Number(Math.sqrt(totalElem).toFixed(0));
-    let classeLinhaMaisUm = classeLinha + 1;
-    let classeLinhaMenosUm = classeLinha - 1;
     let resto = 1
-    console.log(classeLinha)
-    console.log(classeLinhaMaisUm)
-    console.log(classeLinhaMenosUm)
     console.log('Amolitude'+amplitude)
         while(resto == 1){
-            if(amplitude % classeLinhaMenosUm != 0 && amplitude % classeLinhaMaisUm != 0 && amplitude % classeLinhaMenosUm != 0){
+            if(amplitude % classeLinha != 0){
                 amplitude ++;
-            }else if(amplitude % classeLinhaMenosUm == 0){
-                let resultado = amplitude / classeLinhaMenosUm;
-                resto = 0;
-                this.formatoTabela = [classeLinhaMenosUm, resultado];
             }else if(amplitude % classeLinha == 0){
                 let resultado = amplitude / classeLinha;
                 resto = 0;
                 this.formatoTabela = [classeLinha, resultado];
-            }else if(amplitude % classeLinhaMaisUm == 0){
-                let resultado = amplitude / classeLinhaMaisUm;
-                resto = 0;
-                this.formatoTabela = [classeLinhaMaisUm, resultado];
             }
-            
-            
-            
-            
         }
-        console.log('Classe: ' + formatoTabela[0])
-        console.log('Intervalo: ' + formatoTabela[1])
     return formatoTabela;
 }
 
@@ -71,7 +52,7 @@ function desviopadrao(){
     let desvio 
     let coeficienteVariacao
     if(media == undefined){
-        varianca = "-"
+        coeficienteVariacao = "-"
         desvio = "-"
         return{desvio, varianca}
     }

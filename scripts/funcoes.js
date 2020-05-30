@@ -110,7 +110,8 @@ function geraTabela2(){
         Média: trataInput().media || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
-        'Coeficente de variação': desviopadrao().coeficienteVariacao
+        'Coeficente de variação': desviopadrao().coeficienteVariacao || "-",
+        'Desvio Padrão':desviopadrao().desvio
     }];
     if(separatriz!=0){
         medidasCentrais[0][chaveSepratriz] = medidasSeparatrizes()
@@ -156,10 +157,10 @@ function geraTabelaQntContinua(){
     console.log('Limite Inferior: ' + limiteInferior)
     console.log('Limite Superior: ' + limiteSuperior)
     for(i in limiteSuperior){
-        auxFreq = numeros.filter(n => n >= limiteInferior[i] && n <= limiteSuperior[i])
+        auxFreq = numeros.filter(n => n >= limiteInferior[i] && n < limiteSuperior[i])
         frequenciaQuantContinua.push(auxFreq.length)
     }
-    let pontoMedio = limiteInferior.map((n,idx) =>(limiteInferior[idx]+limiteSuperior[idx]/2))
+    let pontoMedio = limiteInferior.map((n,idx) =>((limiteInferior[idx]+limiteSuperior[idx])/2))
     console.log(pontoMedio)
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
