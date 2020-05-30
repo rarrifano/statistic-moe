@@ -110,9 +110,7 @@ function geraTabela2(){
         Média: trataInput().media || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
-        'Coeficente de variação': desviopadrao().coeficienteVariacao,
-        "Desvio Padrão": desviopadrao().desvio,
-        
+        'Coeficente de variação': desviopadrao().coeficienteVariacao
     }];
     if(separatriz!=0){
         medidasCentrais[0][chaveSepratriz] = medidasSeparatrizes()
@@ -215,7 +213,6 @@ function geraTabelaQntContinua(){
 }   
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
-    
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
     }else if(tipoVariavel == 'quantitativaContinua'){

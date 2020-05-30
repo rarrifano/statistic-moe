@@ -87,8 +87,10 @@ function desviopadrao(){
         varianca = (varianca/lista.length -1).toFixed(2);
         desvio = Math.sqrt(varianca).toFixed(2);
     }
+
     coeficienteVariacao = ((desvio/media) * 100).toFixed(2) + '%'
     return {desvio, coeficienteVariacao};
+
 }   
 
 function medidasSeparatrizes(){
