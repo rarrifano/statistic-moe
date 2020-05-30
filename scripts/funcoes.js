@@ -15,7 +15,7 @@ function trataInput(){
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
-            let maiorNumero = sheetParamters.length - 1;
+            let maiorNumero = sheetParamters[sheetParamters.length - 1];
             let menorNumero = sheetParamters[0];
             let totaldeIndicesVetor = sheetParamters.length;
             return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
@@ -26,7 +26,7 @@ function trataInput(){
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
-            let maiorNumero = sheetParamters.length - 1;
+            let maiorNumero = sheetParamters[sheetParamters.length - 1];
             let menorNumero = sheetParamters[0];
             let totaldeIndicesVetor = sheetParamters.length;
             let media = (sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor).toFixed(2)
@@ -110,7 +110,7 @@ function geraTabela2(){
         Média: trataInput().media || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
-        Variança: desviopadrao().varianca,
+        'Coeficente de variação': desviopadrao().coeficienteVariacao,
         "Desvio Padrão": desviopadrao().desvio,
         
     }];
@@ -137,29 +137,90 @@ function geraTabela2(){
 }   
 
 function geraTabelaQntContinua(){
-    let limiteInferior = [trataInput().menorNumero]
+    let limiteInferior = []
     let limiteSuperior = []
-    let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesVetor );
-    let aux = 0
-    for(let i = 0; i > parametrosTabela[0]; i++){
-        console.log(i)
+    let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesVetor);
+    let aux = trataInput().menorNumero
+    let frequenciaQuantContinua = []
+    let auxFreq = []
+    let numeros = trataInput().sheetParamters
+    console.log(parametrosTabela[1])
+    for(let i = 0; i < parametrosTabela[0]; i++){
         if(i == 0){
-            limiteSuperior.push(parametrosTabela[1]+limiteInferior[0])
+            limiteInferior.push(aux)
+            limiteSuperior.push(aux + parametrosTabela[1])  
+        }else{ 
+            limiteInferior.push(aux)
+            limiteSuperior.push(parametrosTabela[1]+limiteInferior[i])
         }
-        limiteInferior.push(limiteSuperior[i])
-        limiteSuperior.push(parametrosTabela[1]+limiteInferior[i])
+        aux += parametrosTabela[1]
     }
-    console.log('Limite inferior: ' + limiteInferior)
-    console.log('Limite superior: ' + limiteSuperior)
+    console.log('Limite Inferior: ' + limiteInferior)
+    console.log('Limite Superior: ' + limiteSuperior)
+    for(i in limiteSuperior){
+        auxFreq = numeros.filter(n => n >= limiteInferior[i] && n <= limiteSuperior[i])
+        frequenciaQuantContinua.push(auxFreq.length)
+    }
+    let pontoMedio = limiteInferior.map((n,idx) =>(limiteInferior[idx]+limiteSuperior[idx]/2))
+    console.log(pontoMedio)
+    let tabela = document.getElementById('tabela');
+    let titulos = tabela.createTHead();    
+    let linhas = titulos.insertRow();
+    tabela.style.border = '1px solid #606060';
+    let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
+    let frequenciaAcumulada = [];
+    let linha = [];
+    let acumulador = 0;
+    let frequenciaPercent = [];
+    let frequenciaPerAcu = [];
+    
+    for(i in frequenciaQuantContinua){
+        frequenciaPercent.push(((frequenciaQuantContinua[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
+        if(i == 0){
+            acumulador = acumulador + frequenciaQuantContinua[i]
+            frequenciaAcumulada.push(acumulador)
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            
+        }else{
+            acumulador = acumulador + frequenciaQuantContinua[i]
+            frequenciaAcumulada.push(acumulador)
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+        }
+    }
+    
+    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
+
+    for(let i = 0; i < parametrosTabela[0]; i++){    
+        linha.push({elementos:`${limiteInferior[i]} |-- ${limiteSuperior[i]}`, 
+        frequenciaSimples: frequenciaQuantContinua[i],
+        frequenciaPercent: frequenciaPercent[i],
+        frequenciaAcumulada:frequenciaAcumulada[i],
+        frequenciaPerAcu: frequenciaPerAcu[i]
+        })
+    }
+    for(let i of cabecalho){   
+        let th = document.createElement('th');
+        let texto = document.createTextNode(i);
+        th.appendChild(texto);
+        linhas.appendChild(th);
+    }
+    for (let i of linha) {
+        let row = tabela.insertRow();
+        for (j in i) {         
+            let celula = row.insertCell();
+            let textoLinhas = document.createTextNode(i[j]);
+            celula.appendChild(textoLinhas);
+        }
+    }
 }   
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
-    geraTabelaQntContinua()
+    
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
     }else if(tipoVariavel == 'quantitativaContinua'){
         criaGraficoHisto();
-        geraTabela();
+        geraTabelaQntContinua();
         geraTabela2();
         desviopadrao();
     }
