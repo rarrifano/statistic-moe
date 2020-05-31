@@ -30,6 +30,7 @@ function trataInput(){
             let menorNumero = sheetParamters[0];
             let totaldeIndicesVetor = sheetParamters.length;
             let media = (sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor).toFixed(2)
+            console.log(media)
             return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements,media};
         }
         
@@ -135,7 +136,7 @@ function geraTabela2(){
     }
 }   
 
-function geraTabelaQntContinua(){
+function trataQuantitativaContinua(){
     let limiteInferior = []
     let limiteSuperior = []
     let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesVetor);
@@ -143,7 +144,6 @@ function geraTabelaQntContinua(){
     let frequenciaQuantContinua = []
     let auxFreq = []
     let numeros = trataInput().sheetParamters
-    console.log(parametrosTabela[1])
     for(let i = 0; i < parametrosTabela[0]; i++){
         if(i == 0){
             limiteInferior.push(aux)
@@ -154,55 +154,63 @@ function geraTabelaQntContinua(){
         }
         aux += parametrosTabela[1]
     }
-    console.log('Limite Inferior: ' + limiteInferior)
-    console.log('Limite Superior: ' + limiteSuperior)
     for(i in limiteSuperior){
         auxFreq = numeros.filter(n => n >= limiteInferior[i] && n < limiteSuperior[i])
         frequenciaQuantContinua.push(auxFreq.length)
     }
     let pontoMedio = limiteInferior.map((n,idx) =>((limiteInferior[idx]+limiteSuperior[idx])/2))
-    console.log(pontoMedio)
+    let labelGrafico = []
+    for(let i = 0; i < parametrosTabela[0]; i++){    
+        labelGrafico.push(`${limiteInferior[i]} |-- ${limiteSuperior[i]}`)
+    }
+    return {labelGrafico,limiteSuperior,limiteInferior,pontoMedio,frequenciaQuantContinua,parametrosTabela}
+}
+
+function geraTabelaQntContinua(){
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
     tabela.style.border = '1px solid #606060';
     let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
+    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
+    let frequencia = trataQuantitativaContinua().frequenciaQuantContinua
+    let parametrosTabela = trataQuantitativaContinua().parametrosTabela[0]
     let frequenciaAcumulada = [];
     let linha = [];
     let acumulador = 0;
     let frequenciaPercent = [];
     let frequenciaPerAcu = [];
     
-    for(i in frequenciaQuantContinua){
-        frequenciaPercent.push(((frequenciaQuantContinua[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
+    for(i in frequencia){
+        frequenciaPercent.push(((frequencia[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
         if(i == 0){
-            acumulador = acumulador + frequenciaQuantContinua[i]
+            acumulador = acumulador + frequencia[i]
             frequenciaAcumulada.push(acumulador)
             frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
             
         }else{
-            acumulador = acumulador + frequenciaQuantContinua[i]
+            acumulador = acumulador + frequencia[i]
             frequenciaAcumulada.push(acumulador)
             frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
         }
     }
-    
-    let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
 
-    for(let i = 0; i < parametrosTabela[0]; i++){    
-        linha.push({elementos:`${limiteInferior[i]} |-- ${limiteSuperior[i]}`, 
-        frequenciaSimples: frequenciaQuantContinua[i],
+    for(let i = 0; i < parametrosTabela; i++){    
+        linha.push({elementos:`${trataQuantitativaContinua().limiteInferior[i]} |-- ${trataQuantitativaContinua().limiteSuperior[i]}`, 
+        frequenciaSimples: frequencia[i],
         frequenciaPercent: frequenciaPercent[i],
         frequenciaAcumulada:frequenciaAcumulada[i],
         frequenciaPerAcu: frequenciaPerAcu[i]
         })
     }
+
     for(let i of cabecalho){   
         let th = document.createElement('th');
         let texto = document.createTextNode(i);
         th.appendChild(texto);
         linhas.appendChild(th);
     }
+
     for (let i of linha) {
         let row = tabela.insertRow();
         for (j in i) {         
@@ -211,7 +219,7 @@ function geraTabelaQntContinua(){
             celula.appendChild(textoLinhas);
         }
     }
-}   
+}
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
     if(tipoVariavel === ''){       

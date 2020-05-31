@@ -3,7 +3,6 @@ function quantitativaContinua(max, min, totalElem){
     let amplitude = max - min //calcula a amplitude da serie
     let classeLinha = Number(Math.sqrt(totalElem).toFixed(0));
     let resto = 1
-    console.log('Amolitude'+amplitude)
         while(resto == 1){
             if(amplitude % classeLinha != 0){
                 amplitude ++;
@@ -68,10 +67,8 @@ function desviopadrao(){
         varianca = (varianca/lista.length -1).toFixed(2);
         desvio = Math.sqrt(varianca).toFixed(2);
     }
-
     coeficienteVariacao = ((desvio/media) * 100).toFixed(2) + '%'
     return {desvio, coeficienteVariacao};
-
 }   
 
 function medidasSeparatrizes(){

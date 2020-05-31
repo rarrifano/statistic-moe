@@ -72,11 +72,11 @@ function criaGraficoHisto(){
     var grafico = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: Object.keys(trataInput().countElements),
-        datasets: [{
-        data:extraiObj(trataInput().countElements) ,
-        backgroundColor: 'rgba(113,89,193, 1)',
-        }]
+        labels: trataQuantitativaContinua().labelGrafico,
+            datasets: [{
+                data: trataQuantitativaContinua().frequenciaQuantContinua,
+                backgroundColor: 'rgba(113,89,193, 1)'
+            }]
     },
     options: {
      scales: {
