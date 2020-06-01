@@ -50,6 +50,7 @@ function desviopadrao(){
     let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;
     let desvio 
     let coeficienteVariacao
+
     if(media == undefined){
         coeficienteVariacao = "-"
         desvio = "-"
@@ -80,5 +81,4 @@ function medidasSeparatrizes(){
     }else if(separatriz == 100){
         return trataInput().maiorNumero
     }
-
 }
