@@ -20,7 +20,8 @@ function trataInput(){
             let totaldeIndicesVetor = sheetParamters.length;
             return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
 
-        }else{
+        }
+        else{
             var sheetParamters = sheetParamters.map(Number);
             sheetParamters.sort((a,b) => a-b); //QuickSort
             sheetParamters.forEach(function(i){
@@ -29,16 +30,14 @@ function trataInput(){
             let maiorNumero = sheetParamters[sheetParamters.length - 1];
             let menorNumero = sheetParamters[0];
             let totaldeIndicesVetor = sheetParamters.length;
-            let media = (sheetParamters.reduce((a,b) => a + b)/totaldeIndicesVetor).toFixed(2)
-            console.log(media)
-            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements,media};
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
         }
         
     }
 }
 
 function extraiObj(obj){
-    this.frequencia = []
+    let frequencia = []
     for(let i in obj){
         frequencia.push(obj[i]);
         
@@ -108,7 +107,7 @@ function geraTabela2(){
     let separatriz = document.getElementById("barraMedidas").value
     let chaveSepratriz = document.getElementById("cars").value +": "+ separatriz
     let medidasCentrais = [{
-        Média: trataInput().media || "-",
+        Média: media() || "-",
         Moda: moda(),
         Mediana: mediana(trataInput().sheetParamters),
         'Coeficente de variação': desviopadrao().coeficienteVariacao || "-",
@@ -159,6 +158,7 @@ function trataQuantitativaContinua(){
         frequenciaQuantContinua.push(auxFreq.length)
     }
     let pontoMedio = limiteInferior.map((n,idx) =>((limiteInferior[idx]+limiteSuperior[idx])/2))
+    
     let labelGrafico = []
     for(let i = 0; i < parametrosTabela[0]; i++){    
         labelGrafico.push(`${limiteInferior[i]} |-- ${limiteSuperior[i]}`)
