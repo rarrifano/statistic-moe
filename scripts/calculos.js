@@ -19,7 +19,7 @@ function media() {
     if(document.getElementById('variaveis').value == "quantitativaDiscreta"){
         let media = (trataInput().sheetParamters.reduce((a,b) => a + b)/trataInput().totaldeIndicesVetor).toFixed(2)
         return media
-    }else{
+    }else if(document.getElementById('variaveis').value == "quantitativaContinua"){
         let mediaQntCont = []
         let pontoMedio = trataQuantitativaContinua().pontoMedio
         let frequenciaQuantContinua = trataQuantitativaContinua().frequenciaQuantContinua
@@ -35,22 +35,26 @@ function media() {
 }
 
 function mediana(vetor){
-    if(document.getElementById('variaveis').value == "quantitativaDiscreta"){
+    let variavel = document.getElementById('variaveis').value
     var meio = Math.floor(vetor.length / 2);
+    if(variavel == "quantitativaDiscreta"){
+        
+        if (vetor.length % 2){
+            return vetor[meio];
     
-    if (vetor.length % 2){
-        return vetor[meio];
-    
-    }
-    return (vetor[meio - 1] + vetor[meio]) / 2;
-    }else{
+        }else{
+            return (vetor[meio - 1] + vetor[meio]) / 2;
+        }
+        
+    }else if(variavel == "qualitativaNominal" || variavel == "qualitativaOrdinal"){
+        return(vetor[meio])
 
     }
 
   }
 
 function moda() {
-    if(document.getElementById('variaveis').value == "quantitativaDiscreta"){
+    if(document.getElementById('variaveis').value != "quantitativaContinua"){
         let moda = []
         let indiceMax = Object.keys(trataInput().countElements)
         let contador = extraiObj(trataInput().countElements)
@@ -71,11 +75,16 @@ function moda() {
         let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua)
         let contador = trataQuantitativaContinua().frequenciaQuantContinua
         console.log(indiceMax)
-        for(let i = 0; i < trataQuantitativaContinua().frequenciaQuantContinua.length;i++){
-            if(contador[i] == indiceMax){
-                moda.push(trataQuantitativaContinua().pontoMedio[i])
+        if(indiceMax == 1){
+            return "serie amodal"
+        }else{
+            for(let i = 0; i < contador.length;i++){
+                if(contador[i] == indiceMax){
+                    moda.push(trataQuantitativaContinua().pontoMedio[i])
+                }
             }
         }
+        
         return moda;
         }
         
@@ -85,7 +94,7 @@ function moda() {
 // Precisa acertar o calculo da função
 function desviopadrao(){
 
-    let mediaDesvio = media()
+    let mediaDesvio = media() || undefined
     let lista = trataInput().sheetParamters;
     let varianca = 0;
     let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;

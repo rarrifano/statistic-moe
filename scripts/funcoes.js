@@ -108,10 +108,10 @@ function geraTabela2(){
     let chaveSepratriz = document.getElementById("cars").value +": "+ separatriz
     let medidasCentrais = [{
         Média: media() || "-",
-        Moda: moda(),
+        Moda: moda() || "-",
         Mediana: mediana(trataInput().sheetParamters),
         'Coeficente de variação': desviopadrao().coeficienteVariacao || "-",
-        'Desvio Padrão':desviopadrao().desvio
+        'Desvio Padrão':desviopadrao().desvio || "-"
     }];
     if(separatriz!=0){
         medidasCentrais[0][chaveSepratriz] = medidasSeparatrizes()
@@ -228,18 +228,17 @@ function execRender(){
         criaGraficoHisto();
         geraTabelaQntContinua();
         geraTabela2();
-        desviopadrao();
     }
-    else if(tipoVariavel !== 'qualitativaOrdinal' && tipoVariavel !== 'qualitativaNominal'){
+    else if(tipoVariavel == "quantitativaDiscreta"){
         criaGrafico();
         geraTabela();
         geraTabela2();
-        desviopadrao();
+ 
     }else{
         criaGraficoPizza();
         geraTabela();
         geraTabela2();
-        desviopadrao();
+        
     }       
 }
 
