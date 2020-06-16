@@ -15,49 +15,99 @@ function quantitativaContinua(max, min, totalElem){
     return formatoTabela;
 }
 
-function mediana(vetor){
-    var meio = Math.floor(vetor.length / 2);
-    if (vetor.length % 2){
-        return vetor[meio];
+function media() {
+    if(document.getElementById('variaveis').value == "quantitativaDiscreta"){
+        let media = (trataInput().sheetParamters.reduce((a,b) => a + b)/trataInput().totaldeIndicesVetor).toFixed(2)
+        return media
+    }else if(document.getElementById('variaveis').value == "quantitativaContinua"){
+        let mediaQntCont = []
+        let pontoMedio = trataQuantitativaContinua().pontoMedio
+        let frequenciaQuantContinua = trataQuantitativaContinua().frequenciaQuantContinua
+    for(i in frequenciaQuantContinua){
+        
+        mediaQntCont.push(pontoMedio[i] * frequenciaQuantContinua[i])
     }
-    return (vetor[meio - 1] + vetor[meio]) / 2;
+    mediaQntCont = (mediaQntCont.reduce((a,b) => a + b)/trataInput().totaldeIndicesVetor).toFixed(2)
+        return mediaQntCont
+    }
+    
+    
+}
+
+function mediana(vetor){
+    let variavel = document.getElementById('variaveis').value
+    var meio = Math.floor(vetor.length / 2);
+    if(variavel == "quantitativaDiscreta"){
+        
+        if (vetor.length % 2){
+            return vetor[meio];
+    
+        }else{
+            return (vetor[meio - 1] + vetor[meio]) / 2;
+        }
+        
+    }else if(variavel == "qualitativaNominal" || variavel == "qualitativaOrdinal"){
+        return(vetor[meio])
+
+    }
+
   }
 
 function moda() {
-    let moda = []
-    let indiceMax = Object.keys(trataInput().countElements)
-    let contador = extraiObj(trataInput().countElements)
+    if(document.getElementById('variaveis').value != "quantitativaContinua"){
+        let moda = []
+        let indiceMax = Object.keys(trataInput().countElements)
+        let contador = extraiObj(trataInput().countElements)
     
-    if(Math.max.apply(null,contador) == 1){
-        return "serie amodal"
-    }else{
-    for(let i =0; i< contador.length; i++){
-        if(contador[i] == Math.max.apply(null,contador)){
+        if(Math.max.apply(null,contador) == 1){
+            return "serie amodal"
+        }else{
+            for(let i =0; i< contador.length; i++){
+                if(contador[i] == Math.max.apply(null,contador)){
             
-            moda.push(indiceMax[i]);
+                moda.push(indiceMax[i]);
             }
         }
         return moda;
+        }
+    }else{
+        let moda = []
+        let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua)
+        let contador = trataQuantitativaContinua().frequenciaQuantContinua
+        console.log(indiceMax)
+        if(indiceMax == 1){
+            return "serie amodal"
+        }else{
+            for(let i = 0; i < contador.length;i++){
+                if(contador[i] == indiceMax){
+                    moda.push(trataQuantitativaContinua().pontoMedio[i])
+                }
+            }
+        }
+        
+        return moda;
+        }
+        
     }
-}
+
 
 // Precisa acertar o calculo da função
 function desviopadrao(){
 
-    let media = trataInput().media
+    let mediaDesvio = media() || undefined
     let lista = trataInput().sheetParamters;
     let varianca = 0;
     let getAmostraPopulação = document.querySelector('input[name="tipo"]:checked').value;
     let desvio 
     let coeficienteVariacao
 
-    if(media == undefined){
+    if(mediaDesvio == undefined){
         coeficienteVariacao = "-"
         desvio = "-"
         return{desvio, varianca}
     }
     for (var i = 0;i < lista.length; i++) {
-        varianca += (lista[i] - media) * (lista[i] - media);
+        varianca += (lista[i] - mediaDesvio) * (lista[i] - mediaDesvio);
     }
     
     if(getAmostraPopulação == 'populacao'){
@@ -68,7 +118,7 @@ function desviopadrao(){
         varianca = (varianca/lista.length -1).toFixed(2);
         desvio = Math.sqrt(varianca).toFixed(2);
     }
-    coeficienteVariacao = ((desvio/media) * 100).toFixed(2) + '%'
+    coeficienteVariacao = ((desvio/mediaDesvio) * 100).toFixed(2) + '%'
     return {desvio, coeficienteVariacao};
 }   
 
