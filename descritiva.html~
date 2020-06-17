@@ -12,7 +12,7 @@
 <body onload="barraBMS()">
   <form>
   <div class="box">
-    <img src="assets/img/document.png">
+    <img src="./img/document.png">
     <div class="content">
       <h2 class="box-title">Estatística Descritiva</h2>
       <input class="input" id="inputTitulo" placeholder="Nome da variavel"/>

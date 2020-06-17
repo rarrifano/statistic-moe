@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Probabilidade | Statistic.moe</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Article-List.css">
+    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="assets/css/probabilidade.css">
+</head>
+
+<body>
+    <!-- Inicio da barra de navegação Main-menu -->
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="./index.html">Statistic.moe</a><button data-toggle="collapse"
+                class="navbar-toggler" data-target="#navcol-1"><span class="sr-only"></span><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Descritiva</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Probabilidade</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Correlação</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Fim da barra de navegação Main-menu -->
+
+    <!-- Inicio do conteudo central da pagina -->
+    <div class="article-list">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Cálculos</h2>
+            </div>
+            <div>
+                <!-- Abas de inserção e resultado -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Inserção de Dados</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Resultados</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">#DELETE THIS#</a></li> -->
+                </ul>
+                <!-- Fim abas de inserção e resultado -->
+
+                <!-- Conteudo das abas -->
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="tab-1">
+                        <!-- linha Tipo de calculo -->
+                        <div class="" style="margin-top: 10px !important;">
+                            <div class="" data-toggle="buttons">
+                                <!-- <label class="btn btn-dark "> -->
+                                <label class="">
+                                    <input type="radio" name="tipo" value="uniforme" checked>
+                                    Uniforme
+                                </label>
+                                <label class="">
+                                    <input type="radio" name="tipo" value="binomial" >
+                                    Binomial
+                                </label>
+                                <label class="">
+                                    <input type="radio" name="tipo" value="normal" >
+                                    Normal
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Fim da linha Tipo de calculo -->
+                        <!-- Inputs de inserção -->
+                        <div class="bloco">
+                            <input class="form-control" type="text" placeholder="Quantidade">
+                            <select class="form-control">
+                                <option value="maior-que" selected>Maior que</option>
+                                <option value="entre">Entre</option>
+                                <option value="menor-que">Menor que</option>
+                                <option value="equilibrio">Equilibrio</option>
+                            </select>
+                            <input class="form-control" type="text" placeholder="Ponto Mínimo">
+                            <input class="form-control" type="text" placeholder="Ponto Máximo">
+                            <!-- fim dos inputs de inserção -->
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                                autocomplete="off">Calcular</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="tab-2">
+                        <div class="row articles">
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table id="table" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Média</th>
+                                                <th>Probabilidade %</th>
+                                                <th>Desvio Padrão</th>
+                                                <th>Coeficiente de Variação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Cell 1</td>
+                                                <td>Cell 2</td>
+                                                <td>Cell 3</td>
+                                                <td>Cell 4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cell 1</td>
+                                                <td>Cell 2</td>
+                                                <td>Cell 3</td>
+                                                <td>Cell 4</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="tab-3">
+                        <p>Content for tab 3.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Fim do conteudo central da pagina -->
+
+    <!-- Rodapé -->
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Serviços</h3>
+                        <ul>
+                            <li><a href="#">Estatística Descritiva</a></li>
+                            <li><a href="#">Probabilidade</a></li>
+                            <li><a href="#">Correlação</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Sobre nós</h3>
+                        <ul>
+                            <li><a href="#">Github</a></li>
+                            <li><a href="#">Discord</a></li>
+                            <li><a href="#">Fatec Franca</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Carreira</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">Copyright © 2020 Statistic.moe</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="assets/js/funcoes.js"></script>
+    <script src="assets/js/calculos.js"></script>
+    <script src="assets/js/graficos.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+</body>
+
+</html>
