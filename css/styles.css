@@ -5,6 +5,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+a{
+    position: absolute !important;
+    transform: translate(-50%, -50%) !important;
+}
+
 .box{
     width: 300px;
     background: #ffffff;
