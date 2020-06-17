@@ -1,0 +1,28 @@
+.table{
+    max-width: 50em !important;
+    text-align: center !important;
+}
+
+.btn-primary.teste{
+    width: 100px !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.btn-primary{
+    background-color: #7159c1 !important;
+    border-color: #7159c1 !important;
+}
+
+.btn-primary:hover{
+    background-color: #7f6ac7 !important;
+    border-color: #7f6ac7 !important;
+}
+
+.nav-link:hover{
+    color: #7f6ac7 !important;
+    text-shadow: 0 0 50px #7159c1;
+    transition: 0.5s;
+}
