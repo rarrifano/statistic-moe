@@ -6,9 +6,10 @@
 }
 
 .box{
-    width: 300px;
+    width: 400px;
     background: #ffffff;
-    height: 360px;
+    margin-top:  50px;
+    height: 540px;
     padding: 80px 40px;
     border-radius: 10px;
     position: absolute;
@@ -24,6 +25,7 @@
     transform: translate(-50%, -50%);
     width: 50px; 
     margin-bottom: 60px;
+
 }
 
 .box .content{

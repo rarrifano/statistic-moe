@@ -18,12 +18,13 @@
     <!-- Inicio da barra de navegação Main-menu -->
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
         <div class="container"><a class="navbar-brand" href="./index.html">Statistic.moe</a><button data-toggle="collapse"
-                class="navbar-toggler" data-target="#navcol-1"><span class="sr-only"></span><span
+                class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Descritiva</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Probabilidade</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="./descritiva.html">Descritiva</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link"
+                            href="./probabilidade.html">Probabilidade</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Correlação</a></li>
                 </ul>
             </div>
@@ -40,14 +41,14 @@
             <div>
                 <!-- Abas de inserção e resultado -->
                 <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Inserção de Dados</a></li>
+                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Uniforme</a></li>
                     <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Resultados</a></li>
                     <!-- <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">#DELETE THIS#</a></li> -->
                 </ul>
                 <!-- Fim abas de inserção e resultado -->
 
                 <!-- Conteudo das abas -->
-                <div class="tab-content">
+                <div class="tab-content" >
                     <div class="tab-pane active" role="tabpanel" id="tab-1">
                         <!-- linha Tipo de calculo -->
                         <div class="" style="margin-top: 10px !important;">
@@ -69,16 +70,15 @@
                         </div>
                         <!-- Fim da linha Tipo de calculo -->
                         <!-- Inputs de inserção -->
-                        <div class="bloco">
-                            <input class="form-control" type="text" placeholder="Quantidade">
-                            <select class="form-control">
-                                <option value="maior-que" selected>Maior que</option>
-                                <option value="entre">Entre</option>
-                                <option value="menor-que">Menor que</option>
-                                <option value="equilibrio">Equilibrio</option>
-                            </select>
+                        <div class="bloco" id="uniforme">
                             <input class="form-control" type="text" placeholder="Ponto Mínimo">
                             <input class="form-control" type="text" placeholder="Ponto Máximo">
+                            <select class="form-control" id="selecionaNominal" onchange="intervalo()">
+                                <option value="" selected disabled>Selecione</option>
+                                <option value="maior-que">Maior que</option>
+                                <option value="entre">Entre</option>
+                                <option value="menor-que">Menor que</option>
+                            </select>
                             <!-- fim dos inputs de inserção -->
                             <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
                                 autocomplete="off">Calcular</button>
@@ -166,8 +166,7 @@
             </div>
         </footer>
     </div>
-    <script src="assets/js/funcoes.js"></script>
-    <script src="assets/js/calculos.js"></script>
+    <script src="assets/js/funcoesProbabilidade.js"></script>
     <script src="assets/js/graficos.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
