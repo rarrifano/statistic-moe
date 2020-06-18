@@ -33,6 +33,7 @@
     <!-- Fim da barra de navegação Main-menu -->
 
     <!-- Inicio do conteudo central da pagina -->
+    <main id="prob">
     <div class="article-list">
         <div class="container">
             <div class="intro">
@@ -70,15 +71,17 @@
                         </div>
                         <!-- Fim da linha Tipo de calculo -->
                         <!-- Inputs de inserção -->
+                        
                         <div class="bloco" id="uniforme">
                             <input class="form-control" type="text" placeholder="Ponto Mínimo">
                             <input class="form-control" type="text" placeholder="Ponto Máximo">
-                            <select class="form-control" id="selecionaNominal" onchange="intervalo()">
+                            <select class="form-control" id="selecionaNominal" onchange="intervalo(this)">
                                 <option value="" selected disabled>Selecione</option>
                                 <option value="maior-que">Maior que</option>
                                 <option value="entre">Entre</option>
                                 <option value="menor-que">Menor que</option>
                             </select>
+                            <div id="escolhaintervalo"></div>
                             <!-- fim dos inputs de inserção -->
                             <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
                                 autocomplete="off">Calcular</button>
@@ -125,6 +128,7 @@
 
         </div>
     </div>
+</main>
     <!-- Fim do conteudo central da pagina -->
 
     <!-- Rodapé -->
