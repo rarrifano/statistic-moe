@@ -1,0 +1,31 @@
+.bloco{
+    display: block !important;
+}
+
+.form-control{
+    margin-top: 5px !important;
+    width: 400px;
+    margin-bottom: 5px !important;
+    display: flex;
+}
+
+.seletor{
+    width: 400px;
+}
+
+.btn-primary{
+    background-color: #7159c1 !important;
+    border-color: #7159c1 !important;
+}
+
+.btn-primary:hover{
+    background-color: #7f6ac7 !important;
+    border-color: #7f6ac7 !important;
+}
+
+.nav-link{
+    color: #7159c1 !important;
+}
+.nav-link.active{
+    color: #000 !important;
+}
