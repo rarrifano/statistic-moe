@@ -16,7 +16,7 @@ function probNominal(){
     escreveDesvio.innerText += `${desvioPadrao}`
     escreveCoef.innerText += `${coefVariacao.toFixed(2)}`
 
-    if(valorPonto == ""){
+    if(valorPonto == "" || valorMin == "" || valorMax == ""){
 
         let modal = document.getElementById("staticBackdrop")
         modal.hidden
