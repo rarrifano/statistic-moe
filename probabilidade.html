@@ -84,7 +84,7 @@
                             <div id="escolhaintervalo"></div>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false"
-                                autocomplete="off" onclick="probNominal()">Calcular</button>
+                                autocomplete="off" id="calcular" onclick="probNominal()">Calcular</button>
                         </div> 
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -96,19 +96,16 @@
                                 </div>
                                 <div class="modal-body">
                                     <div id="resultado">
-                                        <p id='probabilidade'>Probabilidade: </p>
-                                        <p id='desvioPadrao'>Desvio Padrão: </p>
-                                        <p id='media'>Média: </p>
-                                        <p id='cVariacao'>C. de variação: </p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagar()">Fechar</button>
                                 </div>
                             </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane" role="tabpanel" id="tab-2">
                         <div class="row articles">
                             <div class="col">
