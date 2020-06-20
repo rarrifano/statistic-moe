@@ -1,2 +1,4 @@
 *.swp
 testes
+node_modules/
+*~
