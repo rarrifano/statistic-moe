@@ -73,8 +73,8 @@
                         <!-- Inputs de inserção -->
                         
                         <div class="bloco" id="uniforme">
-                            <input class="form-control" type="text" placeholder="Ponto Mínimo">
-                            <input class="form-control" type="text" placeholder="Ponto Máximo">
+                            <input class="form-control" id="min"type="text" placeholder="Ponto Mínimo">
+                            <input class="form-control" id="max"type="text" placeholder="Ponto Máximo">
                             <select class="form-control" id="selecionaNominal" onchange="intervalo(this)">
                                 <option value="" selected disabled>Selecione</option>
                                 <option value="maior-que">Maior que</option>
@@ -82,11 +82,30 @@
                                 <option value="menor-que">Menor que</option>
                             </select>
                             <div id="escolhaintervalo"></div>
-                            <!-- fim dos inputs de inserção -->
-                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
-                                autocomplete="off">Calcular</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false"
+                                autocomplete="off" id="calcular" onclick="probNominal()">Calcular</button>
+                        </div> 
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="resultado">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagar()">Fechar</button>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
+
                     <div class="tab-pane" role="tabpanel" id="tab-2">
                         <div class="row articles">
                             <div class="col">
@@ -171,6 +190,7 @@
         </footer>
     </div>
     <script src="assets/js/funcoesProbabilidade.js"></script>
+    <script src="assets/js/calculosProbabilidade.js"></script>
     <script src="assets/js/graficos.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
