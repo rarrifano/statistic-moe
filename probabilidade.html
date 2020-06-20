@@ -37,14 +37,14 @@
     <div class="article-list">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center">Cálculos</h2>
+                <h2 class="text-center">Probabilidade Estatística</h2>
             </div>
             <div>
                 <!-- Abas de inserção e resultado -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Uniforme</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Resultados</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">#DELETE THIS#</a></li> -->
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Binomial</a></li>
+                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">Normal</a></li>
                 </ul>
                 <!-- Fim abas de inserção e resultado -->
 
@@ -53,94 +53,57 @@
                     <div class="tab-pane active" role="tabpanel" id="tab-1">
                         <!-- linha Tipo de calculo -->
                         <div class="" style="margin-top: 10px !important;">
-                            <div class="" data-toggle="buttons">
-                                <!-- <label class="btn btn-dark "> -->
-                                <label class="">
-                                    <input type="radio" name="tipo" value="uniforme" checked>
-                                    Uniforme
-                                </label>
-                                <label class="">
-                                    <input type="radio" name="tipo" value="binomial" >
-                                    Binomial
-                                </label>
-                                <label class="">
-                                    <input type="radio" name="tipo" value="normal" >
-                                    Normal
-                                </label>
-                            </div>
+                            <!-- Inputs de inserção -->
+                            <div class="bloco" id="uniforme">
+                                <input class="form-control" id="min"type="text" placeholder="Ponto Mínimo">
+                                <input class="form-control" id="max"type="text" placeholder="Ponto Máximo">
+                                Intervalo de Analise
+                                <select class="form-control" id="selecionaNominal" onchange="intervalo(this)">
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="maior-que">Maior que</option>
+                                    <option value="entre">Entre</option>
+                                    <option value="menor-que">Menor que</option>
+                                </select>
+                                <div id="escolhaintervalo"></div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false"
+                                    autocomplete="off" id="calcular" onclick="probNominal()">Calcular</button>
+                            </div> 
                         </div>
-                        <!-- Fim da linha Tipo de calculo -->
-                        <!-- Inputs de inserção -->
-                        
-                        <div class="bloco" id="uniforme">
-                            <input class="form-control" id="min"type="text" placeholder="Ponto Mínimo">
-                            <input class="form-control" id="max"type="text" placeholder="Ponto Máximo">
-                            <select class="form-control" id="selecionaNominal" onchange="intervalo(this)">
+                    </div>
+                    <!--Aba 2 Probabilidade Binominal-->
+                    <div class="tab-pane" role="tabpanel" id="tab-2">
+                        <div class="bloco" id="binomial">
+                            <div class="" style="margin-top: 10px !important;">
+                                <input class="form-control" id="tamanhoAmostra"type="text" placeholder="Tamanho da Amostra (n)">
+                                <input class="form-control" id="evento"type="text" placeholder="Evento (k)">
+                                <input class="form-control" id="sucesso"type="text" placeholder="Sucesso (p) %">
+                                <input class="form-control" id="fracasso"type="text" placeholder="fracasso (q) %">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false"
+                                    autocomplete="off" id="calcular" onclick="probBinominal()">Calcular</button>
+                            </div>
+                        </div> 
+                    </div>
+                    <!--Aba 3 Probabilidade Normal-->
+                    <div class="tab-pane" role="tabpanel" id="tab-3">
+                        <div class="bloco" id="normal">
+                            <div class="" style="margin-top: 10px !important;">
+                                <input class="form-control" id="media"type="text" placeholder="Média">
+                                <input class="form-control" id="desvioPadrao"type="text" placeholder="Desvio Padrão">
+                                Intervalo de Analise
+                            <select class="form-control" id="selecionaNominal" onchange="intervalo2(this)">
                                 <option value="" selected disabled>Selecione</option>
                                 <option value="maior-que">Maior que</option>
                                 <option value="entre">Entre</option>
                                 <option value="menor-que">Menor que</option>
                             </select>
-                            <div id="escolhaintervalo"></div>
+                            <div id="escolhaintervaloNormal"></div>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false"
-                                autocomplete="off" id="calcular" onclick="probNominal()">Calcular</button>
+                                autocomplete="off" id="calcular" onclick="probNormal()">Calcular</button>
+                            </div>
                         </div> 
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div id="resultado">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagar()">Fechar</button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane" role="tabpanel" id="tab-2">
-                        <div class="row articles">
-                            <div class="col">
-                                <div class="table-responsive">
-                                    <table id="table" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Média</th>
-                                                <th>Probabilidade %</th>
-                                                <th>Desvio Padrão</th>
-                                                <th>Coeficiente de Variação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Cell 1</td>
-                                                <td>Cell 2</td>
-                                                <td>Cell 3</td>
-                                                <td>Cell 4</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cell 1</td>
-                                                <td>Cell 2</td>
-                                                <td>Cell 3</td>
-                                                <td>Cell 4</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="tab-3">
-                        <p>Content for tab 3.</p>
                     </div>
                 </div>
             </div>
@@ -150,6 +113,25 @@
 </main>
     <!-- Fim do conteudo central da pagina -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div id="resultado">
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagar()">Fechar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Fim Modal-->
     <!-- Rodapé -->
     <div class="footer-clean">
         <footer>
@@ -191,7 +173,6 @@
     </div>
     <script src="assets/js/funcoesProbabilidade.js"></script>
     <script src="assets/js/calculosProbabilidade.js"></script>
-    <script src="assets/js/graficos.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 </body>
