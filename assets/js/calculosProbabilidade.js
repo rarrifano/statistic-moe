@@ -52,9 +52,16 @@ function probBinomial(){
 
     let sucesso = Number(document.getElementById("sucesso").value)/100
     let fracasso = Number(document.getElementById("fracasso").value)/100
-    let evento = Number(document.getElementById("evento").value)
+    let evento = document.getElementById("evento").value
     let tamanhoAmostra = Number(document.getElementById("tamanhoAmostra").value)
-  
+    let todosEventos = evento.split(';')
+    todosEventos = todosEventos.map(Number)
+    let probabilidadeAux = []
+    let analise
+    let sucessoElevado
+    let amostraMenosEvento
+    let fracassoElevado
+    let probabilidade
     //captura a div que onde será escrito o resultado
     let escrever = document.getElementById("resultado")
     if(sucesso == '' || fracasso == '' || evento == '' || tamanhoAmostra == ''){
@@ -74,17 +81,20 @@ function probBinomial(){
         //caculo do desvio padrão
         let desvioPadrao = Math.sqrt(tamanhoAmostra * sucesso * fracasso)
         // calculo das variaveis para a probabilidade
-        let analise = analiseComb(tamanhoAmostra, evento)
-        let sucessoElevado = Math.pow(sucesso,evento)
-        let amostraMenosEvento = tamanhoAmostra - evento
-        let fracassoElevado = Math.pow(fracasso, amostraMenosEvento)
-        
-        //calculo da probabilidade
-        let probabilidade = analise * sucessoElevado * fracassoElevado
+        for(let i in todosEventos){
 
+            analise = analiseComb(tamanhoAmostra, todosEventos[i])
+            sucessoElevado = Math.pow(sucesso,todosEventos[i])
+            amostraMenosEvento = tamanhoAmostra - todosEventos[i]
+            fracassoElevado = Math.pow(fracasso, amostraMenosEvento)
+            //calculo da probabilidade
+            probabilidade = analise * sucessoElevado * fracassoElevado
+            probabilidadeAux.push(probabilidade)   
+        }
         
-
-        escrever.innerHTML += `<p> Probabilidade: ${(probabilidade*100).toFixed(2)} %`
+        let probabilidadeFinal = probabilidadeAux.reduce((a,b) => a+b)
+    
+        escrever.innerHTML += `<p> Probabilidade: ${(probabilidadeFinal*100).toFixed(2)} %`
         escrever.innerHTML += `<p> Média: ${media.toFixed(2)}`
         escrever.innerHTML += `<p> Desvio Padrão: ${desvioPadrao.toFixed(2)}`
     }
