@@ -5,9 +5,9 @@
   - Probabilidade Normal
   
   Há também funções auxiliares de analise combinatóra e fatorial, para calculo da Probabilidade Binomial
-
+  Foi inserido a função que retorna o o valor da Tabela de valor Z na posição informada na função prob Normal
   Código escrito por: Douglas Soares Silva 3º Noturno ADS Fatec Franca
-  Ultima edição: 21/06/2020
+  Ultima edição: 22/06/2020
 */
 
 function probNominal(){
@@ -125,9 +125,9 @@ function probBinomial(){
 
 function probNormal(){
     //Captura dos valores para calculo
-    let media = Number(document.getElementById("media").value)
-    let desvioPadrao = Number(document.getElementById("desvioPadrao").value)
-    let valor = document.getElementById("selecionaNormal").value
+    let media = Number(document.getElementById("media").value);
+    let desvioPadrao = Number(document.getElementById("desvioPadrao").value);
+    let valor = document.getElementById("selecionaNormal").value;
 
     //captura a div que onde será escrito o resultado
     let escrever = document.getElementById("resultado");
@@ -136,46 +136,44 @@ function probNormal(){
         alert("Insria todos os dados");
         let botao = document.getElementById('calcular3');
         botao.setAttribute("data-target", "");
-        apagar()
+        apagar();
 
     }else if(valor == "maior-que"){
-        let maior = Number(document.getElementById("maior2").value)
-        let scoreZ = (maior - media)/desvioPadrao
-        scoreZ = scoreZ.toFixed(2)
-        let procuraLinha = Math.floor(scoreZ*10)
-        let procuraColuna = Math.round(10*(scoreZ*10 - procuraLinha))
-        let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100
-        escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`
+        let maior = Number(document.getElementById("maior2").value);
+        let scoreZ = (maior - media)/desvioPadrao;
+        scoreZ = scoreZ.toFixed(2);
+        let procuraLinha = Math.floor(scoreZ*10);
+        let procuraColuna = Math.round(10*(scoreZ*10 - procuraLinha));
+        let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
+        escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
     }else if(valor == "menor-que"){
-        let menor = Number(document.getElementById("menor2").value)
-        let scoreZ = Math.abs((menor - media))/desvioPadrao
-        scoreZ = scoreZ.toFixed(2)
-        let procuraLinha = Math.floor(scoreZ*10)
-        let procuraColuna = Math.round(10*(scoreZ*10 - procuraLinha))
-        let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100
-        escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%` 
+        let menor = Number(document.getElementById("menor2").value);
+        let scoreZ = Math.abs((menor - media))/desvioPadrao;
+        scoreZ = scoreZ.toFixed(2);
+        let procuraLinha = Math.floor(scoreZ*10);
+        let procuraColuna = Math.round(10*(scoreZ*10 - procuraLinha));
+        let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
+        escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
     }else if(valor == "entre"){
-        
-        let entreMenor = Number(document.getElementById("entreMenor2").value)
-        let entreMaior = Number(document.getElementById("entreMaior2").value)
+        let entreMenor = Number(document.getElementById("entreMenor2").value);
+        let entreMaior = Number(document.getElementById("entreMaior2").value);
+
         //calcula o score Z e a probabilidade do numero informado no primeiro input entre
-        let scoreZMaior = (entreMaior - media)/desvioPadrao
-        let procuraLinhaMaior = Math.floor(scoreZMaior*10)
-        let procuraColunaMaior = Math.round(10*(scoreZMaior*10 - procuraLinhaMaior))
-        let probabilidadeMaior = tabelaZ(procuraLinhaMaior, procuraColunaMaior)
+        let scoreZMenor = Math.abs((entreMenor - media))/desvioPadrao;
+        let procuraLinhaMenor = Math.floor(scoreZMenor*10);
+        let procuraColunaMenor = Math.round(10*(scoreZMenor * 10 - procuraLinhaMenor));
+        let probabilidadeMenor = tabelaZ(procuraLinhaMenor, procuraColunaMenor);
 
         //calcula o score Z e a probabilidade do numero informado no segundo input entre
-        let scoreZMenor = Math.abs((entreMenor - media))/desvioPadrao
-        let procuraLinhaMenor = Math.floor(scoreZMenor*10)
-        let procuraColunaMenor = Math.round(10*(scoreZMenor * 10 - procuraLinhaMenor))
-        let probabilidadeMenor = tabelaZ(procuraLinhaMenor, procuraColunaMenor)
+        let scoreZMaior = (entreMaior - media)/desvioPadrao;
+        let procuraLinhaMaior = Math.floor(scoreZMaior*10);
+        let procuraColunaMaior = Math.round(10*(scoreZMaior*10 - procuraLinhaMaior));
+        let probabilidadeMaior = tabelaZ(procuraLinhaMaior, procuraColunaMaior);
 
-        console.log("Maior: " + probabilidadeMaior)
-        console.log("Menor: " + probabilidadeMenor)
         //calcula a probabilidade Final
-        let probabilidadeEntre = (probabilidadeMenor + probabilidadeMaior) * 100
-        
-        escrever.innerHTML += `<p>Probabilidade: ${probabilidadeEntre.toFixed(2)}%`
+        let probabilidadeEntre = (probabilidadeMenor + probabilidadeMaior) * 100;
+
+        escrever.innerHTML += `<p>Probabilidade: ${probabilidadeEntre.toFixed(2)}%`;
     };
 };
 
@@ -255,8 +253,8 @@ function tabelaZ(n1, n2){
         [0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999],
         [0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999],
         [0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000]
-    ]
+    ];
     
-    return tabelaZ[n1][n2]
+    return tabelaZ[n1][n2];
 }
 
