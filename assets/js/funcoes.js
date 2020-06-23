@@ -1,40 +1,70 @@
-var elButton = document.querySelector(".box .content .execButton");
-var elChart = document.querySelector(".box .content #grafico");
+
 
 function trataInput(){
     let valor = document.getElementById("inputValores").value;
     let variavel = document.getElementById("variaveis").value;
     if(valor == ''){
         alert("Erro: insira dados válidos");
+        let botao = document.getElementById('calculaDesc');
+        botao.setAttribute("data-target", "");
+        apagar()
     }else{
         var sheetParamters = valor.split(';');
         let countElements = {};
         if(variavel == 'qualitativaOrdinal' || variavel == 'qualitativaNominal'){
             
-            sheetParamters.sort(); //QuickSort
+            quickSort(sheetParamters);
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
             let maiorNumero = sheetParamters[sheetParamters.length - 1];
             let menorNumero = sheetParamters[0];
-            let totaldeIndicesVetor = sheetParamters.length;
-            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
+            let totaldeIndicesvetor = sheetParamters.length;
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
 
         }
         else{
             var sheetParamters = sheetParamters.map(Number);
-            sheetParamters.sort((a,b) => a-b); //QuickSort
+            quickSort(sheetParamters); //QuickSort
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
             let maiorNumero = sheetParamters[sheetParamters.length - 1];
             let menorNumero = sheetParamters[0];
-            let totaldeIndicesVetor = sheetParamters.length;
-            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesVetor, countElements};
+            let totaldeIndicesvetor = sheetParamters.length;
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
         }
         
     }
 }
+
+function troca(vetor, i, j) {
+    let aux = vetor[i]
+    vetor[i] = vetor[j]
+    vetor[j] = aux
+ }
+
+ function quickSort(vetor,inicio = 0, fim = vetor.length - 1) {
+ 
+    if(fim > inicio) { 
+       const pivo = fim 
+       let div = inicio - 1
+ 
+       for(let i = inicio; i < fim; i++) {
+        
+          if(vetor[i] < vetor[pivo]) {
+             div++
+             troca(vetor, i, div) 
+          }
+       }
+       div++
+       troca(vetor, div, pivo)
+
+       quickSort(vetor, inicio, div - 1)
+
+       quickSort(vetor, div + 1, fim)
+    }
+ }
 
 function extraiObj(obj){
     let frequencia = []
@@ -46,7 +76,10 @@ function extraiObj(obj){
 }
 
 function geraTabela(){
-    
+    let elTabela = document.createElement("table");
+    elTabela.setAttribute("id", "tabela");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
@@ -62,16 +95,16 @@ function geraTabela(){
     let frequenciaPerAcu = [];
     
     for(i in frequenciaSimples){
-        frequenciaPercent.push(((frequenciaSimples[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
+        frequenciaPercent.push(((frequenciaSimples[i]/trataInput().totaldeIndicesvetor) * 100).toFixed(2)+"%")
         if(i == 0){
             acumulador = acumulador + frequenciaSimples[i]
             frequenciaAcumulada.push(acumulador)
-            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesvetor *100).toFixed(2)+"%")
             
         }else{
             acumulador = acumulador + frequenciaSimples[i]
             frequenciaAcumulada.push(acumulador)
-            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesvetor *100).toFixed(2)+"%")
         }
     }
     
@@ -97,9 +130,13 @@ function geraTabela(){
             celula.appendChild(textoLinhas);
         }
     }
-
+    
 }
 function geraTabela2(){
+    let elTabela = document.createElement("table");
+    elTabela.setAttribute("id", "tabela2");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let tabela2 = document.getElementById('tabela2');
     tabela2.style.border = '1px solid #606060';
     let tituloTabela2 = tabela2.createTHead();
@@ -136,14 +173,18 @@ function geraTabela2(){
 }   
 
 function trataQuantitativaContinua(){
+    let elTabela = document.createElement("table");
+    elTabela.setAttribute("id", "tabela");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let limiteInferior = []
     let limiteSuperior = []
-    let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesVetor);
+    let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesvetor);
     let aux = trataInput().menorNumero
     let frequenciaQuantContinua = []
     let auxFreq = []
     let numeros = trataInput().sheetParamters
-    for(let i = 0; i < parametrosTabela[0]; i++){
+    for(let i = 0; i <= parametrosTabela[0]; i++){
         if(i == 0){
             limiteInferior.push(aux)
             limiteSuperior.push(aux + parametrosTabela[1])  
@@ -182,20 +223,20 @@ function geraTabelaQntContinua(){
     let frequenciaPerAcu = [];
     
     for(i in frequencia){
-        frequenciaPercent.push(((frequencia[i]/trataInput().totaldeIndicesVetor) * 100).toFixed(2)+"%")
+        frequenciaPercent.push(((frequencia[i]/trataInput().totaldeIndicesvetor) * 100).toFixed(2)+"%")
         if(i == 0){
             acumulador = acumulador + frequencia[i]
             frequenciaAcumulada.push(acumulador)
-            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesvetor *100).toFixed(2)+"%")
             
         }else{
             acumulador = acumulador + frequencia[i]
             frequenciaAcumulada.push(acumulador)
-            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesVetor *100).toFixed(2)+"%")
+            frequenciaPerAcu.push((acumulador/trataInput().totaldeIndicesvetor *100).toFixed(2)+"%")
         }
     }
 
-    for(let i = 0; i < parametrosTabela; i++){    
+    for(let i = 0; i < parametrosTabela+1; i++){    
         linha.push({elementos:`${trataQuantitativaContinua().limiteInferior[i]} |-- ${trataQuantitativaContinua().limiteSuperior[i]}`, 
         frequenciaSimples: frequencia[i],
         frequenciaPercent: frequenciaPercent[i],
@@ -220,29 +261,33 @@ function geraTabelaQntContinua(){
         }
     }
 }
+
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
+        let botao = document.getElementById('calculaDesc');
+        botao.setAttribute("data-target", "");
+        apagar();
     }else if(tipoVariavel == 'quantitativaContinua'){
-        criaGraficoHisto();
         geraTabelaQntContinua();
         geraTabela2();
-    }
-    else if(tipoVariavel == "quantitativaDiscreta"){
+        criaGraficoHisto();
+    }else if(tipoVariavel == "quantitativaDiscreta"){
+        geraTabela();
+        geraTabela2();
         criaGrafico();
-        geraTabela();
-        geraTabela2();
- 
     }else{
-        criaGraficoPizza();
         geraTabela();
         geraTabela2();
-        
+        criaGraficoPizza(); 
     }       
 }
 
-elButton.onclick = execRender;
+function apagar() {
+    modal = document.querySelector("#resultado");
+    modal.innerHTML = "";
+};
 
 function mudaBarra(){
     let barra = document.getElementById("barraMedidas")

@@ -88,7 +88,7 @@ function probBinomial(){
         alert("Insria todos os dados");
         let botao = document.getElementById('calcular2');
         botao.setAttribute("data-target", "");
-        apagar()
+        apagar();
     }else if(sucesso + fracasso != 1){
 
         alert("O sucesso mais o fracasso tem que ser igual a 100, verifique os dados");
@@ -131,7 +131,10 @@ function probNormal(){
 
     //captura a div que onde será escrito o resultado
     let escrever = document.getElementById("resultado");
-
+    /*calculo da probabilidade Normal que tem como valores de entrada a média, desvio pradrão e o valor a ser calculado a probabilidade
+      Retorna apenas o valor da probabilidade
+      Caso o usuário não informe algum dado será apresentado uma mensagem de erro
+    */
     if(media == '' || desvioPadrao == '' || valor == ''){
         alert("Insria todos os dados");
         let botao = document.getElementById('calcular3');
@@ -212,6 +215,7 @@ function analiseComb(n,k){
 };
 
 function tabelaZ(n1, n2){
+    //Tabela com os valores de área da curva
     const tabelaZ = [
         [0.0000, 0.0040, 0.0080, 0.0120, 0.0160, 0.0199, 0.0239, 0.0279, 0.0319, 0.0359],
         [0.0389, 0.0438, 0.0478, 0.0517, 0.0557, 0.0596, 0.0636, 0.0675, 0.0714, 0.0754],
