@@ -1,7 +1,7 @@
 function quantitativaContinua(max, min, totalElem){
     
     let amplitude = max - min //calcula a amplitude da serie
-    let classeLinha = Number(Math.sqrt(totalElem).toFixed(0));
+    let classeLinha = Number(Math.round(Math.sqrt(totalElem)));
     let resto = 1
         while(resto == 1){
             if(amplitude % classeLinha != 0){
@@ -17,7 +17,9 @@ function quantitativaContinua(max, min, totalElem){
 
 function media() {
     if(document.getElementById('variaveis').value == "quantitativaDiscreta"){
-        let media = (trataInput().sheetParamters.reduce((a,b) => a + b)/trataInput().totaldeIndicesVetor).toFixed(2)
+        let media = (trataInput().sheetParamters.reduce((a,b) => a + b)/trataInput().totaldeIndicesvetor).toFixed(2)
+        console.log(trataInput().sheetParamters.reduce((a,b) => a + b))
+        console.log(trataInput().totaldeIndicesvetor)
         return media
     }else if(document.getElementById('variaveis').value == "quantitativaContinua"){
         let mediaQntCont = []
@@ -27,7 +29,7 @@ function media() {
         
         mediaQntCont.push(pontoMedio[i] * frequenciaQuantContinua[i])
     }
-    mediaQntCont = (mediaQntCont.reduce((a,b) => a + b)/trataInput().totaldeIndicesVetor).toFixed(2)
+    mediaQntCont = (mediaQntCont.reduce((a,b) => a + b)/trataInput().totaldeIndicesvetor).toFixed(2)
         return mediaQntCont
     }
     

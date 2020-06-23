@@ -1,4 +1,8 @@
 function criaGrafico(){
+    let elTabela = document.createElement("canvas");
+    elTabela.setAttribute("id", "grafico");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let ctx = document.getElementById('grafico').getContext('2d');
     Chart.defaults.global.legend.display = false
     var grafico = new Chart(ctx,{
@@ -31,13 +35,19 @@ function criaGrafico(){
                     }
                 }]
             }
-    }
-});
+        }
+    });
+grafico.update()
 };
 
 function criaGraficoPizza(){
+    let elTabela = document.createElement("canvas");
+    elTabela.setAttribute("id", "grafico");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let ctx = document.getElementById('grafico').getContext('2d');
     Chart.defaults.global.legend.display = false;
+    
     var grafico = new Chart(ctx,{
         type: 'pie',
         data: {
@@ -63,10 +73,15 @@ function criaGraficoPizza(){
                 borderWidth: 1
             }]
         },
-});
+    });
+grafico.update()
 };
 
 function criaGraficoHisto(){
+    let elTabela = document.createElement("canvas");
+    elTabela.setAttribute("id", "grafico");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let ctx = document.getElementById('grafico').getContext('2d');
     Chart.defaults.global.legend.display = false;
     var grafico = new Chart(ctx, {
@@ -92,6 +107,7 @@ function criaGraficoHisto(){
         }
       }]
     }
-  }
-});
+    }
+    });
+grafico.update()
 }

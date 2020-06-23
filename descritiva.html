@@ -31,7 +31,26 @@
         </div>
     </div>
 </nav>
-  <form>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
+      </div>
+      <div class="modal-body">
+          <div id="resultado">   
+          </div>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagar()">Fechar</button>
+      </div>
+  </div>
+  </div>
+</div>
+
+<form>
   <div class="box">
     <img src="assets/img/document.png">
     <div class="content">
@@ -71,19 +90,15 @@
       <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
       <br/>
       <br/>
-      <button type="button" class="execButton">Calcular</button>
-    </form>
-      <table id="tabela" class="tabela"></table>
-    <div>
-      <div>
-        <table id="tabela2"></table>
-      </div>
-      <canvas id="grafico"></canvas>
-    </div>
-  </div>
+      <button type="button" id="calculaDesc" data-toggle="modal" data-target="#staticBackdrop" onclick="execRender()">Calcular</button>
+</form>
+
+  
   <script src="assets/js/funcoes.js"></script>
   <script src="assets/js/calculos.js"></script>
   <script src="assets/js/graficos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>
