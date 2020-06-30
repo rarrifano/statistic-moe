@@ -1,104 +1,148 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <title>Estatística Descritiva - Statistic.moe</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/Article-List.css">
-    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- Bootstrap CSS -->
-  </head>
+
+<head>
+  <title>Estatística Descritiva | Statistic.moe</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+  <link rel="stylesheet" href="assets/css/Article-List.css">
+  <link rel="stylesheet" href="assets/css/Footer-Clean.css">
+  <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Bootstrap CSS -->
+</head>
+
 <body onload="barraBMS()">
   <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-    <div class="container"><a class="navbar-brand" href="./index.html">Statistic.moe</a><button data-toggle="collapse"
-            class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-                class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/descritiva.html">Descritiva</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link"
-                        href="./probabilidade.html">Probabilidade</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="#">Correlação</a></li>
-            </ul>
+    <div class="container"><a class="navbar-brand" href="./index.html"><img class="mb-4" src="../assets/img/static.png"></a></a><button data-toggle="collapse"
+        class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+          class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navcol-1">
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item" role="presentation"><a class="nav-link" href="/descritiva.html">Descritiva</a></li>
+          <li class="nav-item" role="presentation"><a class="nav-link" href="./probabilidade.html">Probabilidade</a>
+          </li>
+          <li class="nav-item" role="presentation"><a class="nav-link" href="#">Correlação</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
         </div>
-    </div>
-</nav>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-  <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
-      </div>
-      <div class="modal-body">
-          <div id="resultado">   
+        <div class="modal-body">
+          <div id="resultado">
           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagarDescritiva()">Fechar</button>
+        </div>
       </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagar()">Fechar</button>
-      </div>
-  </div>
-  </div>
-</div>
-
-<form>
-  <div class="box">
-    <img src="assets/img/document.png">
-    <div class="content">
-      <h2 class="box-title">Estatística Descritiva</h2>
-      <input class="input" id="inputTitulo" placeholder="Nome da variavel"/>
-      <br/>
-      <br/>
-      <input class="input" id="inputValores" placeholder="Insira os dados separando-os por ';'"/>
-      <br/>
-      <br/>
-      <div>
-      <span>Tipo de Variavel: </span>
-      <select id="variaveis">
-        <option value="" selected disabled>Selecione</option>
-        <option value="qualitativaNominal">Qualitativa Nominal</option>
-        <option value="qualitativaOrdinal">Qualitativa Ordinal</option>
-        <option value="quantitativaDiscreta">Quantitativa Discreta</option>
-        <option value="quantitativaContinua">Quantitativa Continua</option>
-      </select>
     </div>
-    <div>
-      <span>Medidas Separatrizes: </span>
-      <select id="cars" onchange="mudaBarra()">
-        <option value="" selected disabled >Selecione</option>
-        <option value="Quartil">Quartil</option>
-        <option value="Quintil">Quintil</option>
-        <option value="Decil">Decil</option>
-        <option value="Percentil">Porcentil</option>
-      </select>
-      <input type="range" min="0" max="0" value="0" step="1" class="bms" id="barraMedidas">
-      <p id="valorBMS">-</p>
+  </div>
+  <div class="article-list">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">Estatística Descritiva</h2>
+        </div>
       <div>
-      <input type="radio" name="tipo" class="amostragem" value="populacao" checked>População
-      <input type="radio" name="tipo" class="amostragem"value="amostra">Amostra<br>
+    </div>
+  </div>
+  <div class="box">
+    <div class="content">
+      <input class="form-control" id="inputTitulo" placeholder="Nome da variavel" style="margin-bottom: 10px; margin-top: -10px;"/>
+      <input class="form-control" id="inputValores" placeholder="Insira os dados separando-os por ';'"/>
+      <div>
+        <label for="#variaveis">Tipo de Variavel:</label>
+        <select id="variaveis" class="form-control">
+          <option value="" selected disabled>Selecione</option>
+          <option value="qualitativaNominal">Qualitativa Nominal</option>
+          <option value="qualitativaOrdinal">Qualitativa Ordinal</option>
+          <option value="quantitativaDiscreta">Quantitativa Discreta</option>
+          <option value="quantitativaContinua">Quantitativa Continua</option>
+        </select>
       </div>
-      <br/>
-      <input type="file" accept=".csv" class = "importArchive" id="importArchive"></input>
-      <br/>
-      <br/>
-      <button type="button" id="calculaDesc" data-toggle="modal" data-target="#staticBackdrop" onclick="execRender()">Calcular</button>
-</form>
+      <div>
+        <label for="#cars">Medidas Separatrizes:</label>
+        <select id="cars" class="form-control" onchange="mudaBarra()" style="margin-bottom: 10px;">
+          <option value="" selected disabled>Selecione</option>
+          <option value="Quartil">Quartil</option>
+          <option value="Quintil">Quintil</option>
+          <option value="Decil">Decil</option>
+          <option value="Percentil">Porcentil</option>
+        </select>
+        <input type="range" min="0" max="0" value="0" step="1" class="bms" id="barraMedidas">
+        <p id="valorBMS">-</p>
+      </div>
+      <div id="barra">
+        <input type="radio" name="tipo" class="amostragem" value="populacao" checked>População
+        <input type="radio" name="tipo" class="amostragem" value="amostra">Amostra<br>
+      </div>
+      <div>
+      <input type="file" accept=".csv" class="importArchive" id="importArchive"></input>
+      </div>
+      <div>
+      <button type="button" id="calculaDesc" data-toggle="modal" data-target="#staticBackdrop"
+        onclick="execRender()">Calcular</button>
+      </div>
+    </div>
+  </div>
 
-  
-  <script src="assets/js/funcoes.js"></script>
-  <script src="assets/js/calculos.js"></script>
-  <script src="assets/js/graficos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
+    <div class="footer-clean">
+      <footer>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-sm-4 col-md-3 item">
+              <h3>Serviços</h3>
+              <ul>
+                <li><a href="#">Estatística Descritiva</a></li>
+                <li><a href="#">Probabilidade</a></li>
+                <li><a href="#">Correlação</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4 col-md-3 item">
+              <h3>Sobre nós</h3>
+              <ul>
+                <li><a href="#">Github</a></li>
+                <li><a href="#">Discord</a></li>
+                <li><a href="#">Fatec Franca</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4 col-md-3 item">
+              <h3>Carreira</h3>
+              <ul>
+                <li><a href="#">Job openings</a></li>
+                <li><a href="#">Employee success</a></li>
+                <li><a href="#">Benefits</a></li>
+              </ul>
+            </div>
+            <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
+                  class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a
+                href="#"><i class="icon ion-social-instagram"></i></a>
+              <p class="copyright">Copyright © 2020 Statistic.moe</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="assets/js/funcoes.js"></script>
+    <script src="assets/js/calculos.js"></script>
+    <script src="assets/js/graficos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 </body>
+
 </html>

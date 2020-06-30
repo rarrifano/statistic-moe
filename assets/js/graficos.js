@@ -109,5 +109,5 @@ function criaGraficoHisto(){
     }
     }
     });
-grafico.update()
+
 }

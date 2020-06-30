@@ -83,7 +83,6 @@ function geraTabela(){
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
-    tabela.style.border = '1px solid #606060';
     let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
     let coluna1 = Object.keys(trataInput().countElements);
@@ -138,7 +137,6 @@ function geraTabela2(){
     let resultado = document.getElementById("resultado")
     resultado.appendChild(elTabela)
     let tabela2 = document.getElementById('tabela2');
-    tabela2.style.border = '1px solid #606060';
     let tituloTabela2 = tabela2.createTHead();
     let linhaTabela2 = tituloTabela2.insertRow();
     let separatriz = document.getElementById("barraMedidas").value
@@ -208,10 +206,13 @@ function trataQuantitativaContinua(){
 }
 
 function geraTabelaQntContinua(){
+    let elTabela = document.createElement("table");
+    elTabela.setAttribute("id", "tabela");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let tabela = document.getElementById('tabela');
     let titulos = tabela.createTHead();    
     let linhas = titulos.insertRow();
-    tabela.style.border = '1px solid #606060';
     let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
     let frequencia = trataQuantitativaContinua().frequenciaQuantContinua
@@ -327,3 +328,8 @@ function barraBMS() {
         vbms.innerHTML = `${slider.value}%`
     }
 }
+function apagarDescritiva() {
+    modal = document.querySelector("#resultado");
+    modal.innerHTML = "";
+    criaGrafico().destroy
+};

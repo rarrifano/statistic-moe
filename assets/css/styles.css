@@ -8,49 +8,27 @@
 .box{
     width: 400px;
     background: #ffffff;
-    margin-top:  50px;
-    height: 540px;
-    padding: 80px 40px;
+    margin-top:300px;
+    height: 550px;
+    padding: 60px 20px;
     border-radius: 10px;
-    position: absolute;
+    position: relative;
     left: 50%;
-    top: 50%;    
+    top: 10%;    
     transform: translate(-50%,-50%);
     box-shadow: 0 1px 4px #888888;
 }
 
-.box img{
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px; 
-    margin-bottom: 60px;
-
-}
-
 .box .content{
-    margin-top: 60px;
     text-align: center;
-}
 
-.input{
-    width: 250px;
-    height: 30px;
-    border: 1px solid grey;
-    border-radius: 3px;
-    padding-left: 5px;
 }
-
-select{
-    width: 85px;
-    height: 25px;
-    border-radius: 3px;
-}
-
 span{
     font-size: 14px;
 }
-
+input #inputTitulo{
+    margin-bottom: 10px;
+}
 .box button{
     border-radius: 3px;
     color: #ffffff;
@@ -60,6 +38,7 @@ span{
     background-size: 150%;
     border: 1px solid grey;
     height: 30px;
+
 }
 
 .box button:hover{
@@ -70,77 +49,87 @@ span{
 .importArchive {
     color: black;
   }
-  .importArchive::-webkit-file-upload-button {
-    display: inline-block;
+.importArchive::-webkit-file-upload-button {
     background-color: #7159c1;
     color: #ffffff;
     border: 1px solid #999;
     border-radius: 3px;
     padding: 5px 8px;
     outline: none;
-
     -webkit-user-select: none;
     cursor: pointer;
     font-size: 10pt;
 
-  }
-  .importArchive:hover::before {
-    border-color: black;
-  }
-  .importArchive:active {
-    outline: 0;
-  }
-  .importArchive:active::before {
-    background-color:  black; 
-  }
-
+}
 table{
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
     margin-top: 50px;
-}
-td {
-    border: 1px solid #606060;
-    padding: 10px;
-    text-align: left;
-    vertical-align: top;
-    vertical-align: top;
     font-weight: bold;
+}
+
+td {
+    border: 1px solid rgba(113, 89, 192, 0.5);
+    padding: 10px;
+    text-align: center;
+    vertical-align: top;
+    vertical-align: top;
     text-align: center;
 }
 th{
-    border: 1px solid #606060;
+    border: 1px solid rgba(113, 89, 192, 0.5);
     border-spacing: 0px;
+    padding: 10px;
+    color: #7159c1;
     margin-left: auto;
     margin-right: auto; 
     text-align: center;
 }
 tr{
-    border: 1px solid #606060;
+    border: 1px solid rgba(113, 89, 192, 0.5);
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    
 }
 p{
-    margin-top: 0px;
-    margin-bottom: 0px;
-    display: inline-block;
+    text-align: center;
+    margin-bottom: auto;
+    color: black;
 }
 .amostragem{
     margin:20px;
-    display: inline-table;
     margin: auto;
 }
 .bms{
     margin-top: 2px;
+    margin-bottom: 10px;
     margin: auto;
     display: inline-block;
     text-align: center;
 }
-#cars{
-    margin-top: 10px;
-}
 
+#calculaDesc{
+    text-align: center;
+    margin-top: 20px;
+}
+#barraMedidas{
+    margin-top: 20px;
+    width: 300px;
+    background-color: blueviolet;
+}
+.amostragem{
+    margin: 15px;
+}
+select{
+    margin-bottom: 20px;
+}
+#inputValores{
+    margin-bottom: 20px;
+}
+.grid-item{
+    display: grid;
+}
