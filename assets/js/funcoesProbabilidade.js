@@ -1,7 +1,6 @@
 function apagar() {
     modal = document.querySelector("#resultado");
     modal.innerHTML = "";
-    criaGrafico().destroy
 };
 
 function intervalo(x) {
