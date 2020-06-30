@@ -21,7 +21,7 @@
 <body>
     <!-- Inicio da barra de navegação Main-menu -->
     <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-        <div class="container"><a class="navbar-brand" href="./index.html"><img class="mb-4"
+        <div class="container"><a class="navbar-brand" href="./home.html"><img class="mb-4"
                     src="../assets/img/static.png"></a><button data-toggle="collapse" class="navbar-toggler"
                 data-target="#navcol-1"><span class="sr-only">Toggle
                     navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -32,6 +32,8 @@
                     <li class="nav-item" role="presentation"><a class="nav-link"
                             href="./probabilidade.html">Probabilidade</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="./correlacao.html">Correlação</a>
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="./index.html">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -46,47 +48,51 @@
             </div>
             <div>
             </div>
-            <div class="grid-container container">
-                <div class="grid-item">
-                    <label>Nome da variável (x):</label><br>
-                    <input type="text" name="indepx" id="variavelX" class="form-control"
-                        placeholder="Nome da variável X" style="text-align:center"><br><br>
-                    <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
-                    <textarea name="Dados" class="form-control" id="xData" cols="60" rows="7" style="resize: vertical"
-                        placeholder="Insira os dados"></textarea><br>
-                </div>
-                <div class="grid-item">
-                    <label>Nome da variável(y):</label><br>
-                    <input type="text" name="indepy" id="variavelY" class="form-control"
-                        placeholder="Nome da variável Y" style="text-align:center"><br><br>
-                    <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
-                    <textarea name="Dados" class="form-control" id="yData" cols="60" rows="7" style="resize: vertical"
-                        placeholder="Insira os dados"></textarea><br>
-                </div>
-                <br>
-            </div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false" autocomplete="off" id="calcularRegressao" onclick="correlacaoRegressao()">Calcular</button>
         </div>
+    </div>
+    <div id="box">
+        <div class="grid-container container">
+            <div class="grid-item">
+                <label>Nome da variável (x):</label><br>
+                <input type="text" name="indepx" id="variavelX" class="form-control" placeholder="Nome da variável X"
+                    style="text-align:center"><br><br>
+                <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
+                <textarea name="Dados" class="form-control" id="xData" cols="60" rows="7" style="resize: vertical"
+                    placeholder="Insira os dados"></textarea><br>
+            </div>
+            <div class="grid-item">
+                <label>Nome da variável(y):</label><br>
+                <input type="text" name="indepy" id="variavelY" class="form-control" placeholder="Nome da variável Y"
+                    style="text-align:center"><br><br>
+                <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
+                <textarea name="Dados" class="form-control" id="yData" cols="60" rows="7" style="resize: vertical"
+                    placeholder="Insira os dados"></textarea><br>
+            </div>
+            <br>
+        </div>
+        <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
+                aria-pressed="false" autocomplete="off" id="calcularRegressao" onclick="exec()">Calcular</button></p>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="resultado">
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="resultado" class="grid-item">
+                        <canvas id="graficoRegressao"></canvas>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        onclick="apagar()">Fechar</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal"
-                    onclick="">Fechar</button>
-            </div>
         </div>
-    </div>
     </div>
     <!-- Rodapé -->
     <div class="footer-clean">
@@ -130,6 +136,7 @@
     <script src="./assets/js/correlacao.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 </body>
 
 </html>

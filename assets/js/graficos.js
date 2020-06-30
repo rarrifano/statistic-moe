@@ -37,7 +37,6 @@ function criaGrafico(){
             }
         }
     });
-grafico.update()
 };
 
 function criaGraficoPizza(){
@@ -74,7 +73,6 @@ function criaGraficoPizza(){
             }]
         },
     });
-grafico.update()
 };
 
 function criaGraficoHisto(){

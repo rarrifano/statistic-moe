@@ -130,6 +130,14 @@ select{
 #inputValores{
     margin-bottom: 20px;
 }
-.grid-item{
+.grid-container {
     display: grid;
+    grid-template-columns: auto auto;
+  }
+
+.grid-item {
+    padding: 2px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }
