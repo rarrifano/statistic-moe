@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlação | Statistic.moe</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Article-List.css">
+    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
+    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="assets/css/probabilidade.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+</head>
+
+
+
+<body>
+    <!-- Inicio da barra de navegação Main-menu -->
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="./index.html"><img class="mb-4"
+                    src="../assets/img/static.png"></a><button data-toggle="collapse" class="navbar-toggler"
+                data-target="#navcol-1"><span class="sr-only">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="./descritiva.html">Descritiva</a>
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link"
+                            href="./probabilidade.html">Probabilidade</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="./correlacao.html">Correlação</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Fim da barra de navegação Main-menu -->
+
+    <div class="article-list">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Correlação e Regressão</h2>
+            </div>
+            <div>
+            </div>
+            <div class="grid-container container">
+                <div class="grid-item">
+                    <label>Nome da variável (x):</label><br>
+                    <input type="text" name="indepx" id="variavelX" class="form-control"
+                        placeholder="Nome da variável X" style="text-align:center"><br><br>
+                    <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
+                    <textarea name="Dados" class="form-control" id="xData" cols="60" rows="7" style="resize: vertical"
+                        placeholder="Insira os dados"></textarea><br>
+                </div>
+                <div class="grid-item">
+                    <label>Nome da variável(y):</label><br>
+                    <input type="text" name="indepy" id="variavelY" class="form-control"
+                        placeholder="Nome da variável Y" style="text-align:center"><br><br>
+                    <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
+                    <textarea name="Dados" class="form-control" id="yData" cols="60" rows="7" style="resize: vertical"
+                        placeholder="Insira os dados"></textarea><br>
+                </div>
+                <br>
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" aria-pressed="false" autocomplete="off" id="calcularRegressao" onclick="correlacaoRegressao()">Calcular</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Resultados</h5>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="resultado">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    onclick="">Fechar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Rodapé -->
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Serviços</h3>
+                        <ul>
+                            <li><a href="#">Estatística Descritiva</a></li>
+                            <li><a href="#">Probabilidade</a></li>
+                            <li><a href="#">Correlação</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Sobre nós</h3>
+                        <ul>
+                            <li><a href="#">Github</a></li>
+                            <li><a href="#">Discord</a></li>
+                            <li><a href="#">Fatec Franca</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Carreira</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a
+                            href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i
+                                class="icon ion-social-snapchat"></i></a><a href="#"><i
+                                class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">Copyright © 2020 Statistic.moe</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="./assets/js/correlacao.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+</body>
+
+</html>
