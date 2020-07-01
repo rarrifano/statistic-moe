@@ -31,8 +31,8 @@ function correlacaoRegressao(){
     let variavelB = ((separaDados().somatorioXvsY *separaDados().somatorioX) - (separaDados().somatorioXelevado *separaDados().somatorioY))/(Math.pow(separaDados().somatorioX,2) - (separaDados().observacoes *separaDados().somatorioXelevado))
     escrever.innerHTML += `<p>Correlação: ${correlacao.toFixed(2)}</p>`
     escrever.innerHTML += `<p>Formula de Regressão</p><p>Y = ${variavelA.toFixed(4)}X + ${variavelB.toFixed(4)}  `
-    escrever.innerHTML += `<div class=""grid-item><input type="text" class="form-control" id="varX" placeholder="Insira um valor para X" style="display: inline-block">
-                           <input type="text" class="form-control" id="varY" placeholder="Insira um valor para Y" style="display: inline-block"></div>`
+    escrever.innerHTML += `<div class=""grid-item><input type="text" class="form-control" id="varX" placeholder="Insira um valor para X" style="margin: auto;">
+                           <input type="text" class="form-control" id="varY" placeholder="Insira um valor para Y" style="margin: auto;"></div>`
 }
 
 function criaObj(){
@@ -47,6 +47,10 @@ function criaObj(){
 }
 
 function geraGraficoDispercao(){
+    let elTabela = document.createElement("canvas");
+    elTabela.setAttribute("id", "graficoRegressao");
+    let resultado = document.getElementById("resultado")
+    resultado.appendChild(elTabela)
     let ctx = document.getElementById('graficoRegressao').getContext('2d');
     var scatterChart = new Chart(ctx, {
         type: 'scatter',
@@ -54,12 +58,15 @@ function geraGraficoDispercao(){
         datasets: [{
             label: `${separaDados().nomeVariavelX} em função de ${separaDados().nomerVariavelY}`,
             data: criaObj(),
+            backgroundColor: 'rgba(113,89,193, 0.8)',
+            borderColor: 'rgba(113,89,193, 1)'
         }]
     },
     options: {
         responsive: true
    }
 });
+scatterChart.update()
 }
 
 function exec(){
@@ -71,3 +78,5 @@ function apagar() {
     modal = document.querySelector("#resultado");
     modal.innerHTML = "";
 };
+
+
