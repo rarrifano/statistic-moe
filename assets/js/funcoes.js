@@ -12,10 +12,8 @@ function trataInput(){
     }else{
         botao.setAttribute("data-target", "#staticBackdrop")
         var sheetParamters = valor.split(';');
-        console.log(sheetParamters)
         let countElements = {};
         if(variavel == 'qualitativaOrdinal' || variavel == 'qualitativaNominal'){
-            
             quickSort(sheetParamters);
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
@@ -212,6 +210,7 @@ function trataQuantitativaContinua(){
 function geraTabelaQntContinua(){
     let elTabela = document.createElement("table");
     elTabela.setAttribute("id", "tabela");
+    elTabela.setAttribute("style","margin-bottom: 5px; margin-top: 5px;")
     let resultado = document.getElementById("resultado")
     resultado.appendChild(elTabela)
     let tabela = document.getElementById('tabela');
@@ -354,7 +353,7 @@ input.addEventListener('change', () => {
     for(let i = 1; i < data.length; i++){
         document.getElementById("inputValores").value += `${data[i]};`
        
-        if(i == data.length-1){
+       if(i == data.length-1){
             
             document.getElementById("inputValores").value += `${data[i]}`
         }

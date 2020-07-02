@@ -1,23 +1,35 @@
 function separaDados(){
+    
     let nomeVariavelX = document.getElementById('variavelX').value || "X";
     let nomerVariavelY = document.getElementById('variavelY').value || "Y";
-    let elementosX = document.getElementById('xData').value
-    let elementosY = document.getElementById('yData').value
-    let listaElementosX = elementosX.split(';');
-    let listaElementosY = elementosY.split(';');
-    let observacoes = listaElementosX.length;
-    let somatorioX = listaElementosX.map(Number).reduce((a,b) => a+b);
-    let somatorioY = listaElementosY.map(Number).reduce((a,b) => a+b);
-    let somatorioXelevado = listaElementosX.map(a => a * a).reduce((a,b) => a+b);
-    let somatorioYelevado = listaElementosY.map(a => a * a).reduce((a,b) => a+b);
-    let somatorioXvsY = [];
-    for(let i in listaElementosY){
-        somatorioXvsY.push(listaElementosX[i] * listaElementosY[i]);
+    let elementosX = document.getElementById('xData').value;
+    let elementosY = document.getElementById('yData').value;
+    let input = document.getElementById("importArchive").value;
+    let botao = document.getElementById("calcularRegressao");
+    if(nomeVariavelX == "" || nomerVariavelY == ""|| elementosY == "" || elementosX == "" || input == ""){
+        alert("Erro: insira dados válidos ou importe um arquivo");
+        botao.setAttribute("data-target", "");
+        apagar();
+
+    }else{
+        botao.setAttribute("data-target", "#staticBackdrop");
+        let listaElementosX = elementosX.split(';');
+        let listaElementosY = elementosY.split(';');
+        let observacoes = listaElementosX.length;
+        let somatorioX = listaElementosX.map(Number).reduce((a,b) => a+b);
+        let somatorioY = listaElementosY.map(Number).reduce((a,b) => a+b);
+        let somatorioXelevado = listaElementosX.map(a => a * a).reduce((a,b) => a+b);
+        let somatorioYelevado = listaElementosY.map(a => a * a).reduce((a,b) => a+b);
+        let somatorioXvsY = [];
+        for(let i in listaElementosY){
+            somatorioXvsY.push(listaElementosX[i] * listaElementosY[i]);
         
+        }
+        somatorioXvsY = somatorioXvsY.reduce((a,b) => a+b);
+        return{nomeVariavelX, nomerVariavelY, listaElementosX, listaElementosY, observacoes, somatorioX, 
+            somatorioY, somatorioXelevado, somatorioYelevado, somatorioXvsY}
     }
-    somatorioXvsY = somatorioXvsY.reduce((a,b) => a+b);
-    return{nomeVariavelX, nomerVariavelY, listaElementosX, listaElementosY, observacoes, somatorioX, 
-           somatorioY, somatorioXelevado, somatorioYelevado, somatorioXvsY}
+    
 }
 
 function correlacaoRegressao(){
@@ -108,30 +120,25 @@ function formulaRegressao() {
 }
 
 const input = document.getElementById('importArchive')
-
 input.addEventListener('change', () => {
   readXlsxFile(input.files[0]).then((data) => {
     // `data` is an array of rows
     // each row being an array of cells.
     document.getElementById("variavelX").value = ""
     document.getElementById("variavelY").value = ""
+    document.getElementById("xData").value = ""
+    document.getElementById("yData").value = ""
     document.getElementById("variavelX").value = data[0][0]
     document.getElementById("variavelY").value = data[0][1]
     for(let i = 1; i < data.length; i++){
         document.getElementById("xData").value += `${data[i][0]};`
-        
         if(i == data.length-1){
-            
             document.getElementById("xData").value += `${data[i][0]}`
-            
-            
         }
     }
     for(let i = 1; i < data.length; i++){
-            
         document.getElementById("yData").value += `${data[i][1]};`
         if(i == data.length-1){
-        
             document.getElementById("yData").value += `${data[i][1]}`
         }
     }
