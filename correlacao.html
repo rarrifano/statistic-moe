@@ -53,23 +53,19 @@
     <div id="box">
         <div class="grid-container container">
             <div class="grid-item">
-                <label>Nome da variável (x):</label><br>
                 <input type="text" name="indepx" id="variavelX" class="form-control" placeholder="Nome da variável X"
                     style="text-align:center"><br><br>
-                <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
-                <textarea name="Dados" class="form-control" id="xData" cols="60" rows="7" style="resize: vertical"
-                    placeholder="Insira os dados"></textarea><br>
+                <textarea name="Dados" class="form-control" id="xData" cols="60" rows="6" style="resize: vertical"
+                    placeholder="Insira os dados separando-os por ponto e vírgula (;)"></textarea><br>
             </div>
             <div class="grid-item">
-                <label>Nome da variável(y):</label><br>
                 <input type="text" name="indepy" id="variavelY" class="form-control" placeholder="Nome da variável Y"
                     style="text-align:center"><br><br>
-                <label>Insira os dados separando-os por ponto e vírgula (;):</label><br><br>
-                <textarea name="Dados" class="form-control" id="yData" cols="60" rows="7" style="resize: vertical"
-                    placeholder="Insira os dados"></textarea><br>
+                <textarea name="Dados" class="form-control" id="yData" cols="60" rows="6" style="resize: vertical"
+                    placeholder="Insira os dados separando-os por ponto e vírgula (;)"></textarea>
             </div>
-            <br>
         </div>
+        <p><input type="file" class="importArchive" accept=".xlsx" id="importArchive"></input></p><br>
         <p><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
                 aria-pressed="false" autocomplete="off" id="calcularRegressao" onclick="exec()">Calcular</button></p>
     </div>
@@ -90,6 +86,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal"
                         onclick="apagar()">Fechar</button>
+                        
                 </div>
             </div>
         </div>
@@ -137,8 +134,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
 </body>
 
 </html>
