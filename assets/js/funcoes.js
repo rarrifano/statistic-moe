@@ -4,13 +4,13 @@ function trataInput(){
     let valor = document.getElementById("inputValores").value;
     let variavel = document.getElementById("variaveis").value;
     let input = document.getElementById("importArchive").value;
+    let botao = document.getElementById('calculaDesc');
     if(valor == '' && input == ""){
         alert("Erro: insira dados válidos ou importe um arquivo");
-        let botao = document.getElementById('calculaDesc');
         botao.setAttribute("data-target", "");
         apagar()
     }else{
-        
+        botao.setAttribute("data-target", "#staticBackdrop")
         var sheetParamters = valor.split(';');
         console.log(sheetParamters)
         let countElements = {};
@@ -27,6 +27,7 @@ function trataInput(){
 
         }
         else{
+            botao.setAttribute("data-target", "#staticBackdrop")
             var sheetParamters = sheetParamters.map(Number);
             quickSort(sheetParamters); //QuickSort
             sheetParamters.forEach(function(i){
@@ -268,20 +269,25 @@ function geraTabelaQntContinua(){
 
 function execRender(){
     var tipoVariavel = document.getElementById('variaveis').value;
+    let botao = document.getElementById('calculaDesc');
     if(tipoVariavel === ''){       
         alert('Erro: Selecione o tipo de variavel');
-        let botao = document.getElementById('calculaDesc');
+        
         botao.setAttribute("data-target", "");
         apagar();
+       
     }else if(tipoVariavel == 'quantitativaContinua'){
+        botao.setAttribute("data-target", "#staticBackdrop")
         geraTabelaQntContinua();
         geraTabela2();
         criaGraficoHisto();
     }else if(tipoVariavel == "quantitativaDiscreta"){
+        botao.setAttribute("data-target", "#staticBackdrop")
         geraTabela();
         geraTabela2();
         criaGrafico();
     }else{
+        botao.setAttribute("data-target", "#staticBackdrop")
         geraTabela();
         geraTabela2();
         criaGraficoPizza(); 
@@ -344,14 +350,12 @@ input.addEventListener('change', () => {
     // each row being an array of cells.
     document.getElementById("inputTitulo").value = ""
     document.getElementById("inputValores").value = ""
-    console.log(data)
     document.getElementById("inputTitulo").value = data[0]
-    console.log(data.length)
     for(let i = 1; i < data.length; i++){
         document.getElementById("inputValores").value += `${data[i]};`
        
         if(i == data.length-1){
-            console.log(i)
+            
             document.getElementById("inputValores").value += `${data[i]}`
         }
     }
