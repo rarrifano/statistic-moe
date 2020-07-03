@@ -65,8 +65,7 @@ table{
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
@@ -130,6 +129,14 @@ select{
 #inputValores{
     margin-bottom: 20px;
 }
-.grid-item{
+.grid-container {
     display: grid;
+    grid-template-columns: auto auto;
+  }
+
+.grid-item {
+    padding: 2px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }

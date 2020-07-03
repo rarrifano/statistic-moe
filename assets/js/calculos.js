@@ -18,8 +18,6 @@ function quantitativaContinua(max, min, totalElem){
 function media() {
     if(document.getElementById('variaveis').value == "quantitativaDiscreta"){
         let media = (trataInput().sheetParamters.reduce((a,b) => a + b)/trataInput().totaldeIndicesvetor).toFixed(2)
-        console.log(trataInput().sheetParamters.reduce((a,b) => a + b))
-        console.log(trataInput().totaldeIndicesvetor)
         return media
     }else if(document.getElementById('variaveis').value == "quantitativaContinua"){
         let mediaQntCont = []
@@ -51,6 +49,44 @@ function mediana(vetor){
     }else if(variavel == "qualitativaNominal" || variavel == "qualitativaOrdinal"){
         return(vetor[meio])
 
+    }else if(variavel =="quantitativaContinua"){
+        let acum = trataQuantitativaContinua().frequenciaQuantContinua
+        let freqAcu = []
+        let acumulador = 0
+        let posicao 
+        let mediana 
+        for(let i in acum){
+            acumulador = acumulador + acum[i]
+            freqAcu.push(acumulador)   
+        }
+        if(freqAcu.length - 1 % 2 ==0){
+            posicao = []
+            mediana = []
+            posicao.push(freqAcu.length - 1 % 2)
+            posicao.push(posicao[0] + 1)
+            for(let i = 0; i < freqAcu.length; i++){
+                if(freqAcu[i] >= posicao[1]){
+                    mediana[0] = vetor[i]
+                    break
+                }
+            }
+            for(let i = 0; i < freqAcu.length; i++){
+                if(freqAcu[i] >= posicao[1]){
+                    mediana.push(vetor[i])
+                    break
+                }
+            }
+            if(mediana[0] == mediana[1]) mediana = mediana[0]
+        }else{
+            posicao = freqAcu / 2
+            for(let i = 0; i <freqAcu.length; i++){
+                if(freqAcu[i] >= posicao){
+                    return mediana = vetor[i]
+                }
+            }
+        }
+        
+        return mediana
     }
 
   }
@@ -76,7 +112,6 @@ function moda() {
         let moda = []
         let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua)
         let contador = trataQuantitativaContinua().frequenciaQuantContinua
-        console.log(indiceMax)
         if(indiceMax == 1){
             return "serie amodal"
         }else{

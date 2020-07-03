@@ -19,7 +19,7 @@
 
 <body onload="barraBMS()">
   <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-    <div class="container"><a class="navbar-brand" href="./index.html"><img class="mb-4" src="../assets/img/static.png"></a></a><button data-toggle="collapse"
+    <div class="container"><a class="navbar-brand" href="./home.html"><img class="mb-4" src="../assets/img/static.png"></a></a><button data-toggle="collapse"
         class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
           class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navcol-1">
@@ -27,7 +27,7 @@
           <li class="nav-item" role="presentation"><a class="nav-link" href="/descritiva.html">Descritiva</a></li>
           <li class="nav-item" role="presentation"><a class="nav-link" href="./probabilidade.html">Probabilidade</a>
           </li>
-          <li class="nav-item" role="presentation"><a class="nav-link" href="#">Correlação</a></li>
+          <li class="nav-item" role="presentation"><a class="nav-link" href="./correlacao.html">Correlação</a></li>
         </ul>
       </div>
     </div>
@@ -90,7 +90,7 @@
         <input type="radio" name="tipo" class="amostragem" value="amostra">Amostra<br>
       </div>
       <div>
-      <input type="file" accept=".csv" class="importArchive" id="importArchive"></input>
+      <input type="file" class="importArchive" accept=".xlsx" id="importArchive"></input>
       </div>
       <div>
       <button type="button" id="calculaDesc" data-toggle="modal" data-target="#staticBackdrop"
@@ -143,6 +143,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+
 </body>
 
 </html>
