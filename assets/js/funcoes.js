@@ -184,7 +184,7 @@ function trataQuantitativaContinua(){
     let frequenciaQuantContinua = []
     let auxFreq = []
     let numeros = trataInput().sheetParamters
-    for(let i = 0; i <= parametrosTabela[0]; i++){
+    for(let i = 0; i <= parametrosTabela[0]-1; i++){
         if(i == 0){
             limiteInferior.push(aux)
             limiteSuperior.push(aux + parametrosTabela[1])  
@@ -240,7 +240,7 @@ function geraTabelaQntContinua(){
         }
     }
 
-    for(let i = 0; i < parametrosTabela+1; i++){    
+    for(let i = 0; i < parametrosTabela; i++){    
         linha.push({elementos:`${trataQuantitativaContinua().limiteInferior[i]} |-- ${trataQuantitativaContinua().limiteSuperior[i]}`, 
         frequenciaSimples: frequencia[i],
         frequenciaPercent: frequenciaPercent[i],
