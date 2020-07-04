@@ -140,3 +140,9 @@ select{
     margin-right: auto;
     margin-top: 10px;
 }
+.nav-link{
+    color: #7159c1 !important;
+}
+.nav-link.active{
+    color: #000 !important;
+}
