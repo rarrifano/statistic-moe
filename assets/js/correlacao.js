@@ -130,17 +130,20 @@ input.addEventListener('change', () => {
     document.getElementById("yData").value = ""
     document.getElementById("variavelX").value = data[0][0]
     document.getElementById("variavelY").value = data[0][1]
-    for(let i = 1; i < data.length; i++){
-        document.getElementById("xData").value += `${data[i][0]};`
+    for(let i = 1; i < data.length; i++){ 
         if(i == data.length-1){
             document.getElementById("xData").value += `${data[i][0]}`
+            break
         }
+        document.getElementById("xData").value += `${data[i][0]};`
     }
     for(let i = 1; i < data.length; i++){
-        document.getElementById("yData").value += `${data[i][1]};`
+        
         if(i == data.length-1){
             document.getElementById("yData").value += `${data[i][1]}`
+            break
         }
+        document.getElementById("yData").value += `${data[i][1]};`
     }
   })
 })

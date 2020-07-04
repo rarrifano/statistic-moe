@@ -99,8 +99,8 @@ function moda() {
         }
     }else{
         let moda = []
-        let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua)
-        let contador = trataQuantitativaContinua().frequenciaQuantContinua
+        let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua) || ["-"]
+        let contador = trataQuantitativaContinua().frequenciaQuantContinua || ["-"]
         if(indiceMax == 1){
             return "serie amodal"
         }else{

@@ -23,8 +23,7 @@ function trataInput(){
             let totaldeIndicesvetor = sheetParamters.length;
             return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
 
-        }
-        else{
+        }else{
             botao.setAttribute("data-target", "#staticBackdrop")
             var sheetParamters = sheetParamters.map(Number);
             quickSort(sheetParamters); //QuickSort
@@ -351,12 +350,11 @@ input.addEventListener('change', () => {
     document.getElementById("inputValores").value = ""
     document.getElementById("inputTitulo").value = data[0]
     for(let i = 1; i < data.length; i++){
-        document.getElementById("inputValores").value += `${data[i]};`
-       
        if(i == data.length-1){
-            
             document.getElementById("inputValores").value += `${data[i]}`
+            break
         }
+        document.getElementById("inputValores").value += `${data[i]};`
     }
   })
 })
