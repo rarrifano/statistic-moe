@@ -1,15 +1,27 @@
 function quantitativaContinua(max, min, totalElem){
     
     let amplitude = max - min //calcula a amplitude da serie
-    let classeLinha = Number(Math.round(Math.sqrt(totalElem)));
+    let classeLinha = Number(Math.floor(Math.sqrt(totalElem)));
     let resto = 1
+    
         while(resto == 1){
             if(amplitude % classeLinha != 0){
-                amplitude ++;
+                let cont = 0 
+                if(cont == 0){
+                    classeLinha = classeLinha + 1;
+                    cont++
+                }else if(cont == 1){
+                    classeLinha = classeLinha + 1
+                    cont ++
+                }else if(cont == 2){
+                    amplitude ++
+                    cont = 0
+                }
             }else if(amplitude % classeLinha == 0){
                 let resultado = amplitude / classeLinha;
                 resto = 0;
                 this.formatoTabela = [classeLinha, resultado];
+                console.log(formatoTabela)
             }
         }
     return formatoTabela;
@@ -82,7 +94,7 @@ function mediana(vetor){
 
 function moda() {
     if(document.getElementById('variaveis').value != "quantitativaContinua"){
-        let moda = []
+        let modaNormal = []
         let indiceMax = Object.keys(trataInput().countElements)
         let contador = extraiObj(trataInput().countElements)
     
@@ -92,28 +104,26 @@ function moda() {
             for(let i =0; i< contador.length; i++){
                 if(contador[i] == Math.max.apply(null,contador)){
             
-                moda.push(indiceMax[i]);
+                modaNormal.push(indiceMax[i]);
             }
         }
-        return moda;
+        return modaNormal;
         }
     }else{
-        let moda = []
-        let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua) || ["-"]
-        let contador = trataQuantitativaContinua().frequenciaQuantContinua || ["-"]
-        if(indiceMax == 1){
-            return "serie amodal"
-        }else{
+        let modaQuantCont = []
+        let indiceMax = Math.max.apply(null,trataQuantitativaContinua().frequenciaQuantContinua)
+        let contador = trataQuantitativaContinua().frequenciaQuantContinua
             for(let i = 0; i < contador.length;i++){
                 if(contador[i] == indiceMax){
-                    moda.push(trataQuantitativaContinua().pontoMedio[i])
+                    modaQuantCont.push(trataQuantitativaContinua().pontoMedio[i])
                 }
             }
-        }
-        return moda;
+            return modaQuantCont;
         }
         
     }
+        
+
 
 
 // Precisa acertar o calculo da função
@@ -161,14 +171,45 @@ function desviopadrao(){
     }
     
 }   
-//Falta ajustar o calculo da separatriz
+
 function medidasSeparatrizes(){
-    let separatriz = document.getElementById("barraMedidas").value;
-    let separador 
-    if(separatriz !== 100 && separatriz !== 0){
-        separador = Math.round(separatriz/ trataInput().sheetParamters.length)
-        return trataInput().sheetParamters[separador]
-    }else if(separatriz == 100){
-        return trataInput().maiorNumero
+    let separatriz = Number(document.getElementById("barraMedidas").value)/100;
+    let separador;
+    let variavel = document.getElementById("variaveis").value;
+    if(variavel != "quantitativaContinua"){
+        if(separatriz !== 100 && separatriz !== 0){
+            separador = Math.round(separatriz * trataInput().sheetParamters.length)
+            return trataInput().sheetParamters[separador]
+        }else if(separatriz == 100){
+            return trataInput().maiorNumero
+        }
+    }else{
+        let acum = trataQuantitativaContinua().frequenciaQuantContinua
+        let limSup = trataQuantitativaContinua().limiteSuperior
+        let limInf = trataQuantitativaContinua().limiteInferior
+        let freqAcu = []
+        let acumulador = 0;
+        let posição = separatriz * trataInput().sheetParamters.length
+        let freqAcuAnt
+        let freqSimplesAtual
+        let limiteInfClassAtual
+        let resultado
+        let intervaloClasse = trataQuantitativaContinua().parametrosTabela[1]
+        for(let i in acum){
+            acumulador = acumulador + acum[i]
+            freqAcu.push(acumulador)   
+        }
+        for(let i = 0; i < limInf.length; i++){
+
+            if(numeros[posição] >= limInf[i] && numeros[posição] < limSup[i]){
+                freqAcuAnt = freqAcu[i-1] || 0
+                freqSimplesAtual = acum[i]
+                limiteInfClassAtual = limInf[i]
+                break
+            }
+        }
+       resultado = limiteInfClassAtual + ((posição - freqAcuAnt)/freqSimplesAtual * intervaloClasse) 
+       return resultado.toFixed(2)
     }
+    
 }
