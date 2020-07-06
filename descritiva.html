@@ -19,15 +19,25 @@
 
 <body onload="barraBMS()">
   <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-    <div class="container"><a class="navbar-brand" href="./home.html"><img class="mb-4" src="./assets/img/static.png"></a></a><button data-toggle="collapse"
-        class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+    <div class="container"><a class="navbar-brand" href="./home.html"><img class="mb-4"
+          src="./assets/img/static.png"></a></a><button data-toggle="collapse" class="navbar-toggler"
+        data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
           class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navcol-1">
         <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item" role="presentation"><a class="nav-link" href="/descritiva.html">Descritiva</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" href="./probabilidade.html">Probabilidade</a>
+
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" href="./descritiva.html">Descritiva</a>
           </li>
-          <li class="nav-item" role="presentation"><a class="nav-link" href="./correlacao.html">Correlação</a></li>
+
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" href="./probabilidade.html">Probabilidade</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" href="./correlacao.html">Correlação</a>
+          </li>
+          <li class="nav-item" role="presentation"><a class="nav-link" href="./index.html">Sair</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -46,11 +56,12 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="apagarDescritiva()">Fechar</button>
+          <button type="button" class="button" data-dismiss="modal" onclick="apagarDescritiva()">Fechar</button>
         </div>
       </div>
     </div>
   </div>
+  <!-- Fim da Modal s-->
   <div class="article-list">
     <div class="container">
         <div class="intro">
@@ -98,44 +109,39 @@
       </div>
     </div>
   </div>
+</div>
 
-    <div class="footer-clean">
-      <footer>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-sm-4 col-md-3 item">
-              <h3>Serviços</h3>
-              <ul>
-                <li><a href="#">Estatística Descritiva</a></li>
-                <li><a href="#">Probabilidade</a></li>
-                <li><a href="#">Correlação</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-4 col-md-3 item">
-              <h3>Sobre nós</h3>
-              <ul>
-                <li><a href="#">Github</a></li>
-                <li><a href="#">Discord</a></li>
-                <li><a href="#">Fatec Franca</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-4 col-md-3 item">
-              <h3>Carreira</h3>
-              <ul>
-                <li><a href="#">Job openings</a></li>
-                <li><a href="#">Employee success</a></li>
-                <li><a href="#">Benefits</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
-                  class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a
-                href="#"><i class="icon ion-social-instagram"></i></a>
-              <p class="copyright">Copyright © 2020 Statistic.moe</p>
-            </div>
+  <div class="footer-clean">
+    <footer>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-sm-4 col-md-3 item">
+            <h3>Serviços</h3>
+            <ul>
+              <li><a href="descritiva.html">Estatística Descritiva</a></li>
+              <li><a href="probabilidade.html">Probabilidade</a></li>
+              <li><a href="correlacao.html">Correlação</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-4 col-md-3 item">
+            <h3><a href="sobre.html" style="text-decoration: none; color: #4b4c4d;">Sobre nós</a></h3>
+            <ul>
+              <li><a href="https://github.com/RafaelArrifano/statistic.moe" target="_blank">Github</a></li>
+              <li><a href="https://discord.gg/ARhJXNw" target="_blank">Discord</a></li>
+              <li><a href="https://site.fatecfranca.edu.br/" target="_blank">Fatec Franca</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 item social">
+
+            <a href="https://github.com/RafaelArrifano/statistic.moe" target="_blank"><i class="icon ion-social-github"></i></a>
+            <a href="https://site.fatecfranca.edu.br/" target="_blank"><i class="icon ion-university"></i></a>
+            
+            <p class="copyright">Copyright © 2020 Statistic.moe </p>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
+  </div>
 
     <script src="assets/js/funcoes.js"></script>
     <script src="assets/js/calculos.js"></script>
@@ -144,7 +150,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
-
+  </div>
 </body>
 
 </html>

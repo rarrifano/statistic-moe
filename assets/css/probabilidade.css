@@ -13,14 +13,14 @@
     width: 400px;
 }
 
-.btn-primary{
-    background-color: #7159c1 !important;
-    border-color: #7159c1 !important;
+.btn.btn-primary{
+    background-color: #81007f;
+    border-color: #81007f;
 }
-
-.btn-primary:hover{
-    background-color: #7f6ac7 !important;
-    border-color: #7f6ac7 !important;
+.btn.btn-primary:hover{
+    background-color: #c700c4 !important;
+    border-color: #81007f;
+    transition: 0.3s;
 }
 
 .nav-link{
