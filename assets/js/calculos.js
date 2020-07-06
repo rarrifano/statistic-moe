@@ -21,7 +21,6 @@ function quantitativaContinua(max, min, totalElem){
                 let resultado = amplitude / classeLinha;
                 resto = 0;
                 this.formatoTabela = [classeLinha, resultado];
-                console.log(formatoTabela)
             }
         }
     return formatoTabela;
@@ -184,6 +183,7 @@ function medidasSeparatrizes(){
             return trataInput().maiorNumero
         }
     }else{
+        let numeros = trataInput().sheetParamters
         let acum = trataQuantitativaContinua().frequenciaQuantContinua
         let limSup = trataQuantitativaContinua().limiteSuperior
         let limInf = trataQuantitativaContinua().limiteInferior

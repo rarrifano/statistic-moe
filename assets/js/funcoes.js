@@ -48,7 +48,6 @@ function trataInput(){
                 let maiorNumero = sheetParamters[sheetParamters.length - 1];
                 let menorNumero = sheetParamters[0];
                 let totaldeIndicesvetor = sheetParamters.length;
-                console.log(sheetParamters)
                 return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
             }
         }
