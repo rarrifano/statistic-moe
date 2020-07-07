@@ -183,7 +183,7 @@ function medidasSeparatrizes(){
             return trataInput().maiorNumero
         }
     }else{
-        let numeros = trataInput().sheetParamters
+        let dados = trataInput().sheetParamters
         let acum = trataQuantitativaContinua().frequenciaQuantContinua
         let limSup = trataQuantitativaContinua().limiteSuperior
         let limInf = trataQuantitativaContinua().limiteInferior
@@ -201,7 +201,7 @@ function medidasSeparatrizes(){
         }
         for(let i = 0; i < limInf.length; i++){
 
-            if(numeros[posição] >= limInf[i] && numeros[posição] < limSup[i]){
+            if(dados[posição] >= limInf[i] && dados[posição] < limSup[i]){
                 freqAcuAnt = freqAcu[i-1] || 0
                 freqSimplesAtual = acum[i]
                 limiteInfClassAtual = limInf[i]
