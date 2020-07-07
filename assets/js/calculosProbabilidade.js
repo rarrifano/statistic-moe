@@ -7,7 +7,7 @@
   Há também funções auxiliares de analise combinatóra e fatorial, para calculo da Probabilidade Binomial
   Foi inserido a função que retorna o o valor da Tabela de valor Z na posição informada na função prob Normal
   Código escrito por: Douglas Soares Silva 3º Noturno ADS Fatec Franca
-  Ultima edição: 22/06/2020
+  Ultima edição: 06/07/2020
 */
 
 function probNominal(){
@@ -33,21 +33,21 @@ function probNominal(){
         botao.setAttribute("data-target", "");
         apagar();
     }else if(valorPonto == "maior-que"){
-
+        botao.setAttribute("data-target", "#staticBackdrop")
         let maiorQue = Number(document.getElementById("maior").value);
         let intervalo = valorMax - maiorQue;
         let probabilidade  = (1/(valorMax - valorMin))* intervalo;
         escrever.innerHTML += `<p>Probabilidade: ${(probabilidade*100).toFixed(2)}% </p>`;
 
     }else if(valorPonto == "menor-que"){
-
+        botao.setAttribute("data-target", "#staticBackdrop")
         let menorQue = Number(document.getElementById("menor").value);
         let intervalo = menorQue - valorMin;
         let probabilidade  = (1/(valorMax - valorMin))* intervalo;
         escrever.innerHTML += `<p>Probabilidade: ${(probabilidade*100).toFixed(2)}% </p>`;
 
     }else if(valorPonto == "entre"){
-
+        botao.setAttribute("data-target", "#staticBackdrop")
         let entreInf = Number(document.getElementById("entreMenor").value);
         let entreSup = Number(document.getElementById("entreMaior").value);
         let intervalo = entreSup - entreInf;
@@ -90,13 +90,13 @@ function probBinomial(){
         botao.setAttribute("data-target", "");
         apagar();
     }else if(sucesso + fracasso != 1){
-
+        botao.setAttribute("data-target", "#staticBackdrop")
         alert("O sucesso mais o fracasso tem que ser igual a 100, verifique os dados");
         let botao = document.getElementById('calcular2');
         botao.setAttribute("data-target", "");
         apagar();
     }else{
-
+        botao.setAttribute("data-target", "#staticBackdrop")
         //calculo da média
         let media = tamanhoAmostra * fracasso;
 
@@ -128,7 +128,7 @@ function probNormal(){
     let media = Number(document.getElementById("media").value);
     let desvioPadrao = Number(document.getElementById("desvioPadrao").value);
     let valor = document.getElementById("selecionaNormal").value;
-
+    let botao = document.getElementById('calcular3');
     //captura a div que onde será escrito o resultado
     let escrever = document.getElementById("resultado");
     /*calculo da probabilidade Normal que tem como valores de entrada a média, desvio pradrão e o valor a ser calculado a probabilidade
@@ -137,11 +137,11 @@ function probNormal(){
     */
     if(media == '' || desvioPadrao == '' || valor == ''){
         alert("Insria todos os dados");
-        let botao = document.getElementById('calcular3');
         botao.setAttribute("data-target", "");
         apagar();
 
     }else if(valor == "maior-que"){
+        botao.setAttribute("data-target", "#staticBackdrop")
         let maior = Number(document.getElementById("maior2").value);
         let scoreZ = (maior - media)/desvioPadrao;
         scoreZ = scoreZ.toFixed(2);
@@ -150,6 +150,7 @@ function probNormal(){
         let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
         escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
     }else if(valor == "menor-que"){
+        botao.setAttribute("data-target", "#staticBackdrop")
         let menor = Number(document.getElementById("menor2").value);
         let scoreZ = Math.abs((menor - media))/desvioPadrao;
         scoreZ = scoreZ.toFixed(2);
@@ -158,6 +159,7 @@ function probNormal(){
         let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
         escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
     }else if(valor == "entre"){
+        botao.setAttribute("data-target", "#staticBackdrop");
         let entreMenor = Number(document.getElementById("entreMenor2").value);
         let entreMaior = Number(document.getElementById("entreMaior2").value);
 

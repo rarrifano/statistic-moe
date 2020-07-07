@@ -1,9 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css");
 
-*{
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-}
 
 .box{
     width: 400px;
@@ -49,28 +45,55 @@ input #inputTitulo{
 .importArchive {
     color: black;
   }
+
 .importArchive::-webkit-file-upload-button {
-    background-color: #7159c1;
+    background-color: #81007f;
     color: #ffffff;
-    border: 1px solid #999;
-    border-radius: 3px;
+    border: 1px solid #81007f;
+    border-radius: 4px;
     padding: 5px 8px;
     outline: none;
     -webkit-user-select: none;
     cursor: pointer;
     font-size: 10pt;
-
 }
+
+.importArchive::-webkit-file-upload-button:hover{
+    background-color: #c700c4 !important;
+    border-color: #81007f;
+    transition: 0.3s;
+}
+
+.button{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #81007f;
+    border-radius: 4px;
+    background-color: #81007f;
+    border-color: #81007f;
+    color: white;
+}
+
+.button:hover{
+    background-color: #c700c4 !important;
+    border-color: #81007f;
+    transition: 0.3s;
+}
+
 table{
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     font-weight: bold;
 }
 
+
 td {
-    border: 1px solid rgba(113, 89, 192, 0.5);
+    border: 1px solid rgba(113, 89, 192, 0.3) !important;
+    border-left: hidden !important;
+    border-right: hidden !important;
     padding: 10px;
     text-align: center;
     vertical-align: top;
@@ -78,16 +101,16 @@ td {
     text-align: center;
 }
 th{
-    border: 1px solid rgba(113, 89, 192, 0.5);
+    border: 1px solid #81007f !important;
     border-spacing: 0px;
     padding: 10px;
-    color: #7159c1;
     margin-left: auto;
     margin-right: auto; 
     text-align: center;
+    background-color:#81007f !important ;
 }
 tr{
-    border: 1px solid rgba(113, 89, 192, 0.5);
+    border: 1px solid rgba(113, 89, 192, 0.8) !important;
     border-spacing: 0px;
     margin-left: auto;
     margin-right: auto;
@@ -110,15 +133,22 @@ p{
     display: inline-block;
     text-align: center;
 }
-
 #calculaDesc{
+    background-color: #81007f;
+    border-color: #81007f;
     text-align: center;
     margin-top: 20px;
+}
+
+#calculaDesc:hover{
+    background-color: #c700c4 !important;
+    border-color: #81007f;
+    transition: 0.3s;
 }
 #barraMedidas{
     margin-top: 20px;
     width: 300px;
-    background-color: blueviolet;
+    color: blueviolet !important;
 }
 .amostragem{
     margin: 15px;
@@ -139,4 +169,10 @@ select{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+}
+.nav-link{
+    color: #7159c1 !important;
+}
+.nav-link.active{
+    color: #000 !important;
 }

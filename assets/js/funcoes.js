@@ -1,5 +1,4 @@
 
-
 function trataInput(){
     let valor = document.getElementById("inputValores").value;
     let variavel = document.getElementById("variaveis").value;
@@ -10,11 +9,20 @@ function trataInput(){
         botao.setAttribute("data-target", "");
         apagar()
     }else{
-        botao.setAttribute("data-target", "#staticBackdrop")
         var sheetParamters = valor.split(';');
         let countElements = {};
-        if(variavel == 'qualitativaOrdinal' || variavel == 'qualitativaNominal'){
+        if(variavel == 'qualitativaOrdinal'){
             quickSort(sheetParamters);
+            sheetParamters.forEach(function(i){
+            countElements[i] = (countElements[i]||0)+1;
+        });
+            let maiorNumero = sheetParamters[sheetParamters.length - 1];
+            let menorNumero = sheetParamters[0];
+            let totaldeIndicesvetor = sheetParamters.length;
+            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
+
+        }else if(variavel == 'qualitativaNominal'){
+            
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
@@ -25,16 +33,23 @@ function trataInput(){
 
         }
         else{
-            botao.setAttribute("data-target", "#staticBackdrop")
             var sheetParamters = sheetParamters.map(Number);
-            quickSort(sheetParamters); //QuickSort
-            sheetParamters.forEach(function(i){
-            countElements[i] = (countElements[i]||0)+1;
-        });
-            let maiorNumero = sheetParamters[sheetParamters.length - 1];
-            let menorNumero = sheetParamters[0];
-            let totaldeIndicesvetor = sheetParamters.length;
-            return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
+            if(isNaN(sheetParamters[1])){
+                document.getElementById("inputValores").value = ''
+                alert("Variaveis Quantitativas só aceitam numeros")
+                document.getElementById("inputValores").focus
+                botao.setAttribute("data-target", "");
+                apagar()
+            }else{
+                quickSort(sheetParamters); //QuickSort
+                sheetParamters.forEach(function(i){
+                countElements[i] = (countElements[i]||0)+1;
+                });
+                let maiorNumero = sheetParamters[sheetParamters.length - 1];
+                let menorNumero = sheetParamters[0];
+                let totaldeIndicesvetor = sheetParamters.length;
+                return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
+            }
         }
         
     }
@@ -80,10 +95,12 @@ function extraiObj(obj){
 function geraTabela(){
     let elTabela = document.createElement("table");
     elTabela.setAttribute("id", "tabela");
+    elTabela.setAttribute("class", "table table-hover table-bordered table-sm");
     let resultado = document.getElementById("resultado")
     resultado.appendChild(elTabela)
     let tabela = document.getElementById('tabela');
-    let titulos = tabela.createTHead();    
+    let titulos = tabela.createTHead(); 
+    titulos.setAttribute("class", "thead-dark")   
     let linhas = titulos.insertRow();
     let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
@@ -136,10 +153,12 @@ function geraTabela(){
 function geraTabela2(){
     let elTabela = document.createElement("table");
     elTabela.setAttribute("id", "tabela2");
+    elTabela.setAttribute("class", "table table-hover table-bordered table-sm")
     let resultado = document.getElementById("resultado")
     resultado.appendChild(elTabela)
     let tabela2 = document.getElementById('tabela2');
     let tituloTabela2 = tabela2.createTHead();
+    tituloTabela2.setAttribute("class", "thead-dark")
     let linhaTabela2 = tituloTabela2.insertRow();
     let separatriz = document.getElementById("barraMedidas").value
     let chaveSepratriz = document.getElementById("cars").value +": "+ separatriz
@@ -156,7 +175,7 @@ function geraTabela2(){
 
     for(let i of Object.keys(medidasCentrais[0])){
         let th = document.createElement('th');
-        th.setAttribute('class', 'cabecalho');
+        th.setAttribute('scope', 'col');
         let texto = document.createTextNode(i);
         th.appendChild(texto);
         linhaTabela2.appendChild(th);
@@ -173,10 +192,6 @@ function geraTabela2(){
 }   
 
 function trataQuantitativaContinua(){
-    let elTabela = document.createElement("table");
-    elTabela.setAttribute("id", "tabela");
-    let resultado = document.getElementById("resultado")
-    resultado.appendChild(elTabela)
     let limiteInferior = []
     let limiteSuperior = []
     let parametrosTabela = quantitativaContinua(trataInput().maiorNumero,trataInput().menorNumero,trataInput().totaldeIndicesvetor);
@@ -184,7 +199,7 @@ function trataQuantitativaContinua(){
     let frequenciaQuantContinua = []
     let auxFreq = []
     let numeros = trataInput().sheetParamters
-    for(let i = 0; i <= parametrosTabela[0]; i++){
+    for(let i = 0; i <= parametrosTabela[0]+1; i++){
         if(i == 0){
             limiteInferior.push(aux)
             limiteSuperior.push(aux + parametrosTabela[1])  
@@ -201,7 +216,7 @@ function trataQuantitativaContinua(){
     let pontoMedio = limiteInferior.map((n,idx) =>((limiteInferior[idx]+limiteSuperior[idx])/2))
     
     let labelGrafico = []
-    for(let i = 0; i < parametrosTabela[0]; i++){    
+    for(let i = 0; i < parametrosTabela[0]+1; i++){    
         labelGrafico.push(`${limiteInferior[i]} |-- ${limiteSuperior[i]}`)
     }
     return {labelGrafico,limiteSuperior,limiteInferior,pontoMedio,frequenciaQuantContinua,parametrosTabela}
@@ -210,11 +225,11 @@ function trataQuantitativaContinua(){
 function geraTabelaQntContinua(){
     let elTabela = document.createElement("table");
     elTabela.setAttribute("id", "tabela");
-    elTabela.setAttribute("style","margin-bottom: 5px; margin-top: 5px;")
-    let resultado = document.getElementById("resultado")
+    elTabela.setAttribute("class", "table table-hover table-bordered table-sm");
     resultado.appendChild(elTabela)
     let tabela = document.getElementById('tabela');
-    let titulos = tabela.createTHead();    
+    let titulos = tabela.createTHead();;
+    titulos.setAttribute("class", "thead-dark")    
     let linhas = titulos.insertRow();
     let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
@@ -351,12 +366,11 @@ input.addEventListener('change', () => {
     document.getElementById("inputValores").value = ""
     document.getElementById("inputTitulo").value = data[0]
     for(let i = 1; i < data.length; i++){
-        document.getElementById("inputValores").value += `${data[i]};`
-       
        if(i == data.length-1){
-            
             document.getElementById("inputValores").value += `${data[i]}`
+            break
         }
+        document.getElementById("inputValores").value += `${data[i]};`
     }
   })
 })
