@@ -23,13 +23,12 @@ function probNominal(){
 
     //captura a div que onde será escrito o resultado
     let escrever = document.getElementById("resultado");
-
+    let botao = document.getElementById('calcular');
     /*Faz o calculo da probabilidade de acordo com os dados inseridos 
       Se o usuário não informar algun dado aparecerá uma mensagem de erro e a Janela modular não abrirá
     */     
     if(valorPonto == "" || valorMin == "" || valorMax == ""){
         alert("Insria todos os dados");
-        let botao = document.getElementById('calcular');
         botao.setAttribute("data-target", "");
         apagar();
     }else if(valorPonto == "maior-que"){
@@ -38,6 +37,9 @@ function probNominal(){
         let intervalo = valorMax - maiorQue;
         let probabilidade  = (1/(valorMax - valorMin))* intervalo;
         escrever.innerHTML += `<p>Probabilidade: ${(probabilidade*100).toFixed(2)}% </p>`;
+        escrever.innerHTML += `<p>Média: ${media}</p>`;
+        escrever.innerHTML += `<p>Desvio Padrão: ${desvioPadrao}</p>`;
+        escrever.innerHTML += `<p>Coefeciente De Variação: ${coefVariacao.toFixed(2)}</p>`;
 
     }else if(valorPonto == "menor-que"){
         botao.setAttribute("data-target", "#staticBackdrop")
@@ -45,7 +47,9 @@ function probNominal(){
         let intervalo = menorQue - valorMin;
         let probabilidade  = (1/(valorMax - valorMin))* intervalo;
         escrever.innerHTML += `<p>Probabilidade: ${(probabilidade*100).toFixed(2)}% </p>`;
-
+        escrever.innerHTML += `<p>Média: ${media}</p>`;
+        escrever.innerHTML += `<p>Desvio Padrão: ${desvioPadrao}</p>`;
+        escrever.innerHTML += `<p>Coefeciente De Variação: ${coefVariacao.toFixed(2)}</p>`;
     }else if(valorPonto == "entre"){
         botao.setAttribute("data-target", "#staticBackdrop")
         let entreInf = Number(document.getElementById("entreMenor").value);
@@ -53,11 +57,12 @@ function probNominal(){
         let intervalo = entreSup - entreInf;
         let probabilidade  = (1/(valorMax - valorMin))* intervalo;
         escrever.innerHTML += `<p>Probabilidade: ${(probabilidade*100).toFixed(2)}% </p>`;
+        escrever.innerHTML += `<p>Média: ${media}</p>`;
+        escrever.innerHTML += `<p>Desvio Padrão: ${desvioPadrao}</p>`;
+        escrever.innerHTML += `<p>Coefeciente De Variação: ${coefVariacao.toFixed(2)}</p>`;
     };
     
-    escrever.innerHTML += `<p>Média: ${media}</p>`;
-    escrever.innerHTML += `<p>Desvio Padrão: ${desvioPadrao}</p>`;
-    escrever.innerHTML += `<p>Coefeciente De Variação: ${coefVariacao.toFixed(2)}</p>`;
+    
 };
 
 function probBinomial(){
@@ -75,7 +80,7 @@ function probBinomial(){
     let amostraMenosEvento;
     let fracassoElevado;
     let probabilidade;
-
+    let botao = document.getElementById('calcular2');
     //captura a div que onde será escrito o resultado
     let escrever = document.getElementById("resultado");
 
@@ -84,15 +89,12 @@ function probBinomial(){
       caso esteja tudo certo o resultado será mostrado ao usuário em uma janela modal
     */
     if(sucesso == '' || fracasso == '' || evento == '' || tamanhoAmostra == ''){
-
         alert("Insria todos os dados");
-        let botao = document.getElementById('calcular2');
         botao.setAttribute("data-target", "");
         apagar();
     }else if(sucesso + fracasso != 1){
         botao.setAttribute("data-target", "#staticBackdrop")
         alert("O sucesso mais o fracasso tem que ser igual a 100, verifique os dados");
-        let botao = document.getElementById('calcular2');
         botao.setAttribute("data-target", "");
         apagar();
     }else{
@@ -145,8 +147,8 @@ function probNormal(){
         let maior = Number(document.getElementById("maior2").value);
         let scoreZ = (maior - media)/desvioPadrao;
         scoreZ = scoreZ.toFixed(2);
-        let procuraLinha = Math.floor(scoreZ*10);
-        let procuraColuna = Math.round(10*(scoreZ*10 - procuraLinha));
+        let procuraLinha = Math.abs(Math.floor(scoreZ*10));
+        let procuraColuna = Math.abs(Math.round(10*(scoreZ*10 - procuraLinha)));
         let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
         escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
     }else if(valor == "menor-que"){
@@ -218,6 +220,7 @@ function analiseComb(n,k){
 
 function tabelaZ(n1, n2){
     //Tabela com os valores de área da curva
+    console.log(n1, n2)
     const tabelaZ = [
         [0.0000, 0.0040, 0.0080, 0.0120, 0.0160, 0.0199, 0.0239, 0.0279, 0.0319, 0.0359],
         [0.0389, 0.0438, 0.0478, 0.0517, 0.0557, 0.0596, 0.0636, 0.0675, 0.0714, 0.0754],
@@ -260,7 +263,6 @@ function tabelaZ(n1, n2){
         [0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999, 0.4999],
         [0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000, 0.5000]
     ];
-    
     return tabelaZ[n1][n2];
 }
 

@@ -1,6 +1,7 @@
 function apagar() {
     modal = document.querySelector("#resultado");
     modal.innerHTML = "";
+    console.log("opa")
 };
 
 function intervalo(x) {
