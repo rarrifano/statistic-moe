@@ -15,8 +15,8 @@ function criaGrafico(){
             labels: Object.keys(trataInput().countElements),
                 datasets: [{
                     data: extraiObj(trataInput().countElements),
-                    backgroundColor: 'rgba(113,89,193, 0.8)',
-                    borderColor: 'rgba(113,89,193, 1)',
+                    backgroundColor: 'rgba(129,0,127, 0.7)',
+                    borderColor: 'rgba(129,0,127, 1)',
                     borderWidth: 1
                 }]
         },
@@ -88,7 +88,7 @@ function criaGraficoHisto(){
         labels: trataQuantitativaContinua().labelGrafico,
             datasets: [{
                 data: trataQuantitativaContinua().frequenciaQuantContinua,
-                backgroundColor: 'rgba(113,89,193, 1)'
+                backgroundColor: 'rgba(129,0,127, 1)'
             }]
     },
     options: {
