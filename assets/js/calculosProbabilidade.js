@@ -145,12 +145,18 @@ function probNormal(){
     }else if(valor == "maior-que"){
         botao.setAttribute("data-target", "#staticBackdrop")
         let maior = Number(document.getElementById("maior2").value);
-        let scoreZ = (maior - media)/desvioPadrao;
+        let scoreZ = Math.abs((maior - media)/desvioPadrao);
         scoreZ = scoreZ.toFixed(2);
         let procuraLinha = Math.abs(Math.floor(scoreZ*10));
         let procuraColuna = Math.abs(Math.round(10*(scoreZ*10 - procuraLinha)));
-        let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
-        escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
+        if(maior < media){
+            let probabilidade = (0.5 + tabelaZ(procuraLinha, procuraColuna)) * 100;
+            escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
+        }else{
+            let probabilidade = (0.5 - tabelaZ(procuraLinha, procuraColuna)) * 100;
+            escrever.innerHTML += `<p>Probabilidade: ${probabilidade.toFixed(2)}%`;
+        }
+        
     }else if(valor == "menor-que"){
         botao.setAttribute("data-target", "#staticBackdrop")
         let menor = Number(document.getElementById("menor2").value);
@@ -172,15 +178,23 @@ function probNormal(){
         let probabilidadeMenor = tabelaZ(procuraLinhaMenor, procuraColunaMenor);
 
         //calcula o score Z e a probabilidade do numero informado no segundo input entre
-        let scoreZMaior = (entreMaior - media)/desvioPadrao;
+        let scoreZMaior = Math.abs((entreMaior - media)/desvioPadrao);
         let procuraLinhaMaior = Math.floor(scoreZMaior*10);
         let procuraColunaMaior = Math.round(10*(scoreZMaior*10 - procuraLinhaMaior));
         let probabilidadeMaior = tabelaZ(procuraLinhaMaior, procuraColunaMaior);
 
+        let probabilidadeEntre
         //calcula a probabilidade Final
-        let probabilidadeEntre = (probabilidadeMenor + probabilidadeMaior) * 100;
+        if(entreMaior > media && entreMenor < media){
+            probabilidadeEntre = (probabilidadeMenor + probabilidadeMaior) * 100;
+            escrever.innerHTML += `<p>Probabilidade: ${probabilidadeEntre.toFixed(2)}%`;
+        }else if(entreMenor > media && entreMaior > media || entreMenor < media && entreMaior < media){
+            probabilidadeEntre = (probabilidadeMaior - probabilidadeMenor) * 100
+            escrever.innerHTML += `<p>Probabilidade: ${probabilidadeEntre.toFixed(2)}%`;
+        }
+        
 
-        escrever.innerHTML += `<p>Probabilidade: ${probabilidadeEntre.toFixed(2)}%`;
+        
     };
 };
 
