@@ -48,8 +48,10 @@ function escreveResultados(){
     let escrever = document.getElementById("resultado")
     escrever.innerHTML += `<p>Correlação: ${correlacaoRegressao().correlacao.toFixed(2)}</p>`
     escrever.innerHTML += `<p>Formula de Regressão</p><p>Y = ${correlacaoRegressao().variavelA.toFixed(4)}X + ${correlacaoRegressao().variavelB.toFixed(4)}  `
-    escrever.innerHTML += `<div class=""grid-item><input type="text" onclick="apagarTxt()" onkeypress="formulaRegressao()" class="form-control" id="varX" placeholder="Insira um valor para X" style="margin: auto;">
-                           <input type="text" onkeypress="formulaRegressao()" onclick="apagarTxt()" class="form-control" id="varY" placeholder="Insira um valor para Y" style="margin: auto;"></div>`
+    escrever.innerHTML += `<div class=""grid-item><input type="text" onclick="apagarTxt()" class="form-control" id="varX" placeholder="Insira um valor para X" style="margin: auto;">
+                           <input type="text" onclick="apagarTxt()" class="form-control" id="varY" placeholder="Insira um valor para Y" style="margin: auto;"></div>
+                           <p><button type="button" class="btn btn-primary" aria-pressed="false" autocomplete="off" id="calcularRegressao" onclick="formulaRegressao()">Calcular</button></p>
+                           `
 }
 
 function criaObj(){
@@ -59,15 +61,14 @@ function criaObj(){
     for(let i = 0; i < separaDados().listaElementosX.length; i++){
         dados.push({x: varx[i], y:varY[i]})
     }
-    console.log(dados)
     return dados
 }
 
 function geraGraficoDispercao(){
-    let elTabela = document.createElement("canvas");
-    elTabela.setAttribute("id", "graficoRegressao");
+    let elCanvas = document.createElement("canvas");
+    elCanvas.setAttribute("id", "graficoRegressao");
     let resultado = document.getElementById("resultado")
-    resultado.appendChild(elTabela)
+    resultado.appendChild(elCanvas)
     let ctx = document.getElementById('graficoRegressao').getContext('2d');
     var scatterChart = new Chart(ctx, {
         type: 'scatter',
@@ -103,12 +104,11 @@ function apagarTxt() {
 }
 
 function formulaRegressao() {
-    
     let y;
     let x;
     if (document.getElementById('varX').value != "") {
         x = Number(document.getElementById('varX').value);
-        y = correlacaoRegressao().variavelA * x + correlacaoRegressao().variavelB;
+        y = (correlacaoRegressao().variavelA * x) + correlacaoRegressao().variavelB;
         
         document.getElementById('varY').value = y.toFixed(2);
     } else if (document.getElementById('varY').value != "") {
