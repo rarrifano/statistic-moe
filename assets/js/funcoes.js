@@ -11,7 +11,7 @@ function trataInput(){
     }else{
         var sheetParamters = valor.split(';');
         let countElements = {};
-        if(variavel == 'qualitativaOrdinal'){
+        if(variavel == 'qualitativaNominal'){
             quickSort(sheetParamters);
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
@@ -21,11 +21,12 @@ function trataInput(){
             let totaldeIndicesvetor = sheetParamters.length;
             return {sheetParamters, maiorNumero, menorNumero, totaldeIndicesvetor, countElements};
 
-        }else if(variavel == 'qualitativaNominal'){
+        }else if(variavel == 'qualitativaOrdinal'){
             
             sheetParamters.forEach(function(i){
             countElements[i] = (countElements[i]||0)+1;
         });
+            console.log(countElements)
             let maiorNumero = sheetParamters[sheetParamters.length - 1];
             let menorNumero = sheetParamters[0];
             let totaldeIndicesvetor = sheetParamters.length;
@@ -105,6 +106,7 @@ function geraTabela(){
     let colunaTitulo = document.getElementById('inputTitulo').value || "Variável";
     let cabecalho = [colunaTitulo,'Fi', 'Fr%', 'Fac', 'Fac%'];
     let coluna1 = Object.keys(trataInput().countElements);
+    console.log(Object.keys(trataInput().countElements))
     let frequenciaSimples = extraiObj(trataInput().countElements);
     let frequenciaAcumulada = [];
     let linha = [];
