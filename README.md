@@ -10,7 +10,7 @@ O sistema tem como requisito minimo os navegadores Google Chrome 83 ou acima, Mo
 ## Como acessar
 Não é necessário cadastro para ter acesso ao sistema, pode colocar qualquer usuario e senha, função à implementar futuramente.
 
-O link dara execução do projeto: https://rafaelarrifano.github.io/statistic.moe/index.html
+O link dara execução do projeto: https://rafaelarrifano.github.io/statistic.moe/
 
 Após fazer login ou acessar como convidado, temos acesso às funcionalidades do sistema.
 
