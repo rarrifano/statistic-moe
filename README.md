@@ -14,10 +14,4 @@ O link dara execução do projeto: https://rafaelarrifano.github.io/statistic.mo
 
 Após fazer login ou acessar como convidado, temos acesso às funcionalidades do sistema.
 
-Podemos adicionar dados estatisticos por meio de digitação ou upload de arquivo, inclusive com funcionalidade de drag&drop. statistic.moe
-
-## Membros do projeto
-César Carvalho Silva: https://github.com/CsrCarvalho19
-Daniel Bispo Silva: https://github.com/odanielbispo
-Douglas Soares Silva: https://github.com/DougFanta
-Rafael Arrifano Silva: https://github.com/RafaelArrifano
+Podemos adicionar dados estatisticos por meio de digitação ou upload de arquivo, inclusive com funcionalidade de drag&drop.
